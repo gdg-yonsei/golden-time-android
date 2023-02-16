@@ -21,6 +21,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".presentation.profile.ProfileActivity"/>
+        <activity android:name=".presentation.emergency.EmergencyActivity"/>
+        <activity android:name=".presentation.rescue.RescueActivity"/>
+        <activity android:name=".presentation.article.ArticleActivity"/>
+
     </application>
 
 </manifest>
