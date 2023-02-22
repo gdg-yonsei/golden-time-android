@@ -62,6 +62,10 @@ dependencies {
     // Firebase
     implementation platform('com.google.firebase:firebase-bom:31.2.0')
     implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-messaging-ktx'
+
+    // Wearable
+    implementation 'com.google.android.gms:play-services-wearable:18.0.0'
 
     // Test
     testImplementation 'junit:junit:4.13.2'

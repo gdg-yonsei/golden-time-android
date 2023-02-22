@@ -1,6 +1,8 @@
 package com.next.goldentime.presentation.main
 
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -15,6 +17,7 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.google.firebase.messaging.FirebaseMessaging
 import com.next.goldentime.model.profile.Profile
 
 class MainActivity : ComponentActivity() {
@@ -22,6 +25,14 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        FirebaseMessaging.getInstance().subscribeToTopic("SOS").addOnCompleteListener { task ->
+            val message =
+                if (task.isSuccessful) "Successfully subscribed" else "Subscription failed"
+
+            Log.d("GOLDEN TIME", message)
+            Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+        }
 
         setContent {
             val profile by model.profile.observeAsState(Profile())
