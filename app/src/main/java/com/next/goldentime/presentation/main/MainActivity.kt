@@ -6,12 +6,9 @@ import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material.Button
-import androidx.compose.material.Text
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.*
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
@@ -23,6 +20,7 @@ import com.next.goldentime.model.profile.Profile
 class MainActivity : ComponentActivity() {
     private val model: MainViewModel by viewModels()
 
+    @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -37,22 +35,31 @@ class MainActivity : ComponentActivity() {
         setContent {
             val profile by model.profile.observeAsState(Profile())
 
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .fillMaxHeight(),
-                verticalArrangement = Arrangement.spacedBy(
-                    space = 20.dp,
-                    alignment = Alignment.CenterVertically
-                ),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text("GOLDEN TIME")
-                Text("Hello, ${profile.name}!")
-                Button(onClick = { model.updateProfile() }) {
-                    Text("Update profile")
+            Scaffold(
+                topBar = {
+                    TopAppBar(title = { Text("GOLDEN TIME") })
+                },
+                content = {
+                    LazyColumn(
+                        contentPadding = it,
+                        modifier = Modifier
+                            .padding(20.dp)
+                            .fillMaxSize(),
+                        verticalArrangement = Arrangement.spacedBy(
+                            space = 20.dp,
+                            alignment = Alignment.CenterVertically
+                        ),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        item {
+                            Text("Hello, ${profile.name}!")
+                            Button(onClick = { model.updateProfile() }) {
+                                Text("Update profile")
+                            }
+                        }
+                    }
                 }
-            }
+            )
         }
     }
 }
