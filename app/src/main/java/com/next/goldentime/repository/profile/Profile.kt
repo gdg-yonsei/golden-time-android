@@ -1,6 +1,6 @@
-package com.next.goldentime.model.profile
+package com.next.goldentime.repository.profile
 
-import java.util.UUID
+import java.util.*
 
 data class Profile(
     val name: String = UUID.randomUUID().toString()

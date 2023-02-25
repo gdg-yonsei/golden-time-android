@@ -1,4 +1,4 @@
-package com.next.goldentime.model.profile
+package com.next.goldentime.repository.profile
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
