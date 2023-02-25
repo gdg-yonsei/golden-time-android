@@ -61,10 +61,7 @@ private fun BottomNavigationBar(navController: NavController) {
     fun moveTo(route: String) {
         navController.navigate(route) {
             navController.graph.startDestinationRoute?.let {
-                popUpTo(it) {
-                    saveState = true
-                    inclusive = true
-                }
+                popUpTo(it) { saveState = true }
             }
             launchSingleTop = true
             restoreState = true
