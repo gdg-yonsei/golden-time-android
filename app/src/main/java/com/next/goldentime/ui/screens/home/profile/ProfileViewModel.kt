@@ -3,11 +3,11 @@ package com.next.goldentime.ui.screens.home.profile
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.next.goldentime.repository.profile.ProfileRepository
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalCoroutinesApi::class)
 class ProfileViewModel(
     profileRepository: ProfileRepository = ProfileRepository()
 ) : ViewModel() {
