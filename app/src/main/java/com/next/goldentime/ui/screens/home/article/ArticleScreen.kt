@@ -1,4 +1,4 @@
-package com.next.goldentime.ui.components.main.fragment
+package com.next.goldentime.ui.screens.home.article
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 
 @Composable
-fun ArticleFragment() {
+fun ArticleScreen() {
     Box(
         modifier = Modifier
             .fillMaxSize()

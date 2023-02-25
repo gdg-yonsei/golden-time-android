@@ -11,23 +11,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.next.goldentime.ui.MainScreen
-import com.next.goldentime.ui.components.main.fragment.ArticleFragment
-import com.next.goldentime.ui.components.main.fragment.ProfileFragment
-import com.next.goldentime.ui.components.main.fragment.SOSFragment
+import com.next.goldentime.ui.screens.home.article.ArticleScreen
+import com.next.goldentime.ui.screens.home.profile.ProfileScreen
+import com.next.goldentime.ui.screens.home.sos.SOSScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen(
-    navigateTo: (String) -> Unit,
-    model: HomeViewModel = viewModel()
-) {
+fun HomeScreen(navigateTo: (String) -> Unit) {
     val navController = rememberNavController()
 
     Scaffold(
@@ -41,23 +37,23 @@ fun HomeScreen(
                 }
             )
         },
-        bottomBar = { BottomNavigation(navController = navController) }
+        bottomBar = { BottomNavigationBar(navController = navController) }
     ) {
         NavHost(
             navController = navController,
-            startDestination = HomeFragment.SOS.route,
+            startDestination = HomeScreen.SOS.route,
             modifier = Modifier.padding(it)
         ) {
-            composable(HomeFragment.Profile.route) { ProfileFragment(model) }
-            composable(HomeFragment.SOS.route) { SOSFragment() }
-            composable(HomeFragment.Article.route) { ArticleFragment() }
+            composable(HomeScreen.Profile.route) { ProfileScreen() }
+            composable(HomeScreen.SOS.route) { SOSScreen() }
+            composable(HomeScreen.Article.route) { ArticleScreen() }
         }
     }
 }
 
 @Composable
-fun BottomNavigation(navController: NavController) {
-    val fragments = listOf(HomeFragment.Profile, HomeFragment.SOS, HomeFragment.Article)
+fun BottomNavigationBar(navController: NavController) {
+    val screens = listOf(HomeScreen.Profile, HomeScreen.SOS, HomeScreen.Article)
 
     val currentNavigation by navController.currentBackStackEntryAsState()
     val currentRoute = currentNavigation?.destination?.route
@@ -76,19 +72,19 @@ fun BottomNavigation(navController: NavController) {
     }
 
     NavigationBar {
-        fragments.forEach { fragment ->
+        screens.forEach { screen ->
             NavigationBarItem(
-                selected = fragment.route == currentRoute,
-                onClick = { moveTo(fragment.route) },
-                icon = { Icon(imageVector = fragment.icon, contentDescription = fragment.label) },
-                label = { Text(fragment.label) }
+                selected = screen.route == currentRoute,
+                onClick = { moveTo(screen.route) },
+                icon = { Icon(imageVector = screen.icon, contentDescription = screen.label) },
+                label = { Text(screen.label) }
             )
         }
     }
 }
 
-private sealed class HomeFragment(val route: String, val label: String, val icon: ImageVector) {
-    object Profile : HomeFragment("profile", "Profile", Icons.Filled.AccountCircle)
-    object SOS : HomeFragment("sos", "SOS", Icons.Filled.Notifications)
-    object Article : HomeFragment("article", "Article", Icons.Filled.Article)
+private sealed class HomeScreen(val route: String, val label: String, val icon: ImageVector) {
+    object Profile : HomeScreen("profile", "Profile", Icons.Filled.AccountCircle)
+    object SOS : HomeScreen("sos", "SOS", Icons.Filled.Notifications)
+    object Article : HomeScreen("article", "Article", Icons.Filled.Article)
 }

@@ -1,4 +1,4 @@
-package com.next.goldentime.ui.components.main.fragment
+package com.next.goldentime.ui.screens.home.profile
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
@@ -10,11 +10,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.next.goldentime.repository.profile.Profile
-import com.next.goldentime.ui.screens.home.HomeViewModel
 
 @Composable
-fun ProfileFragment(model: HomeViewModel) {
+fun ProfileScreen(model: ProfileViewModel = viewModel()) {
     val profile by model.profile.observeAsState(Profile())
 
     Column(

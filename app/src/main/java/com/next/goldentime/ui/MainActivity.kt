@@ -17,12 +17,12 @@ class MainActivity : ComponentActivity() {
 
         MessageUsecase.subscribeSOS()
 
-        setContent { MainScreens() }
+        setContent { MainNavigation() }
     }
 }
 
 @Composable
-private fun MainScreens() {
+private fun MainNavigation() {
     val navController = rememberNavController()
 
     fun navigateTo(route: String) {

@@ -1,4 +1,4 @@
-package com.next.goldentime.ui.components.main.fragment
+package com.next.goldentime.ui.screens.home.sos
 
 import android.content.Intent
 import androidx.compose.foundation.layout.Arrangement
@@ -15,7 +15,7 @@ import com.next.goldentime.ui.RescueActivity
 import com.next.goldentime.ui.SOSActivity
 
 @Composable
-fun SOSFragment() {
+fun SOSScreen() {
     val context = LocalContext.current
 
     Column(
