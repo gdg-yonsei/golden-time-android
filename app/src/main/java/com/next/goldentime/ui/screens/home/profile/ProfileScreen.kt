@@ -8,7 +8,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.next.goldentime.repository.profile.Profile
@@ -22,7 +21,7 @@ fun ProfileScreen(model: ProfileViewModel = viewModel()) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text("Hello, ${profile.name}!", color = Color.White)
+        Text("Hello, ${profile.name}!")
         Spacer(modifier = Modifier.size(20.dp))
         Button(onClick = { model.updateProfile() }) {
             Text("Update profile")
