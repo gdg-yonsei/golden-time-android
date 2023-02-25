@@ -20,6 +20,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.SOSActivity" />
+        <activity android:name=".ui.RescueActivity" />
 
         <service
             android:name=".receiver.SOSReceiver"

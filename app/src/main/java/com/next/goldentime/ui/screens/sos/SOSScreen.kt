@@ -1,4 +1,4 @@
-package com.next.goldentime.ui.screens.about
+package com.next.goldentime.ui.screens.sos
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -8,8 +8,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 
 @Composable
-fun AboutScreen() {
+fun SOSScreen() {
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        Text("About Screen")
+        Text("SOS Screen")
     }
 }
