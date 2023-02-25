@@ -34,12 +34,8 @@ private fun MainNavigation() {
     }
 
     NavHost(navController = navController, startDestination = MainScreen.Home.route) {
-        composable(MainScreen.Home.route) {
-            HomeScreen(navigateTo = ::navigateTo)
-        }
-        composable(MainScreen.About.route) {
-            AboutScreen(back = ::back)
-        }
+        composable(MainScreen.Home.route) { HomeScreen(navigateTo = ::navigateTo) }
+        composable(MainScreen.About.route) { AboutScreen(back = ::back) }
     }
 }
 

@@ -23,7 +23,7 @@ fun SOSScreen() {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text("SOS Fragment", color = Color.Gray)
+        Text("SOS Screen", color = Color.Gray)
         ElevatedButton(onClick = {
             context.startActivity(Intent(context, SOSActivity::class.java))
         }) {

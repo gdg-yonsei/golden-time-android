@@ -1,6 +1,5 @@
 package com.next.goldentime.ui.screens.home.article
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Text
@@ -12,11 +11,9 @@ import androidx.compose.ui.graphics.Color
 @Composable
 fun ArticleScreen() {
     Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color.Green),
+        modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        Text("Article Fragment", color = Color.Black)
+        Text("Article Screen", color = Color.Black)
     }
 }

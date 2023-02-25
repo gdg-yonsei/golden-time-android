@@ -52,7 +52,7 @@ fun HomeScreen(navigateTo: (String) -> Unit) {
 }
 
 @Composable
-fun BottomNavigationBar(navController: NavController) {
+private fun BottomNavigationBar(navController: NavController) {
     val screens = listOf(HomeScreen.Profile, HomeScreen.SOS, HomeScreen.Article)
 
     val currentNavigation by navController.currentBackStackEntryAsState()
@@ -83,7 +83,7 @@ fun BottomNavigationBar(navController: NavController) {
     }
 }
 
-private sealed class HomeScreen(val route: String, val label: String, val icon: ImageVector) {
+sealed class HomeScreen(val route: String, val label: String, val icon: ImageVector) {
     object Profile : HomeScreen("profile", "Profile", Icons.Filled.AccountCircle)
     object SOS : HomeScreen("sos", "SOS", Icons.Filled.Notifications)
     object Article : HomeScreen("article", "Article", Icons.Filled.Article)
