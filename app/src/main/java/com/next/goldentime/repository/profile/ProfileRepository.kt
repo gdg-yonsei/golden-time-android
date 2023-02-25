@@ -1,20 +1,18 @@
 package com.next.goldentime.repository.profile
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 
 class ProfileRepository {
-    private val _profile = MutableLiveData<Profile>()
-
-    init {
-        _profile.value = Profile()
+    private val _profile: Flow<Profile> = flow {
+        while (true) {
+            emit(Profile())
+            delay(3000)
+        }
     }
 
-    fun watchProfile(): LiveData<Profile> {
+    fun watchProfile(): Flow<Profile> {
         return _profile
-    }
-
-    fun setProfile(profile: Profile) {
-        _profile.value = profile
     }
 }
