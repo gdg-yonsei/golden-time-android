@@ -5,16 +5,23 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
+import com.next.goldentime.repository.profile.Profile
 import com.next.goldentime.repository.profile.ProfileStoreRepository
-import com.next.goldentime.usecase.profile.ProfileUsecase
+import com.next.goldentime.usecase.profile.ProfileUseCase
+import java.util.*
 
 class ProfileViewModel(
     profileStore: DataStore<Preferences>,
-    profileUsecase: ProfileUsecase = ProfileUsecase(ProfileStoreRepository(profileStore))
+    private val profileUseCase: ProfileUseCase = ProfileUseCase(ProfileStoreRepository(profileStore))
 ) : ViewModel() {
-    private val _name = profileUsecase.watchName()
+    private val _name = profileUseCase.watchName()
 
     val name = _name.asLiveData()
+
+    suspend fun generateProfile() {
+        val randomName = UUID.randomUUID().toString().substring(0, 5)
+        profileUseCase.setProfile(Profile(randomName, "2000", 0.0, 0.0, ""))
+    }
 }
 
 class ProfileViewModelFactory(

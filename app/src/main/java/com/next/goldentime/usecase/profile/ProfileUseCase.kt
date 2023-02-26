@@ -1,9 +1,11 @@
 package com.next.goldentime.usecase.profile
 
+import com.next.goldentime.repository.profile.Profile
 import com.next.goldentime.repository.profile.ProfileRepository
 
-class ProfileUsecase(private val profileRepository: ProfileRepository) {
+class ProfileUseCase(private val profileRepository: ProfileRepository) {
     fun watchProfile() = profileRepository.watchProfile()
+    suspend fun setProfile(profile: Profile) = profileRepository.setProfile(profile)
 
     fun watchName() = profileRepository.watchName()
     fun watchBirthDate() = profileRepository.watchBirthDate()

@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.doublePreferencesKey
+import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.Dispatchers
@@ -11,7 +12,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 
-class ProfileStoreRepository(profileStore: DataStore<Preferences>) : ProfileRepository {
+class ProfileStoreRepository(private val profileStore: DataStore<Preferences>) : ProfileRepository {
     private val _profile: Flow<Profile> =
         profileStore.data.map {
             Profile(
@@ -35,6 +36,15 @@ class ProfileStoreRepository(profileStore: DataStore<Preferences>) : ProfileRepo
         profileStore.data.map { it[ProfileStore.MedicalNotes.key] ?: "" }.flowOn(Dispatchers.IO)
 
     override fun watchProfile() = _profile
+    override suspend fun setProfile(profile: Profile) {
+        profileStore.edit {
+            it[ProfileStore.Name.key] = profile.name
+            it[ProfileStore.BirthDate.key] = profile.birthDate
+            it[ProfileStore.Height.key] = profile.height
+            it[ProfileStore.Weight.key] = profile.weight
+            it[ProfileStore.MedicalNotes.key] = profile.medicalNotes
+        }
+    }
 
     override fun watchName() = _name
     override fun watchBirthDate() = _birthDate

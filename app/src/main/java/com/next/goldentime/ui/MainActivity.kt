@@ -13,7 +13,7 @@ import com.next.goldentime.ui.screens.home.HomeScreen
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        
         setContent { MainNavigation() }
     }
 }

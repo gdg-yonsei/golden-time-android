@@ -4,6 +4,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface ProfileRepository {
     fun watchProfile(): Flow<Profile>
+    suspend fun setProfile(profile: Profile)
 
     fun watchName(): Flow<String>
     fun watchBirthDate(): Flow<String>
