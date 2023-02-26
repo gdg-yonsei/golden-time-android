@@ -1,18 +1,21 @@
 package com.next.goldentime.repository.profile
 
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 
-class ProfileRepository {
-    private val _profile: Flow<Profile> = flow {
-        while (true) {
-            emit(Profile())
-            delay(3000)
-        }
-    }
+interface ProfileRepository {
+    fun watchProfile(): Flow<Profile>
 
-    fun watchProfile(): Flow<Profile> {
-        return _profile
-    }
+    fun watchName(): Flow<String>
+    fun watchBirthDate(): Flow<String>
+    fun watchHeight(): Flow<Double>
+    fun watchWeight(): Flow<Double>
+    fun watchMedicalNotes(): Flow<String>
 }
+
+data class Profile(
+    val name: String,
+    val birthDate: String,
+    val height: Double,
+    val weight: Double,
+    val medicalNotes: String
+)

@@ -9,13 +9,10 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.next.goldentime.ui.screens.about.AboutScreen
 import com.next.goldentime.ui.screens.home.HomeScreen
-import com.next.goldentime.usecase.message.MessageUsecase
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        MessageUsecase.subscribeSOS()
 
         setContent { MainNavigation() }
     }
