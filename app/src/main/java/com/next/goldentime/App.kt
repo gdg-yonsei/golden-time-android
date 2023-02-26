@@ -2,7 +2,7 @@ package com.next.goldentime
 
 import android.app.Application
 import android.content.Context
-import com.next.goldentime.usecase.message.MessageUsecase
+import com.next.goldentime.usecase.message.MessageUseCase
 
 class App : Application() {
     companion object {
@@ -17,6 +17,6 @@ class App : Application() {
 
         instance = this
 
-        MessageUsecase.subscribeSOS()
+        MessageUseCase.subscribeSOS()
     }
 }
