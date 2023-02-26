@@ -22,7 +22,7 @@ fun ProfileScreen(
 ) {
     val composableScope: CoroutineScope = rememberCoroutineScope()
 
-    val name by model.name.observeAsState()
+    val name by model.name.observeAsState("")
 
     fun generateProfile() {
         composableScope.launch { model.generateProfile() }
