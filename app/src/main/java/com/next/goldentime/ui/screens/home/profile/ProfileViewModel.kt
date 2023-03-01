@@ -11,8 +11,8 @@ import com.next.goldentime.usecase.user.UserUseCase
 import java.util.*
 
 class ProfileViewModel(
-    profileStore: DataStore<Preferences>,
-    private val userUseCase: UserUseCase = UserUseCase(UserStoreRepository(profileStore))
+    userStore: DataStore<Preferences>,
+    private val userUseCase: UserUseCase = UserUseCase(UserStoreRepository(userStore))
 ) : ViewModel() {
     private val _name = userUseCase.watchName()
 
@@ -25,12 +25,12 @@ class ProfileViewModel(
 }
 
 class ProfileViewModelFactory(
-    private val profileStore: DataStore<Preferences>
+    private val userStore: DataStore<Preferences>
 ) : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(ProfileViewModel::class.java)) {
-            return ProfileViewModel(profileStore) as T
+            return ProfileViewModel(userStore) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
