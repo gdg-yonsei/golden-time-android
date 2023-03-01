@@ -1,6 +1,6 @@
 package com.next.goldentime.data
 
-import com.next.goldentime.repository.article.Article
+import com.next.goldentime.repository.disease.Article
 
 private val articleFixtureA = Article(
     1,

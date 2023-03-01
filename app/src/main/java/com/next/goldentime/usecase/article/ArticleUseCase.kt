@@ -1,6 +1,6 @@
 package com.next.goldentime.usecase.article
 
-import com.next.goldentime.repository.article.ArticleRepository
+import com.next.goldentime.repository.disease.ArticleRepository
 
 class ArticleUseCase(private val articleRepository: ArticleRepository) {
     fun listArticles() = articleRepository.listArticles()

@@ -2,13 +2,6 @@ package com.next.goldentime.repository.user
 
 import kotlinx.coroutines.flow.Flow
 
-interface UserRepository {
-    fun watchUser(): Flow<User>
-    fun watchName(): Flow<String>
-
-    suspend fun setUser(user: User)
-}
-
 data class User(
     val name: String,
     val birthDate: String,
@@ -19,3 +12,13 @@ data class User(
     val medications: String,
     val medicalNotes: String
 )
+
+/**
+ * Repository
+ */
+interface UserRepository {
+    fun watchUser(): Flow<User>
+    fun watchName(): Flow<String>
+
+    suspend fun setUser(user: User)
+}
