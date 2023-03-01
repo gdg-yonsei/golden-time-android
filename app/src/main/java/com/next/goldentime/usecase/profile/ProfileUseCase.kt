@@ -1,7 +1,7 @@
 package com.next.goldentime.usecase.profile
 
-import com.next.goldentime.repository.profile.Profile
-import com.next.goldentime.repository.profile.ProfileRepository
+import com.next.goldentime.repository.user.Profile
+import com.next.goldentime.repository.user.ProfileRepository
 
 class ProfileUseCase(private val profileRepository: ProfileRepository) {
     fun watchProfile() = profileRepository.watchProfile()

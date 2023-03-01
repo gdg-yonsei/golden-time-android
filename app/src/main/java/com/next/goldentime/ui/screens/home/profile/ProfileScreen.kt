@@ -12,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.next.goldentime.App
-import com.next.goldentime.repository.profile.profileStore
+import com.next.goldentime.repository.user.profileStore
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
