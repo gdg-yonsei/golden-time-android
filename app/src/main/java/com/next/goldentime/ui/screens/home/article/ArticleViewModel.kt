@@ -3,12 +3,12 @@ package com.next.goldentime.ui.screens.home.article
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import com.next.goldentime.repository.disease.DiseaseAPIRepository
-import com.next.goldentime.usecase.article.ArticleUseCase
+import com.next.goldentime.usecase.disease.DiseaseUseCase
 
 class ArticleViewModel(
-    private val articleUseCase: ArticleUseCase = ArticleUseCase(DiseaseAPIRepository())
+    private val diseaseUseCase: DiseaseUseCase = DiseaseUseCase(DiseaseAPIRepository())
 ) : ViewModel() {
-    private val _articles = articleUseCase.listArticles()
+    private val _diseases = diseaseUseCase.listDiseases()
 
-    val articles = _articles.asLiveData()
+    val diseases = _diseases.asLiveData()
 }

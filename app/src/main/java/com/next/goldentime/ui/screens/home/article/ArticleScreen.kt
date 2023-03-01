@@ -13,7 +13,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
 fun ArticleScreen(model: ArticleViewModel = viewModel()) {
-    val articles by model.articles.observeAsState(listOf())
+    val diseases by model.diseases.observeAsState()
 
     Column(
         modifier = Modifier
@@ -23,7 +23,7 @@ fun ArticleScreen(model: ArticleViewModel = viewModel()) {
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Text("What are you interested in?")
-        articles.map {
+        diseases?.diseases?.map {
             Card(modifier = Modifier.fillMaxWidth()) {
                 Column(modifier = Modifier.padding(20.dp)) {
                     Text("title : ${it.title}")
