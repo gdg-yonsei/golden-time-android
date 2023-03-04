@@ -3,6 +3,7 @@ package com.next.goldentime.repository.disease
 import kotlinx.coroutines.flow.Flow
 
 interface Disease {
+    val id: Int
     val title: String
     val subtitle: String
     val overview: String
@@ -19,7 +20,7 @@ interface Step {
  * Repository
  */
 interface DiseaseRepository {
-    fun listDiseases(ids: List<Int>?): Flow<ListDiseasesResponse>
+    fun listDiseases(ids: List<Int>? = null): Flow<ListDiseasesResponse>
     fun getDisease(id: Int): Flow<GetDiseaseResponse>
     fun getManual(diseaseId: Int): Flow<GetManualResponse>
 }
