@@ -10,15 +10,15 @@ data class Location(val latitude: Double, val longitude: Double)
  */
 interface SOSRepository {
     // By patient
-    fun requestSOS(user: User, location: Location): Flow<RequestSOSResponse>
+    suspend fun requestSOS(user: User, location: Location): RequestSOSResponse
     fun watchRescuers(sosId: Int): Flow<GetRescuersResponse>
 
     // By rescuers
     fun getPatient(sosId: Int): Flow<GetPatientResponse>
-    fun acceptSOS(sosId: Int): Flow<Void>
-    fun postLocation(sosId: Int, location: Location): Flow<Void>
-    fun markAsArrived(sosId: Int): Flow<Void>
-    fun completeSOS(sosId: Int): Flow<Void>
+    suspend fun acceptSOS(sosId: Int)
+    suspend fun postLocation(sosId: Int, location: Location)
+    suspend fun markAsArrived(sosId: Int)
+    suspend fun completeSOS(sosId: Int)
 }
 
 interface RequestSOSResponse {

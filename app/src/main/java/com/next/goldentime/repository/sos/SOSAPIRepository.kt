@@ -20,10 +20,11 @@ class SOSAPIRepository : SOSRepository {
             RetrofitClient.create(SOSAPIClient::class.java)
     }
 
-    override fun requestSOS(user: User, location: Location): Flow<RequestSOSResponse> = flow {
+    override suspend fun requestSOS(user: User, location: Location) {
         val response = client.requestSOS(user, "${location.latitude},${location.longitude}")
-        emitResponse(response)
-    }.flowOn(Dispatchers.IO)
+
+        return response.body()
+    }
 
     override fun watchRescuers(sosId: Int): Flow<GetRescuersResponse> = flow {
         while (true) {
@@ -39,25 +40,21 @@ class SOSAPIRepository : SOSRepository {
         emitResponse(response)
     }.flowOn(Dispatchers.IO)
 
-    override fun acceptSOS(sosId: Int) = flow {
-        val response = client.acceptSOS(sosId)
-        emitResponse(response)
-    }.flowOn(Dispatchers.IO)
+    override suspend fun acceptSOS(sosId: Int) {
+        client.acceptSOS(sosId)
+    }
 
-    override fun postLocation(sosId: Int, location: Location) = flow {
-        val response = client.postLocation(sosId, "${location.latitude},${location.longitude}")
-        emitResponse(response)
-    }.flowOn(Dispatchers.IO)
+    override suspend fun postLocation(sosId: Int, location: Location) {
+        client.postLocation(sosId, "${location.latitude},${location.longitude}")
+    }
 
-    override fun markAsArrived(sosId: Int) = flow {
-        val response = client.markAsArrived(sosId)
-        emitResponse(response)
-    }.flowOn(Dispatchers.IO)
+    override suspend fun markAsArrived(sosId: Int) {
+        client.markAsArrived(sosId)
+    }
 
-    override fun completeSOS(sosId: Int) = flow {
-        val response = client.completeSOS(sosId)
-        emitResponse(response)
-    }.flowOn(Dispatchers.IO)
+    override suspend fun completeSOS(sosId: Int) {
+        client.completeSOS(sosId)
+    }
 }
 
 private interface SOSAPIClient {
