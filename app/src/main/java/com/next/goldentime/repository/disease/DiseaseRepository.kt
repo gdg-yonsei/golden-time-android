@@ -19,7 +19,7 @@ interface Step {
  * Repository
  */
 interface DiseaseRepository {
-    fun listDiseases(ids: Array<Int>?): Flow<ListDiseasesResponse>
+    fun listDiseases(ids: List<Int>?): Flow<ListDiseasesResponse>
     fun getDisease(id: Int): Flow<GetDiseaseResponse>
     fun getManual(diseaseId: Int): Flow<GetManualResponse>
 }

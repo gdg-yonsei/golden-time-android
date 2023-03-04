@@ -17,7 +17,7 @@ class DiseaseAPIRepository : DiseaseRepository {
             RetrofitClient.create(DiseaseAPIClient::class.java)
     }
 
-    override fun listDiseases(ids: Array<Int>?): Flow<ListDiseasesResponse> = flow {
+    override fun listDiseases(ids: List<Int>?): Flow<ListDiseasesResponse> = flow {
         val response = client.listDiseases(ids?.joinToString(","))
         emitResponse(response)
     }.flowOn(Dispatchers.IO)
@@ -44,8 +44,8 @@ private interface DiseaseAPIClient {
         @Path("id") id: Int
     ): Response<GetDiseaseResponse>
 
-    @GET("disease/{diseaseId}/manual")
+    @GET("disease/{id}/manual")
     suspend fun getManual(
-        @Path("diseaseId") diseaseId: Int
+        @Path("id") diseaseId: Int
     ): Response<GetManualResponse>
 }

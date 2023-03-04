@@ -10,7 +10,8 @@ data class User(
     val bloodType: String,
     val allergies: String,
     val medications: String,
-    val medicalNotes: String
+    val medicalNotes: String,
+    val diseases: List<Int>,
 )
 
 /**
@@ -19,6 +20,8 @@ data class User(
 interface UserRepository {
     fun watchUser(): Flow<User>
     fun watchName(): Flow<String>
+    fun watchDiseases(): Flow<List<Int>>
 
     suspend fun setUser(user: User)
+    suspend fun setDiseases(diseases: List<Int>)
 }
