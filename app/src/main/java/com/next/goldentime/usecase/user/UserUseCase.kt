@@ -5,7 +5,6 @@ import com.next.goldentime.repository.user.User
 import com.next.goldentime.repository.user.UserRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.flow.map
 
 class UserUseCase(
     private val userRepository: UserRepository,
@@ -16,8 +15,8 @@ class UserUseCase(
 
     @OptIn(ExperimentalCoroutinesApi::class)
     fun watchDiseases() = userRepository.watchDiseases().flatMapLatest { diseaseIds ->
-        diseaseRepository.listDiseases(diseaseIds)
-    }.map { it.diseases }
+        diseaseRepository.getDiseases(diseaseIds)
+    }
 
     suspend fun setUser(user: User) = userRepository.setUser(user)
     suspend fun setDiseases(diseases: List<Int>) = userRepository.setDiseases(diseases)
