@@ -37,8 +37,9 @@ class UserStoreRepository(private val userStore: DataStore<Preferences>) : UserR
         )
     }.flowOn(Dispatchers.IO)
 
-    override fun watchName() =
-        userStore.data.map { user -> user[UserStore.Name.key] ?: "" }.flowOn(Dispatchers.IO)
+    override fun watchName() = userStore.data.map { user ->
+        user[UserStore.Name.key] ?: ""
+    }.flowOn(Dispatchers.IO)
 
     override fun watchDiseases() = userStore.data.map { user ->
         (user[UserStore.Diseases.key] ?: "").split(",").map { it.toInt() }

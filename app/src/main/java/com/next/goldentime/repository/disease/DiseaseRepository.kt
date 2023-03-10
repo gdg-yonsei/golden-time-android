@@ -12,7 +12,7 @@ data class Disease(
 
 typealias Manual = List<Step>
 
-data class Step(val title: String, val description: String, val videoUrl: String?)
+data class Step(val title: String, val description: String, val videoUrl: String? = null)
 
 /**
  * Repository
