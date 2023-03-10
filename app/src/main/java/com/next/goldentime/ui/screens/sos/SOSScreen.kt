@@ -7,10 +7,15 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.next.goldentime.App
+import com.next.goldentime.repository.user.userStore
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SOSScreen() {
+fun SOSScreen(
+    model: SOSViewModel = viewModel(factory = SOSViewModelFactory(App.context.userStore))
+) {
     Scaffold {
         Column(
             modifier = Modifier

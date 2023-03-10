@@ -7,8 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.next.goldentime.ui.screens.manual.ManualScreen
-import com.next.goldentime.ui.screens.map.MapScreen
+import com.next.goldentime.ui.screens.rescue.RescueScreen
 
 class RescueActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,21 +21,11 @@ class RescueActivity : ComponentActivity() {
 private fun RescueNavigation() {
     val navController = rememberNavController()
 
-    fun navigateTo(route: String) {
-        navController.navigate(route)
-    }
-
-    fun back() {
-        navController.navigateUp()
-    }
-
-    NavHost(navController = navController, startDestination = RescueScreen.Map.route) {
-        composable(RescueScreen.Map.route) { MapScreen(navigateTo = ::navigateTo) }
-        composable(RescueScreen.Manual.route) { ManualScreen(back = ::back) }
+    NavHost(navController = navController, startDestination = RescueScreen.Rescue.route) {
+        composable(RescueScreen.Rescue.route) { RescueScreen(sosId = 1) }
     }
 }
 
 sealed class RescueScreen(val route: String) {
-    object Map : RescueScreen("map")
-    object Manual : RescueScreen("manual")
+    object Rescue : RescueScreen("rescue")
 }

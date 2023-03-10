@@ -6,10 +6,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AboutScreen(back: () -> Unit) {
+fun AboutScreen(back: () -> Unit, model: AboutViewModel = viewModel()) {
     Scaffold {
         Column(
             modifier = Modifier

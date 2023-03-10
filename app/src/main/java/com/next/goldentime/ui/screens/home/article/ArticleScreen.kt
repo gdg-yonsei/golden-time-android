@@ -23,7 +23,7 @@ fun ArticleScreen(model: ArticleViewModel = viewModel()) {
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Text("What are you interested in?")
-        diseases?.diseases?.map {
+        diseases?.map {
             Card(modifier = Modifier.fillMaxWidth()) {
                 Column(modifier = Modifier.padding(20.dp)) {
                     Text("title : ${it.title}")
