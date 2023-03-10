@@ -1,13 +1,15 @@
 package com.next.goldentime.repository.sos
 
+import android.util.Log
 import com.next.goldentime.framework.RetrofitClient
 import com.next.goldentime.framework.emitResponse
 import com.next.goldentime.repository.user.User
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.withContext
 import retrofit2.Response
 import retrofit2.http.Field
 import retrofit2.http.GET
@@ -20,78 +22,102 @@ class SOSAPIRepository : SOSRepository {
             RetrofitClient.create(SOSAPIClient::class.java)
     }
 
-    override suspend fun requestSOS(user: User, location: Location) {
-        val response = client.requestSOS(user, "${location.latitude},${location.longitude}")
+    override fun getSOS(sosId: Int) = flow {
+        val response = client.getSOS(sosId)
+        emitResponse(response)
+    }.map {
+        val patient = it.patient
+        val (latitude, longitude) = it.location.split(",")
 
-        return response.body()
-    }
+        SOS(patient, Location(latitude.toDouble(), longitude.toDouble()))
+    }.flowOn(Dispatchers.IO)
 
-    override fun watchRescuers(sosId: Int): Flow<GetRescuersResponse> = flow {
+    override fun watchSOSState(sosId: Int) = flow {
         while (true) {
-            val response = client.getRescuers(sosId)
+            val response = client.getSOSState(sosId)
             emitResponse(response)
 
             delay(3000)
         }
     }.flowOn(Dispatchers.IO)
 
-    override fun getPatient(sosId: Int): Flow<GetPatientResponse> = flow {
-        val response = client.getPatient(sosId)
-        emitResponse(response)
-    }.flowOn(Dispatchers.IO)
+    override suspend fun requestSOS(user: User, location: Location) =
+        withContext(Dispatchers.IO) {
+            val response = client.requestSOS(user, "${location.latitude},${location.longitude}")
+
+            if (response.isSuccessful) {
+                response.body()!!.sosId
+            } else {
+                Log.e("API Call", response.errorBody().toString())
+            }
+        }
 
     override suspend fun acceptSOS(sosId: Int) {
-        client.acceptSOS(sosId)
+        withContext(Dispatchers.IO) {
+            client.acceptSOS(sosId)
+        }
     }
 
     override suspend fun postLocation(sosId: Int, location: Location) {
-        client.postLocation(sosId, "${location.latitude},${location.longitude}")
+        withContext(Dispatchers.IO) {
+            client.postLocation(sosId, "${location.latitude},${location.longitude}")
+        }
     }
 
     override suspend fun markAsArrived(sosId: Int) {
-        client.markAsArrived(sosId)
+        withContext(Dispatchers.IO) {
+            client.markAsArrived(sosId)
+        }
     }
 
     override suspend fun completeSOS(sosId: Int) {
-        client.completeSOS(sosId)
+        withContext(Dispatchers.IO) {
+            client.completeSOS(sosId)
+        }
     }
 }
 
+/**
+ * Date source
+ */
 private interface SOSAPIClient {
+    @GET("sos/{id}")
+    suspend fun getSOS(
+        @Path("id") id: Int
+    ): Response<GetSOSResponse>
+
+    @GET("sos/{id}/rescuers")
+    suspend fun getSOSState(
+        @Path("id") id: Int
+    ): Response<SOSState>
+
     @POST("sos")
     suspend fun requestSOS(
         @Field("user") user: User,
         @Field("location") location: String
     ): Response<RequestSOSResponse>
 
-    @GET("sos/{id}/rescuers")
-    suspend fun getRescuers(
-        @Path("id") id: Int
-    ): Response<GetRescuersResponse>
-
-    @GET("sos/{id}/patient")
-    suspend fun getPatient(
-        @Path("id") id: Int
-    ): Response<GetPatientResponse>
-
-    @POST("sos/{id}/rescuers/accept")
+    @POST("sos/{id}/rescuer/accept")
     suspend fun acceptSOS(
         @Path("id") id: Int
     ): Response<Void>
 
-    @POST("sos/{id}/rescuers/location")
+    @POST("sos/{id}/rescuer/location")
     suspend fun postLocation(
         @Path("id") id: Int,
         @Field("location") location: String
     ): Response<Void>
 
-    @POST("sos/{id}/rescuers/arrived")
+    @POST("sos/{id}/rescuer/arrived")
     suspend fun markAsArrived(
         @Path("id") id: Int
     ): Response<Void>
 
-    @POST("sos/{id}/rescuers/done")
+    @POST("sos/{id}/done")
     suspend fun completeSOS(
         @Path("id") id: Int
     ): Response<Void>
 }
+
+private data class GetSOSResponse(val patient: User, val location: String)
+private data class RequestSOSResponse(val sosId: Int)

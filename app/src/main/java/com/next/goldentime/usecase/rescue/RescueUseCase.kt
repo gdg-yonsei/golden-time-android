@@ -4,7 +4,7 @@ import com.next.goldentime.repository.sos.Location
 import com.next.goldentime.repository.sos.SOSRepository
 
 class RescueUseCase(private val sosRepository: SOSRepository, private val sosId: Int) {
-    fun getPatient() = sosRepository.getPatient(sosId)
+    fun getSOS() = sosRepository.getSOS(sosId)
     suspend fun acceptSOS() = sosRepository.acceptSOS(sosId)
     suspend fun postLocation(location: Location) = sosRepository.postLocation(sosId, location)
     suspend fun markAsArrived() = sosRepository.markAsArrived(sosId)
