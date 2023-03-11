@@ -2,7 +2,9 @@ package com.next.goldentime.ui.screens.rescue
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.asLiveData
 import com.next.goldentime.repository.disease.DiseaseStaticRepository
+import com.next.goldentime.repository.sos.Location
 import com.next.goldentime.repository.sos.SOSStaticRepository
 import com.next.goldentime.usecase.rescue.RescueUseCase
 
@@ -13,7 +15,17 @@ class RescueViewModel(
         DiseaseStaticRepository(),
         sosId
     )
-) : ViewModel()
+) : ViewModel() {
+    fun getSOS() = rescueUseCase.getSOS().asLiveData()
+
+    fun getManual(diseaseId: Int) = rescueUseCase.getManual(diseaseId).asLiveData()
+
+    suspend fun postLocation(location: Location) = rescueUseCase.postLocation(location)
+
+    suspend fun markAsArrived() = rescueUseCase.markAsArrived()
+
+    suspend fun completeSOS() = rescueUseCase.completeSOS()
+}
 
 class RescueViewModelFactory(
     private val sosId: Int

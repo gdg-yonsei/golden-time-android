@@ -14,7 +14,8 @@ import com.next.goldentime.repository.user.userStore
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SOSScreen(
-    model: SOSViewModel = viewModel(factory = SOSViewModelFactory(App.context.userStore))
+    sosId: Int,
+    model: SOSViewModel = viewModel(factory = SOSViewModelFactory(sosId, App.context.userStore))
 ) {
     Scaffold {
         Column(

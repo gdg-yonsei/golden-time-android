@@ -18,8 +18,10 @@ class ProfileViewModel(
         DiseaseStaticRepository()
     )
 ) : ViewModel() {
+    private val _user = userUseCase.watchUser()
     private val _name = userUseCase.watchName()
 
+    val user = _user.asLiveData()
     val name = _name.asLiveData()
 
     suspend fun generateProfile() {

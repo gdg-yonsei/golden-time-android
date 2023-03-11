@@ -4,6 +4,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.next.goldentime.repository.sos.Location
 import com.next.goldentime.repository.sos.SOSStaticRepository
 import com.next.goldentime.repository.user.UserStoreRepository
 import com.next.goldentime.usecase.sos.SOSUseCase
@@ -14,7 +15,9 @@ class SOSViewModel(
         SOSStaticRepository(),
         UserStoreRepository(userStore)
     )
-) : ViewModel()
+) : ViewModel() {
+    suspend fun requestSOS(location: Location) = sosUseCase.requestSOS(location)
+}
 
 class SOSViewModelFactory(
     private val userStore: DataStore<Preferences>
