@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import com.next.goldentime.repository.disease.DiseaseStaticRepository
-import com.next.goldentime.repository.user.User
 import com.next.goldentime.repository.user.UserStoreRepository
 import com.next.goldentime.usecase.user.UserUseCase
 import java.util.*
@@ -19,15 +18,8 @@ class ProfileViewModel(
     )
 ) : ViewModel() {
     private val _user = userUseCase.watchUser()
-    private val _name = userUseCase.watchName()
 
     val user = _user.asLiveData()
-    val name = _name.asLiveData()
-
-    suspend fun generateProfile() {
-        val randomName = UUID.randomUUID().toString().substring(0, 5)
-        userUseCase.setUser(User(randomName, "2000", 0.0, 0.0, "", "", "", "", listOf()))
-    }
 }
 
 class ProfileViewModelFactory(

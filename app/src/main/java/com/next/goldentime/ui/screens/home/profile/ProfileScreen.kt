@@ -1,42 +1,36 @@
 package com.next.goldentime.ui.screens.home.profile
 
-import androidx.compose.foundation.layout.*
-import androidx.compose.material3.ElevatedButton
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.next.goldentime.App
 import com.next.goldentime.repository.user.userStore
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.launch
+import com.next.goldentime.ui.screens.home.profile.edit.ProfileEditScreen
+import com.next.goldentime.ui.screens.home.profile.view.ProfileViewScreen
 
 @Composable
 fun ProfileScreen(
     model: ProfileViewModel = viewModel(factory = ProfileViewModelFactory(App.context.userStore))
 ) {
-    val composableScope: CoroutineScope = rememberCoroutineScope()
+    val navController = rememberNavController()
 
-    val name by model.name.observeAsState("")
-
-    fun generateProfile() {
-        composableScope.launch { model.generateProfile() }
+    fun navigateToProfileEdit() {
+        navController.navigate(ProfileScreen.ProfileEdit.route)
     }
 
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text("Hello, ${name}!")
-        Spacer(modifier = Modifier.size(20.dp))
-        ElevatedButton(onClick = { generateProfile() }) {
-            Text("Generate new profile")
-        }
+    fun navigateBack() {
+        navController.navigateUp()
     }
+
+    NavHost(navController = navController, startDestination = ProfileScreen.ProfileView.route) {
+        composable(ProfileScreen.ProfileView.route) { ProfileViewScreen(navigateToProfileEdit = ::navigateToProfileEdit) }
+        composable(ProfileScreen.ProfileEdit.route) { ProfileEditScreen(navigateBack = ::navigateBack) }
+    }
+}
+
+private sealed class ProfileScreen(val route: String) {
+    object ProfileView : ProfileScreen("profile-view")
+    object ProfileEdit : ProfileScreen("profile-edit")
 }
