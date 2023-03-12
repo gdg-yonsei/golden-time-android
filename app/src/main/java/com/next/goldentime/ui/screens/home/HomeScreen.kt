@@ -21,7 +21,7 @@ import com.next.goldentime.ui.screens.home.sos.SOSScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen(navigateTo: (String) -> Unit) {
+fun HomeScreen(navigateToAbout: () -> Unit) {
     val navController = rememberNavController()
 
     Scaffold(
@@ -33,7 +33,7 @@ fun HomeScreen(navigateTo: (String) -> Unit) {
             modifier = Modifier.padding(it)
         ) {
             composable(HomeScreen.Profile.route) { ProfileScreen() }
-            composable(HomeScreen.SOS.route) { SOSScreen() }
+            composable(HomeScreen.SOS.route) { SOSScreen(navigateToAbout = navigateToAbout) }
             composable(HomeScreen.Article.route) { ArticleScreen() }
         }
     }

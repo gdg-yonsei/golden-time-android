@@ -13,7 +13,7 @@ import com.next.goldentime.ui.screens.home.HomeScreen
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        
+
         setContent { MainNavigation() }
     }
 }
@@ -22,21 +22,21 @@ class MainActivity : ComponentActivity() {
 private fun MainNavigation() {
     val navController = rememberNavController()
 
-    fun navigateTo(route: String) {
-        navController.navigate(route)
+    fun navigateToAbout() {
+        navController.navigate(MainNavigation.About.route)
     }
 
-    fun back() {
+    fun navigateBack() {
         navController.navigateUp()
     }
 
-    NavHost(navController = navController, startDestination = MainScreen.Home.route) {
-        composable(MainScreen.Home.route) { HomeScreen(navigateTo = ::navigateTo) }
-        composable(MainScreen.About.route) { AboutScreen(back = ::back) }
+    NavHost(navController = navController, startDestination = MainNavigation.Home.route) {
+        composable(MainNavigation.Home.route) { HomeScreen(navigateToAbout = ::navigateToAbout) }
+        composable(MainNavigation.About.route) { AboutScreen(navigateBack = ::navigateBack) }
     }
 }
 
-sealed class MainScreen(val route: String) {
-    object Home : MainScreen("home")
-    object About : MainScreen("about")
+private sealed class MainNavigation(val route: String) {
+    object Home : MainNavigation("home")
+    object About : MainNavigation("about")
 }
