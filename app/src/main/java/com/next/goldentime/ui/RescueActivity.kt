@@ -26,6 +26,6 @@ private fun RescueNavigation() {
     }
 }
 
-sealed class RescueScreen(val route: String) {
+private sealed class RescueScreen(val route: String) {
     object Rescue : RescueScreen("rescue")
 }

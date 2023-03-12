@@ -1,31 +1,44 @@
 package com.next.goldentime.ui.screens.sos
 
-import androidx.compose.foundation.layout.*
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.next.goldentime.App
-import com.next.goldentime.repository.user.userStore
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.next.goldentime.ui.screens.sos.complete.SOSCompleteScreen
+import com.next.goldentime.ui.screens.sos.detect.SOSDetectScreen
+import com.next.goldentime.ui.screens.sos.state.SOSStateScreen
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SOSScreen(
-    sosId: Int,
-    model: SOSViewModel = viewModel(factory = SOSViewModelFactory(sosId, App.context.userStore))
-) {
-    Scaffold {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(it),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
-            Text("SOS screen")
-        }
+fun SOSScreen(model: SOSViewModel = viewModel()) {
+    val navController = rememberNavController()
+
+    fun moveToSOSState(sosId: Int) {
+        navController.navigate(
+            SOSScreen.SOSState.route.replace(
+                "{sosId}",
+                "$sosId"
+            )
+        )
     }
+
+    fun moveToSOSComplete() {
+        navController.navigate(SOSScreen.SOSComplete.route)
+    }
+
+    NavHost(navController = navController, startDestination = SOSScreen.SOSDetect.route) {
+        composable(SOSScreen.SOSDetect.route) { SOSDetectScreen(moveToSOSState = ::moveToSOSState) }
+        composable(SOSScreen.SOSState.route) {
+            val sosId = it.arguments?.getString("sosId")?.toInt() ?: 0
+
+            SOSStateScreen(sosId = sosId, moveToSOSComplete = ::moveToSOSComplete)
+        }
+        composable(SOSScreen.SOSComplete.route) { SOSCompleteScreen() }
+    }
+}
+
+private sealed class SOSScreen(val route: String) {
+    object SOSDetect : SOSScreen("sos/detect")
+    object SOSState : SOSScreen("sos/{sosId}")
+    object SOSComplete : SOSScreen("sos/complete")
 }

@@ -21,11 +21,11 @@ class SOSActivity : ComponentActivity() {
 private fun SOSNavigation() {
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = SOSScreen.SOS.route) {
-        composable(SOSScreen.SOS.route) { SOSScreen(1) }
+    NavHost(navController = navController, startDestination = SOSNavigation.SOS.route) {
+        composable(SOSNavigation.SOS.route) { SOSScreen() }
     }
 }
 
-sealed class SOSScreen(val route: String) {
-    object SOS : SOSScreen("sos")
+private sealed class SOSNavigation(val route: String) {
+    object SOS : SOSNavigation("sos")
 }

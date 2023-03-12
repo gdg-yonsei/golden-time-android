@@ -41,7 +41,7 @@ fun ArticleScreen(model: ArticleViewModel = viewModel()) {
             )
         }
         composable(ArticleScreen.DiseaseDetail.route) {
-            val diseaseId = (it.arguments?.getString("diseaseId") ?: "0").toInt()
+            val diseaseId = it.arguments?.getString("diseaseId")?.toInt() ?: 0
 
             DiseaseDetailScreen(
                 diseaseId = diseaseId,
