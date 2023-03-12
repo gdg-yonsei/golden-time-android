@@ -22,7 +22,7 @@ private fun SOSNavigation() {
     val navController = rememberNavController()
 
     NavHost(navController = navController, startDestination = SOSScreen.SOS.route) {
-        composable(SOSScreen.SOS.route) { SOSScreen() }
+        composable(SOSScreen.SOS.route) { SOSScreen(1) }
     }
 }
 

@@ -13,7 +13,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
 fun ArticleScreen(model: ArticleViewModel = viewModel()) {
-    val diseases by model.diseases.observeAsState()
+    val diseases by model.getDiseases().observeAsState()
 
     Column(
         modifier = Modifier

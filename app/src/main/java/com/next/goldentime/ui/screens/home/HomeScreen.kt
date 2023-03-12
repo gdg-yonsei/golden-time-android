@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Article
-import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -16,7 +15,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.next.goldentime.ui.MainScreen
 import com.next.goldentime.ui.screens.home.article.ArticleScreen
 import com.next.goldentime.ui.screens.home.profile.ProfileScreen
 import com.next.goldentime.ui.screens.home.sos.SOSScreen
@@ -27,16 +25,6 @@ fun HomeScreen(navigateTo: (String) -> Unit) {
     val navController = rememberNavController()
 
     Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { Text("GOLDEN TIME") },
-                actions = {
-                    IconButton(onClick = { navigateTo(MainScreen.About.route) }) {
-                        Icon(imageVector = Icons.Filled.Info, contentDescription = "about")
-                    }
-                }
-            )
-        },
         bottomBar = { BottomNavigationBar(navController = navController) }
     ) {
         NavHost(
