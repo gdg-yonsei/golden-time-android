@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -21,7 +22,7 @@ import com.next.goldentime.ui.screens.home.sos.SOSScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen(navigateToAbout: () -> Unit) {
+fun HomeScreen(navigateToAbout: () -> Unit, model: HomeViewModel = viewModel()) {
     val navController = rememberNavController()
 
     Scaffold(

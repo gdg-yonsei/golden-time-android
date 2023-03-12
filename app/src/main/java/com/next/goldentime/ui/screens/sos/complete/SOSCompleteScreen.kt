@@ -2,6 +2,7 @@ package com.next.goldentime.ui.screens.sos.complete
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
@@ -17,7 +18,9 @@ import com.next.goldentime.ui.components.common.TopBar
 fun SOSCompleteScreen(model: SOSCompleteViewModel = viewModel()) {
     Scaffold(topBar = { TopBar("SOS") }) {
         Column(
-            modifier = Modifier.padding(it),
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(it),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
