@@ -31,6 +31,6 @@ fun ProfileScreen(
 }
 
 private sealed class ProfileScreen(val route: String) {
-    object ProfileView : ProfileScreen("profile-view")
-    object ProfileEdit : ProfileScreen("profile-edit")
+    object ProfileView : ProfileScreen("profile/view")
+    object ProfileEdit : ProfileScreen("profile/edit")
 }

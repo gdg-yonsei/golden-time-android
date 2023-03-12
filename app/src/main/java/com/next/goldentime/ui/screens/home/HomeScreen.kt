@@ -69,7 +69,7 @@ private fun BottomNavigationBar(navController: NavController) {
 }
 
 sealed class HomeScreen(val route: String, val label: String, val icon: ImageVector) {
-    object Profile : HomeScreen("profile", "Profile", Icons.Filled.AccountCircle)
-    object SOS : HomeScreen("sos", "SOS", Icons.Filled.Notifications)
-    object Article : HomeScreen("article", "Article", Icons.Filled.Article)
+    object Profile : HomeScreen("home/profile", "Profile", Icons.Filled.AccountCircle)
+    object SOS : HomeScreen("home/sos", "SOS", Icons.Filled.Notifications)
+    object Article : HomeScreen("home/article", "Article", Icons.Filled.Article)
 }

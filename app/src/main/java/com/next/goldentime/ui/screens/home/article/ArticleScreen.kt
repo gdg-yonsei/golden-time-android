@@ -1,37 +1,58 @@
 package com.next.goldentime.ui.screens.home.article
 
-import androidx.compose.foundation.layout.*
-import androidx.compose.material3.Card
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.next.goldentime.ui.screens.home.article.diseaseDetail.DiseaseDetailScreen
+import com.next.goldentime.ui.screens.home.article.diseaseList.DiseaseListScreen
+import com.next.goldentime.ui.screens.home.article.list.ArticleListScreen
 
 @Composable
 fun ArticleScreen(model: ArticleViewModel = viewModel()) {
-    val diseases by model.getDiseases().observeAsState()
+    val navController = rememberNavController()
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(56.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
-        Text("What are you interested in?")
-        diseases?.map {
-            Card(modifier = Modifier.fillMaxWidth()) {
-                Column(modifier = Modifier.padding(20.dp)) {
-                    Text("title : ${it.title}")
-                    Text("subtitle : ${it.subtitle}")
-                    Text("overview : ${it.overview}")
-                    Text("manual : ${it.manual.size}")
-                }
-            }
+    fun navigateToDiseaseList() {
+        navController.navigate(ArticleScreen.DiseaseList.route)
+    }
+
+    fun navigateToDiseaseDetail(diseaseId: Int) {
+        navController.navigate(
+            ArticleScreen.DiseaseDetail.route.replace(
+                "{diseaseId}",
+                "$diseaseId"
+            )
+        )
+    }
+
+    fun navigateBack() {
+        navController.navigateUp()
+    }
+
+    NavHost(navController = navController, startDestination = ArticleScreen.ArticleList.route) {
+        composable(ArticleScreen.ArticleList.route) {
+            ArticleListScreen(navigateToDiseaseList = ::navigateToDiseaseList)
+        }
+        composable(ArticleScreen.DiseaseList.route) {
+            DiseaseListScreen(
+                navigateBack = ::navigateBack,
+                navigateToDiseaseDetail = ::navigateToDiseaseDetail,
+            )
+        }
+        composable(ArticleScreen.DiseaseDetail.route) {
+            val diseaseId = (it.arguments?.getString("diseaseId") ?: "0").toInt()
+
+            DiseaseDetailScreen(
+                diseaseId = diseaseId,
+                navigateBack = ::navigateBack
+            )
         }
     }
+}
+
+private sealed class ArticleScreen(val route: String) {
+    object ArticleList : ArticleScreen("article")
+    object DiseaseList : ArticleScreen("article/disease")
+    object DiseaseDetail : ArticleScreen("article/disease/{diseaseId}")
 }
