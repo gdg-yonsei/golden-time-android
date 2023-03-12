@@ -21,11 +21,11 @@ class RescueActivity : ComponentActivity() {
 private fun RescueNavigation() {
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = RescueScreen.Rescue.route) {
-        composable(RescueScreen.Rescue.route) { RescueScreen(sosId = 1) }
+    NavHost(navController = navController, startDestination = RescueNavigation.Rescue.route) {
+        composable(RescueNavigation.Rescue.route) { RescueScreen(sosId = 1) }
     }
 }
 
-private sealed class RescueScreen(val route: String) {
-    object Rescue : RescueScreen("rescue")
+private sealed class RescueNavigation(val route: String) {
+    object Rescue : RescueNavigation("rescue")
 }
