@@ -1,34 +1,31 @@
 package com.next.goldentime.ui.screens.home.profile.view
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Edit
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+import com.next.goldentime.ui.components.common.FragmentTab
 import com.next.goldentime.ui.components.common.TopBar
 import com.next.goldentime.ui.components.common.TopBarIcon
 import com.next.goldentime.ui.components.home.WithTopBar
+import com.next.goldentime.ui.components.profile.DiseaseFragment
+import com.next.goldentime.ui.components.profile.MedicalIDFragment
+import com.next.goldentime.ui.screens.home.profile.ProfileViewModel
 
 @Composable
-fun ProfileViewScreen(edit: () -> Unit) {
+fun ProfileViewScreen(model: ProfileViewModel, edit: () -> Unit) {
     WithTopBar(topBar = {
         TopBar(
             "Profile",
             right = TopBarIcon(Icons.Outlined.Edit) { edit() },
         )
     }) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(24.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Text("Profile")
+        val tabs = listOf("Medical ID", "My medical conditions")
+
+        FragmentTab(tabs = tabs) {
+            when (it) {
+                0 -> MedicalIDFragment(model)
+                1 -> DiseaseFragment()
+            }
         }
     }
 }

@@ -8,6 +8,7 @@ import androidx.lifecycle.asLiveData
 import com.next.goldentime.repository.disease.DiseaseStaticRepository
 import com.next.goldentime.repository.user.UserStoreRepository
 import com.next.goldentime.usecase.user.UserUseCase
+import kotlinx.coroutines.flow.first
 import java.util.*
 
 class ProfileViewModel(
@@ -20,6 +21,8 @@ class ProfileViewModel(
     private val _user = userUseCase.watchUser()
 
     val user = _user.asLiveData()
+
+    suspend fun getUser() = userUseCase.watchUser().first()
 }
 
 class ProfileViewModelFactory(
