@@ -9,7 +9,10 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
@@ -57,7 +60,10 @@ private fun BottomNavigationBar(navController: NavController) {
         }
     }
 
-    NavigationBar {
+    NavigationBar(
+        containerColor = Color.White,
+        modifier = Modifier.shadow(40.dp)
+    ) {
         screens.forEach { screen ->
             NavigationBarItem(
                 selected = screen.route == currentRoute,

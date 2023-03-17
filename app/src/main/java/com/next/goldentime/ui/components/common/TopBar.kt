@@ -5,8 +5,11 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.sp
 
 data class TopBarIcon(val icon: ImageVector, val onClick: () -> Unit)
 
@@ -18,7 +21,7 @@ fun TopBar(
     right: TopBarIcon? = null,
 ) {
     CenterAlignedTopAppBar(
-        title = { Text(title) },
+        title = { Text(title, fontSize = 22.sp, fontWeight = FontWeight(700), color = Color(0xff201A18)) },
         navigationIcon = {
             left?.let {
                 IconButton(onClick = it.onClick) {
