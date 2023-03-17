@@ -1,4 +1,4 @@
-package com.next.goldentime.ui.screens.sos.state
+package com.next.goldentime.ui.screens.sos.detect
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -18,14 +18,11 @@ import com.next.goldentime.ui.components.common.TopBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun StateScreen(
-    sosId: Int,
-    completeSOS: () -> Unit,
-    model: StateViewModel = viewModel(
-        factory = StateViewModelFactory(sosId, App.context.userStore)
-    )
+fun SOSDetectScreen(
+    confirmSOS: (sosId: Int) -> Unit,
+    model: SOSDetectViewModel = viewModel(factory = SOSDetectViewModelFactory(App.context.userStore))
 ) {
-    Scaffold(topBar = { TopBar("Waiting for help") }) {
+    Scaffold(topBar = { TopBar("Fall Detected") }) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -33,9 +30,9 @@ fun StateScreen(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text("Waiting for help")
-            ElevatedButton(onClick = { completeSOS() }) {
-                Text("SOS Completed")
+            Text("It looks like you've taken a hard fall")
+            ElevatedButton(onClick = { confirmSOS(1) }) {
+                Text("SOS Confirmed")
             }
         }
     }

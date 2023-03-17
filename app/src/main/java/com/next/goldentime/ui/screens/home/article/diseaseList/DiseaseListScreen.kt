@@ -21,7 +21,7 @@ import com.next.goldentime.ui.components.home.WithTopBar
 @Composable
 fun DiseaseListScreen(
     navigateBack: () -> Unit,
-    navigateToDiseaseDetail: (diseaseId: Int) -> Unit,
+    showDetail: (diseaseId: Int) -> Unit,
     model: DiseaseListViewModel = viewModel()
 ) {
     val diseases by model.diseases.observeAsState()
@@ -41,7 +41,7 @@ fun DiseaseListScreen(
         ) {
             diseases?.map { disease ->
                 Card(
-                    onClick = { navigateToDiseaseDetail(disease.id) },
+                    onClick = { showDetail(disease.id) },
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Text(disease.title)

@@ -1,4 +1,4 @@
-package com.next.goldentime.ui.screens.sos.detect
+package com.next.goldentime.ui.screens.rescue.accept
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,17 +12,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.next.goldentime.App
-import com.next.goldentime.repository.user.userStore
 import com.next.goldentime.ui.components.common.TopBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DetectScreen(
-    confirmSOS: (sosId: Int) -> Unit,
-    model: DetectViewModel = viewModel(factory = DetectViewModelFactory(App.context.userStore))
-) {
-    Scaffold(topBar = { TopBar("Fall Detected") }) {
+fun RescueAcceptScreen(accept: () -> Unit, model: RescueAcceptViewModel = viewModel()) {
+    Scaffold(topBar = { TopBar("New SOS") }) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -30,9 +25,8 @@ fun DetectScreen(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text("It looks like you've taken a hard fall")
-            ElevatedButton(onClick = { confirmSOS(1) }) {
-                Text("SOS Confirmed")
+            ElevatedButton({ accept() }) {
+                Text("Accept rescue")
             }
         }
     }

@@ -10,7 +10,7 @@ import com.next.goldentime.repository.user.UserStoreRepository
 import com.next.goldentime.usecase.sos.SOSUseCase
 import kotlinx.coroutines.flow.map
 
-class StateViewModel(
+class SOSStateViewModel(
     sosId: Int,
     userStore: DataStore<Preferences>,
     private val sosUseCase: SOSUseCase = SOSUseCase(
@@ -24,14 +24,14 @@ class StateViewModel(
     val closestRescuerDistance = _sosState.map { it.closestRescuerDistance }.asLiveData()
 }
 
-class StateViewModelFactory(
+class SOSStateViewModelFactory(
     private val sosId: Int,
     private val userStore: DataStore<Preferences>
 ) : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(StateViewModel::class.java)) {
-            return StateViewModel(sosId, userStore) as T
+        if (modelClass.isAssignableFrom(SOSStateViewModel::class.java)) {
+            return SOSStateViewModel(sosId, userStore) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

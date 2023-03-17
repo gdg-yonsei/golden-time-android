@@ -5,9 +5,9 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.next.goldentime.ui.screens.sos.complete.CompleteScreen
-import com.next.goldentime.ui.screens.sos.detect.DetectScreen
-import com.next.goldentime.ui.screens.sos.state.StateScreen
+import com.next.goldentime.ui.screens.sos.complete.SOSCompleteScreen
+import com.next.goldentime.ui.screens.sos.detect.SOSDetectScreen
+import com.next.goldentime.ui.screens.sos.state.SOSStateScreen
 
 @Composable
 fun SOSScreen(model: SOSViewModel = viewModel()) {
@@ -15,7 +15,7 @@ fun SOSScreen(model: SOSViewModel = viewModel()) {
 
     fun moveToSOSState(sosId: Int) {
         navController.navigate(
-            SOSScreen.State.route.replace(
+            SOSScreen.SOSState.route.replace(
                 "{sosId}",
                 "$sosId"
             )
@@ -23,22 +23,22 @@ fun SOSScreen(model: SOSViewModel = viewModel()) {
     }
 
     fun moveToSOSComplete() {
-        navController.navigate(SOSScreen.Complete.route)
+        navController.navigate(SOSScreen.SOSComplete.route)
     }
 
-    NavHost(navController = navController, startDestination = SOSScreen.Detect.route) {
-        composable(SOSScreen.Detect.route) { DetectScreen(confirmSOS = ::moveToSOSState) }
-        composable(SOSScreen.State.route) {
+    NavHost(navController = navController, startDestination = SOSScreen.SOSDetect.route) {
+        composable(SOSScreen.SOSDetect.route) { SOSDetectScreen(confirmSOS = ::moveToSOSState) }
+        composable(SOSScreen.SOSState.route) {
             val sosId = it.arguments?.getString("sosId")?.toInt() ?: 0
 
-            StateScreen(sosId = sosId, completeSOS = ::moveToSOSComplete)
+            SOSStateScreen(sosId = sosId, completeSOS = ::moveToSOSComplete)
         }
-        composable(SOSScreen.Complete.route) { CompleteScreen() }
+        composable(SOSScreen.SOSComplete.route) { SOSCompleteScreen() }
     }
 }
 
 private sealed class SOSScreen(val route: String) {
-    object Detect : SOSScreen("sos/detect")
-    object State : SOSScreen("sos/{sosId}")
-    object Complete : SOSScreen("sos/complete")
+    object SOSDetect : SOSScreen("sos/detect")
+    object SOSState : SOSScreen("sos/{sosId}")
+    object SOSComplete : SOSScreen("sos/complete")
 }

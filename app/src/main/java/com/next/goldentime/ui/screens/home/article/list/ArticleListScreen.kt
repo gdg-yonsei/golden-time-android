@@ -11,7 +11,7 @@ import com.next.goldentime.ui.components.common.TopBar
 import com.next.goldentime.ui.components.home.WithTopBar
 
 @Composable
-fun ArticleListScreen(navigateToDiseaseList: () -> Unit) {
+fun ArticleListScreen(showDiseaseList: () -> Unit) {
     WithTopBar(topBar = { TopBar("Articles") }) {
         Column(
             modifier = Modifier
@@ -21,7 +21,7 @@ fun ArticleListScreen(navigateToDiseaseList: () -> Unit) {
         ) {
             Text("What will you learn today?")
             Spacer(Modifier.height(24.dp))
-            ElevatedButton(onClick = { navigateToDiseaseList() }) {
+            ElevatedButton(onClick = { showDiseaseList() }) {
                 Text("Show diseases")
             }
         }

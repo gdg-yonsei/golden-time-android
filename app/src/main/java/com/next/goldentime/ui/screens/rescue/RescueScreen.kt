@@ -5,8 +5,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.next.goldentime.ui.screens.rescue.accept.AcceptScreen
-import com.next.goldentime.ui.screens.rescue.complete.CompleteScreen
+import com.next.goldentime.ui.screens.rescue.accept.RescueAcceptScreen
+import com.next.goldentime.ui.screens.rescue.complete.RescueCompleteScreen
 import com.next.goldentime.ui.screens.rescue.manual.ManualScreen
 import com.next.goldentime.ui.screens.rescue.patient.PatientScreen
 
@@ -26,26 +26,26 @@ fun RescueScreen(
     }
 
     fun moveToComplete() {
-        navController.navigate(RescueScreen.Complete.route)
+        navController.navigate(RescueScreen.RescueComplete.route)
     }
 
     fun navigateBack() {
         navController.navigateUp()
     }
 
-    NavHost(navController = navController, startDestination = RescueScreen.Accept.route) {
-        composable(RescueScreen.Accept.route) { AcceptScreen(accept = ::moveToManual) }
+    NavHost(navController = navController, startDestination = RescueScreen.RescueAccept.route) {
+        composable(RescueScreen.RescueAccept.route) { RescueAcceptScreen(accept = ::moveToManual) }
         composable(RescueScreen.Manual.route) {
             ManualScreen(showPatientID = ::navigateToPatient, complete = ::moveToComplete)
         }
         composable(RescueScreen.Patient.route) { PatientScreen(navigateBack = ::navigateBack) }
-        composable(RescueScreen.Complete.route) { CompleteScreen() }
+        composable(RescueScreen.RescueComplete.route) { RescueCompleteScreen() }
     }
 }
 
 private sealed class RescueScreen(val route: String) {
-    object Accept : RescueScreen("rescue/accept")
+    object RescueAccept : RescueScreen("rescue/accept")
     object Manual : RescueScreen("rescue/manual")
     object Patient : RescueScreen("rescue/patient")
-    object Complete : RescueScreen("rescue/complete")
+    object RescueComplete : RescueScreen("rescue/complete")
 }

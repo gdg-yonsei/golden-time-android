@@ -15,11 +15,11 @@ import com.next.goldentime.ui.components.common.TopBarIcon
 import com.next.goldentime.ui.components.home.WithTopBar
 
 @Composable
-fun ProfileViewScreen(navigateToProfileEdit: () -> Unit) {
+fun ProfileViewScreen(edit: () -> Unit) {
     WithTopBar(topBar = {
         TopBar(
             "Profile",
-            right = TopBarIcon(Icons.Outlined.Edit) { navigateToProfileEdit() },
+            right = TopBarIcon(Icons.Outlined.Edit) { edit() },
         )
     }) {
         Column(

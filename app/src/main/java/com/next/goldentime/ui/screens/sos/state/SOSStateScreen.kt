@@ -1,4 +1,4 @@
-package com.next.goldentime.ui.screens.rescue.accept
+package com.next.goldentime.ui.screens.sos.state
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,12 +12,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.next.goldentime.App
+import com.next.goldentime.repository.user.userStore
 import com.next.goldentime.ui.components.common.TopBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AcceptScreen(accept: () -> Unit, model: AcceptViewModel = viewModel()) {
-    Scaffold(topBar = { TopBar("New SOS") }) {
+fun SOSStateScreen(
+    sosId: Int,
+    completeSOS: () -> Unit,
+    model: SOSStateViewModel = viewModel(
+        factory = SOSStateViewModelFactory(sosId, App.context.userStore)
+    )
+) {
+    Scaffold(topBar = { TopBar("Waiting for help") }) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -25,8 +33,9 @@ fun AcceptScreen(accept: () -> Unit, model: AcceptViewModel = viewModel()) {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            ElevatedButton({ accept() }) {
-                Text("Accept rescue")
+            Text("Waiting for help")
+            ElevatedButton(onClick = { completeSOS() }) {
+                Text("SOS Completed")
             }
         }
     }

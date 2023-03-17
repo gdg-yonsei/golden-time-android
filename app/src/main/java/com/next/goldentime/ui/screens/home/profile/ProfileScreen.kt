@@ -25,7 +25,7 @@ fun ProfileScreen(
     }
 
     NavHost(navController = navController, startDestination = ProfileScreen.ProfileView.route) {
-        composable(ProfileScreen.ProfileView.route) { ProfileViewScreen(navigateToProfileEdit = ::navigateToProfileEdit) }
+        composable(ProfileScreen.ProfileView.route) { ProfileViewScreen(edit = ::navigateToProfileEdit) }
         composable(ProfileScreen.ProfileEdit.route) { ProfileEditScreen(navigateBack = ::navigateBack) }
     }
 }

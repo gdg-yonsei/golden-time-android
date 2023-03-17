@@ -1,4 +1,4 @@
-package com.next.goldentime.ui.screens.rescue.complete
+package com.next.goldentime.ui.screens.sos.complete
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -13,11 +13,10 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.next.goldentime.ui.components.common.TopBar
 
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CompleteScreen(model: CompleteViewModel = viewModel()) {
-    Scaffold(topBar = { TopBar("All done") }) {
+fun SOSCompleteScreen(model: SOSCompleteViewModel = viewModel()) {
+    Scaffold(topBar = { TopBar("SOS") }) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -25,7 +24,7 @@ fun CompleteScreen(model: CompleteViewModel = viewModel()) {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text("Completed")
+            Text("Everything is over!")
         }
     }
 }

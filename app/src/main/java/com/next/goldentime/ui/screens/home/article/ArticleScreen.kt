@@ -32,12 +32,12 @@ fun ArticleScreen(model: ArticleViewModel = viewModel()) {
 
     NavHost(navController = navController, startDestination = ArticleScreen.ArticleList.route) {
         composable(ArticleScreen.ArticleList.route) {
-            ArticleListScreen(navigateToDiseaseList = ::navigateToDiseaseList)
+            ArticleListScreen(showDiseaseList = ::navigateToDiseaseList)
         }
         composable(ArticleScreen.DiseaseList.route) {
             DiseaseListScreen(
                 navigateBack = ::navigateBack,
-                navigateToDiseaseDetail = ::navigateToDiseaseDetail,
+                showDetail = ::navigateToDiseaseDetail,
             )
         }
         composable(ArticleScreen.DiseaseDetail.route) {

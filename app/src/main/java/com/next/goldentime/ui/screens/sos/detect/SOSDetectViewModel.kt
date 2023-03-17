@@ -9,7 +9,7 @@ import com.next.goldentime.repository.sos.SOSStaticRepository
 import com.next.goldentime.repository.user.UserStoreRepository
 import com.next.goldentime.usecase.sos.SOSUseCase
 
-class DetectViewModel(
+class SOSDetectViewModel(
     userStore: DataStore<Preferences>,
     private val sosUseCase: SOSUseCase = SOSUseCase(
         SOSStaticRepository(),
@@ -19,13 +19,13 @@ class DetectViewModel(
     suspend fun requestSOS(location: Location) = sosUseCase.requestSOS(location)
 }
 
-class DetectViewModelFactory(
+class SOSDetectViewModelFactory(
     private val userStore: DataStore<Preferences>
 ) : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(DetectViewModel::class.java)) {
-            return DetectViewModel(userStore) as T
+        if (modelClass.isAssignableFrom(SOSDetectViewModel::class.java)) {
+            return SOSDetectViewModel(userStore) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
