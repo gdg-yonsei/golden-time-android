@@ -4,13 +4,11 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.ElevatedButton
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.next.goldentime.ui.components.common.TopBar
 
@@ -21,7 +19,23 @@ fun ManualScreen(
     complete: () -> Unit,
     model: ManualViewModel = viewModel()
 ) {
-    Scaffold(topBar = { TopBar("Instructions") }) {
+    BottomSheetScaffold(
+        topBar = { TopBar("Instructions") },
+        sheetContent = {
+            Column(modifier = Modifier.padding(24.dp)) {
+                Text("Instructions")
+                ElevatedButton(onClick = { /*TODO*/ }) {
+                    Text("Call 911")
+                }
+                Text("Step1")
+                Text("Step2")
+                Text("Step3")
+                Text("Step4")
+                Text("Step5")
+                Text("Step6")
+            }
+        }
+    ) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
