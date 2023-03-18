@@ -1,6 +1,8 @@
 package com.next.goldentime.ui.screens.sos
 
+import android.app.Activity
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -9,27 +11,30 @@ import com.next.goldentime.ui.screens.sos.complete.SOSCompleteScreen
 import com.next.goldentime.ui.screens.sos.detect.SOSDetectScreen
 import com.next.goldentime.ui.screens.sos.state.SOSStateScreen
 import com.next.goldentime.usecase.sos.SOSType
+import com.next.goldentime.util.removePrevious
 
 @Composable
-fun SOSScreen(type: SOSType, model: SOSViewModel = viewModel()) {
+fun SOSScreen(sosType: SOSType, model: SOSViewModel = viewModel()) {
     val navController = rememberNavController()
+    val context = LocalContext.current
 
     fun moveToSOSState(sosId: Int) {
-        navController.navigate(
-            SOSScreen.SOSState.route.replace(
-                "{sosId}",
-                "$sosId"
-            )
-        )
+        val route = SOSScreen.SOSState.route.replace("{sosId}", "$sosId")
+
+        navController.navigate(route) { removePrevious(navController) }
     }
 
     fun moveToSOSComplete() {
         navController.navigate(SOSScreen.SOSComplete.route)
     }
 
+    fun finishSOS() {
+        (context as Activity).finish()
+    }
+
     NavHost(navController = navController, startDestination = SOSScreen.SOSDetect.route) {
         composable(SOSScreen.SOSDetect.route) {
-            SOSDetectScreen(type = type, confirmSOS = ::moveToSOSState)
+            SOSDetectScreen(sosType = sosType, confirmSOS = ::moveToSOSState, cancelSOS = ::finishSOS)
         }
         composable(SOSScreen.SOSState.route) {
             val sosId = it.arguments?.getString("sosId")?.toInt() ?: 0

@@ -17,15 +17,15 @@ import com.next.goldentime.ui.components.common.Guide
 fun HeartDetectGuide() {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         Image(
-            painter = painterResource(id = R.drawable.image_falling),
+            painter = painterResource(id = R.drawable.image_heart_rate),
             contentDescription = null,
             modifier = Modifier
-                .width(209.dp)
-                .height(240.dp),
+                .width(200.dp)
+                .height(200.dp),
         )
         Spacer(Modifier.height(28.dp))
         Guide(
-            title = "It looks like you’ve taken a hard fall",
+            title = "It looks like you have an irregular\nheart rhythm",
             description = "Do you need help? We will trigger\nEmergency SOS if you don’t respond."
         )
     }
