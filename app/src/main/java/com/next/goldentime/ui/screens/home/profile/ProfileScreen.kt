@@ -31,7 +31,12 @@ fun ProfileScreen(
                 edit = ::navigateToProfileEdit
             )
         }
-        composable(ProfileScreen.ProfileEdit.route) { ProfileEditScreen(navigateBack = ::navigateBack) }
+        composable(ProfileScreen.ProfileEdit.route) {
+            ProfileEditScreen(
+                model = model,
+                navigateBack = ::navigateBack
+            )
+        }
     }
 }
 

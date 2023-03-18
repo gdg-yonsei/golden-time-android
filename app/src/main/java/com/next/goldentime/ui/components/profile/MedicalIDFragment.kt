@@ -41,7 +41,7 @@ fun MedicalIDFragment(model: ProfileViewModel) {
                 )
                 TextField(
                     label = { Text("Birth date") },
-                    placeholder = { Text("Not set") },
+                    placeholder = { Text("MM/DD/YYYY") },
                     value = it.birthDate,
                     onValueChange = {},
                     modifier = Modifier.fillMaxWidth(),

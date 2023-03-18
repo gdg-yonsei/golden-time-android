@@ -9,6 +9,8 @@ import com.next.goldentime.repository.disease.DiseaseStaticRepository
 import com.next.goldentime.repository.user.User
 import com.next.goldentime.repository.user.UserStoreRepository
 import com.next.goldentime.usecase.user.UserUseCase
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.first
 import java.util.*
 
 class ProfileViewModel(
@@ -20,7 +22,8 @@ class ProfileViewModel(
 ) : ViewModel() {
     private val _user = userUseCase.watchUser()
 
-    val user = _user.asLiveData()
+    val user = _user.asLiveData(Dispatchers.IO)
+    suspend fun getUser() = _user.first()
 
     fun checkMedicalIDValid(user: User): Boolean {
         val nameFilled = user.name.isNotBlank()
@@ -31,6 +34,8 @@ class ProfileViewModel(
 
         return nameFilled && birthDateFilled && heightFilled && weightFilled && bloodTypeFilled
     }
+
+    suspend fun saveMedicalID(user: User) = userUseCase.setUser(user)
 }
 
 class ProfileViewModelFactory(
