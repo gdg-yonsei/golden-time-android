@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import com.next.goldentime.repository.disease.DiseaseStaticRepository
+import com.next.goldentime.repository.user.User
 import com.next.goldentime.repository.user.UserStoreRepository
 import com.next.goldentime.usecase.user.UserUseCase
 import java.util.*
@@ -20,6 +21,16 @@ class ProfileViewModel(
     private val _user = userUseCase.watchUser()
 
     val user = _user.asLiveData()
+
+    fun checkMedicalIDValid(user: User): Boolean {
+        val nameFilled = user.name.isNotBlank()
+        val birthDateFilled = user.birthDate.isNotBlank()
+        val heightFilled = user.height > 0.0
+        val weightFilled = user.weight > 0.0
+        val bloodTypeFilled = user.bloodType.isNotBlank()
+
+        return nameFilled && birthDateFilled && heightFilled && weightFilled && bloodTypeFilled
+    }
 }
 
 class ProfileViewModelFactory(
