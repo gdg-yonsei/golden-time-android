@@ -24,7 +24,7 @@ fun ProfileViewScreen(model: ProfileViewModel, edit: () -> Unit) {
         FragmentTab(tabs = tabs) {
             when (it) {
                 0 -> MedicalIDFragment(model)
-                1 -> DiseaseFragment()
+                1 -> DiseaseFragment(model)
             }
         }
     }

@@ -21,8 +21,10 @@ class ProfileViewModel(
     )
 ) : ViewModel() {
     private val _user = userUseCase.watchUser()
+    private val _diseases = userUseCase.watchDiseases()
 
     val user = _user.asLiveData(Dispatchers.IO)
+    val diseases = _diseases.asLiveData(Dispatchers.IO)
     suspend fun getUser() = _user.first()
 
     fun checkMedicalIDValid(user: User): Boolean {
