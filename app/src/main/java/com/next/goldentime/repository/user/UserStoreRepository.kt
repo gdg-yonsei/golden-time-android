@@ -7,6 +7,7 @@ import androidx.datastore.preferences.core.doublePreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import com.next.goldentime.util.toIntList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
@@ -22,7 +23,7 @@ class UserStoreRepository(private val userStore: DataStore<Preferences>) : UserR
         val allergies = user[UserStore.Allergies.key] ?: ""
         val medications = user[UserStore.Medications.key] ?: ""
         val medicalNotes = user[UserStore.MedicalNotes.key] ?: ""
-        val diseases = (user[UserStore.Diseases.key] ?: "").split(",").map { it.toInt() }
+        val diseases = (user[UserStore.Diseases.key] ?: "").toIntList()
 
         User(
             name,
@@ -42,7 +43,7 @@ class UserStoreRepository(private val userStore: DataStore<Preferences>) : UserR
     }.flowOn(Dispatchers.IO)
 
     override fun watchDiseases() = userStore.data.map { user ->
-        (user[UserStore.Diseases.key] ?: "").split(",").map { it.toInt() }
+        (user[UserStore.Diseases.key] ?: "").toIntList()
     }.flowOn(Dispatchers.IO)
 
     override suspend fun setUser(user: User) {
