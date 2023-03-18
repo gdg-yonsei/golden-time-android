@@ -25,7 +25,7 @@ fun SOSScreen(sosType: SOSType, model: SOSViewModel = viewModel()) {
     }
 
     fun moveToSOSComplete() {
-        navController.navigate(SOSScreen.SOSComplete.route)
+        navController.navigate(SOSScreen.SOSComplete.route) { removePrevious(navController) }
     }
 
     fun finishSOS() {

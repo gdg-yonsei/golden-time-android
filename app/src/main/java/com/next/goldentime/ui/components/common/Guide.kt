@@ -13,21 +13,23 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun Guide(title: String, description: String? = null) {
+fun Guide(title: String? = null, description: String? = null) {
     Column(
         verticalArrangement = Arrangement.spacedBy(8.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(
-            title,
-            textAlign = TextAlign.Center,
-            fontSize = 16.sp,
-            fontWeight = FontWeight(700),
-            color = Color(0xFF201A18)
-        )
+        title?.let {
+            Text(
+                it,
+                textAlign = TextAlign.Center,
+                fontSize = 16.sp,
+                fontWeight = FontWeight(700),
+                color = Color(0xFF201A18)
+            )
+        }
         description?.let {
             Text(
-                description,
+                it,
                 textAlign = TextAlign.Center,
                 fontSize = 14.sp,
                 fontWeight = FontWeight(400),

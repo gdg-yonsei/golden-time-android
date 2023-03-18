@@ -20,6 +20,8 @@ class RescueViewModel(
 
     fun getManual(diseaseId: Int) = rescueUseCase.getManual(diseaseId).asLiveData()
 
+    suspend fun acceptSOS() = rescueUseCase.acceptSOS()
+
     suspend fun postLocation(location: Location) = rescueUseCase.postLocation(location)
 
     suspend fun markAsArrived() = rescueUseCase.markAsArrived()

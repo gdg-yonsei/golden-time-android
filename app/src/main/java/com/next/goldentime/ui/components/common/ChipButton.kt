@@ -16,7 +16,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun ChipButton(label: String, icon: ImageVector, onClick: () -> Unit) {
+fun ChipButton(label: String, icon: ImageVector, noBorder: Boolean = false, onClick: () -> Unit) {
     AssistChip(
         label = { Text(label) },
         leadingIcon = {
@@ -31,7 +31,9 @@ fun ChipButton(label: String, icon: ImageVector, onClick: () -> Unit) {
             leadingIconContentColor = Color(0xFF201A18)
         ),
         shape = RoundedCornerShape(50),
-        border = AssistChipDefaults.assistChipBorder(borderColor = Color(0xFF201A18)),
+        border =
+        if (noBorder) null
+        else AssistChipDefaults.assistChipBorder(borderColor = Color(0xFF201A18)),
         onClick = onClick
     )
 }
@@ -40,4 +42,10 @@ fun ChipButton(label: String, icon: ImageVector, onClick: () -> Unit) {
 @Composable
 private fun ChipButtonPreview1() {
     ChipButton(label = "Label", icon = Icons.Filled.Emergency) {}
+}
+
+@Preview
+@Composable
+private fun ChipButtonPreview2() {
+    ChipButton(label = "Label", icon = Icons.Filled.Emergency, noBorder = true) {}
 }
