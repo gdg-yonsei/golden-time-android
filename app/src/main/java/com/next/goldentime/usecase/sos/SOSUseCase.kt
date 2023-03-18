@@ -16,3 +16,7 @@ class SOSUseCase(
 
     fun watchSOSState(sosId: Int) = sosRepository.watchSOSState(sosId)
 }
+
+enum class SOSType {
+    FALL, HEART, DIRECT
+}

@@ -1,47 +1,61 @@
 package com.next.goldentime.ui.screens.sos.detect
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
-import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.next.goldentime.App
-import com.next.goldentime.R
 import com.next.goldentime.repository.user.userStore
-import com.next.goldentime.ui.components.common.Guide
 import com.next.goldentime.ui.components.common.TopBar
+import com.next.goldentime.ui.components.sos.DirectDetectGuide
+import com.next.goldentime.ui.components.sos.FallDetectGuide
+import com.next.goldentime.ui.components.sos.HeartDetectGuide
+import com.next.goldentime.ui.components.sos.SOSTimer
+import com.next.goldentime.usecase.sos.SOSType
+import kotlinx.coroutines.delay
 
-@OptIn(ExperimentalMaterial3Api::class)
+
 @Composable
 fun SOSDetectScreen(
+    type: SOSType,
     confirmSOS: (sosId: Int) -> Unit,
     model: SOSDetectViewModel = viewModel(factory = SOSDetectViewModelFactory(App.context.userStore))
 ) {
-    Scaffold(topBar = { TopBar("Fall Detected") }) {
-        Column(
+    val title = when (type) {
+        SOSType.FALL -> "Fall Detected"
+        SOSType.HEART -> "Irregular Heart rate Detected"
+        else -> "SOS"
+    }
+
+    Scaffold(topBar = { TopBar(title) }) {
+        Box(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(it),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
+            contentAlignment = Alignment.Center
         ) {
-            Image(
-                painter = painterResource(id = R.drawable.image_falling),
-                contentDescription = null,
-                modifier = Modifier
-                    .width(209.dp)
-                    .height(240.dp),
-            )
-            Spacer(Modifier.height(28.dp))
-            Guide(
-                title = "It looks like you’ve taken a hard fall",
-                description = "Do you need help? We will trigger\nEmergency SOS if you don’t respond."
-            )
+            var remainingTime by remember { mutableStateOf(30) }
+
+            LaunchedEffect(Unit) {
+                while (remainingTime > 0) {
+                    delay(1000)
+                    remainingTime--
+                }
+            }
+
+            if (remainingTime > 25) {
+                when (type) {
+                    SOSType.FALL -> FallDetectGuide()
+                    SOSType.HEART -> HeartDetectGuide()
+                    else -> DirectDetectGuide()
+                }
+            } else {
+                SOSTimer(remainingTime)
+            }
         }
     }
 }
