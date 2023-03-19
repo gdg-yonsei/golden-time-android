@@ -43,7 +43,11 @@ fun RescueScreen(
     NavHost(navController = navController, startDestination = RescueScreen.RescueAccept.route) {
         composable(RescueScreen.RescueAccept.route) { RescueAcceptScreen(accept = ::acceptSOS) }
         composable(RescueScreen.Manual.route) {
-            ManualScreen(showPatientID = ::navigateToPatient, complete = ::moveToComplete)
+            ManualScreen(
+                model = model,
+                showPatientID = ::navigateToPatient,
+                complete = ::moveToComplete
+            )
         }
         composable(RescueScreen.Patient.route) { PatientScreen(navigateBack = ::navigateBack) }
         composable(RescueScreen.RescueComplete.route) { RescueCompleteScreen() }

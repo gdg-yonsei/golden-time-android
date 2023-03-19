@@ -1,16 +1,22 @@
 package com.next.goldentime.ui.screens.rescue.accept
 
-import androidx.compose.foundation.layout.*
-import androidx.compose.material3.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.next.goldentime.ui.components.common.Timer
 import com.next.goldentime.ui.components.common.TopBar
 
 @Composable
 fun RescueAcceptScreen(accept: () -> Unit) {
+    LaunchedEffect(Unit) {
+        accept()
+    }
+
     Scaffold(topBar = { TopBar("New SOS") }) {
         Box(
             modifier = Modifier
@@ -18,9 +24,7 @@ fun RescueAcceptScreen(accept: () -> Unit) {
                 .padding(it),
             contentAlignment = Alignment.Center
         ) {
-            Timer(duration = 1, onComplete = { accept() }) {
-                CircularProgressIndicator()
-            }
+            CircularProgressIndicator()
         }
     }
 }

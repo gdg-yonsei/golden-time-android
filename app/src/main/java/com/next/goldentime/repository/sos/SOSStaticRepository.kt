@@ -10,11 +10,13 @@ import kotlinx.coroutines.flow.flowOn
 
 class SOSStaticRepository : SOSRepository {
     override fun getSOS(sosId: Int) = flow {
+        delay(1000)
+
         when (sosId) {
             1 -> emit(sosA)
             2 -> emit(sosB)
         }
-    }
+    }.flowOn(Dispatchers.IO)
 
     override fun watchSOSState(sosId: Int) = flow {
         emit(sosStateA)

@@ -7,7 +7,11 @@ import com.next.goldentime.repository.disease.DiseaseStaticRepository
 import com.next.goldentime.repository.sos.Location
 import com.next.goldentime.repository.sos.SOSStaticRepository
 import com.next.goldentime.usecase.rescue.RescueUseCase
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.map
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class RescueViewModel(
     sosId: Int,
     private val rescueUseCase: RescueUseCase = RescueUseCase(
@@ -16,9 +20,14 @@ class RescueViewModel(
         sosId
     )
 ) : ViewModel() {
-    fun getSOS() = rescueUseCase.getSOS().asLiveData()
+    private val _sos = rescueUseCase.getSOS()
+    private val _manual = _sos.flatMapLatest { sos ->
+        rescueUseCase.getManual(sos.patient.diseases[0])
+    }
 
-    fun getManual(diseaseId: Int) = rescueUseCase.getManual(diseaseId).asLiveData()
+    val location = _sos.map { it.location }.asLiveData()
+    val patient = _sos.map { it.patient }.asLiveData()
+    val manual = _manual.asLiveData()
 
     suspend fun acceptSOS() = rescueUseCase.acceptSOS()
 
