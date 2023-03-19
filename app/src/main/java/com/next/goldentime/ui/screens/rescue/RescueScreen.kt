@@ -49,7 +49,12 @@ fun RescueScreen(
                 complete = ::moveToComplete
             )
         }
-        composable(RescueScreen.Patient.route) { PatientScreen(navigateBack = ::navigateBack) }
+        composable(RescueScreen.Patient.route) {
+            PatientScreen(
+                model = model,
+                navigateBack = ::navigateBack
+            )
+        }
         composable(RescueScreen.RescueComplete.route) { RescueCompleteScreen() }
     }
 }
