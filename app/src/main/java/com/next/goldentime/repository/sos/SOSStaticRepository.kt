@@ -1,13 +1,12 @@
 package com.next.goldentime.repository.sos
 
 import android.util.Log
-import com.next.goldentime.data.fixtures.sosA
-import com.next.goldentime.data.fixtures.sosB
-import com.next.goldentime.data.fixtures.sosStateA
-import com.next.goldentime.data.fixtures.sosStateB
+import com.next.goldentime.data.fixtures.*
 import com.next.goldentime.repository.user.User
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 
 class SOSStaticRepository : SOSRepository {
     override fun getSOS(sosId: Int) = flow {
@@ -18,15 +17,18 @@ class SOSStaticRepository : SOSRepository {
     }
 
     override fun watchSOSState(sosId: Int) = flow {
-        while (true) {
-            when (sosId) {
-                1 -> emit(sosStateA)
-                2 -> emit(sosStateB)
-            }
-
-            delay(3000)
-        }
-    }
+        emit(sosStateA)
+        delay(3000)
+        emit(sosStateB)
+        delay(5000)
+        emit(sosStateC)
+        delay(5000)
+        emit(sosStateD)
+        delay(10000)
+        emit(sosStateE)
+        delay(10000)
+        emit(sosStateF)
+    }.flowOn(Dispatchers.IO)
 
     override suspend fun requestSOS(user: User, location: Location): Int {
         return when (user.name) {

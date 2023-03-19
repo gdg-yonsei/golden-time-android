@@ -41,7 +41,9 @@ fun SOSScreen(sosType: SOSType, model: SOSViewModel = viewModel()) {
 
             SOSStateScreen(sosId = sosId, completeSOS = ::moveToSOSComplete)
         }
-        composable(SOSScreen.SOSComplete.route) { SOSCompleteScreen() }
+        composable(SOSScreen.SOSComplete.route) {
+            SOSCompleteScreen(finishSOS = ::finishSOS)
+        }
     }
 }
 

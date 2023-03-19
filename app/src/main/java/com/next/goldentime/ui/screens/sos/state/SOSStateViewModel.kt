@@ -22,6 +22,7 @@ class SOSStateViewModel(
 
     val rescuerNum = _sosState.map { it.rescuerNum }.asLiveData()
     val closestRescuerDistance = _sosState.map { it.closestRescuerDistance }.asLiveData()
+    val done = _sosState.map { it.done }.asLiveData()
 }
 
 class SOSStateViewModelFactory(
