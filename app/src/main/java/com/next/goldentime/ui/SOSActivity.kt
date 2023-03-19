@@ -1,5 +1,6 @@
 package com.next.goldentime.ui
 
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -11,19 +12,26 @@ import com.next.goldentime.ui.screens.sos.SOSScreen
 import com.next.goldentime.usecase.sos.SOSType
 
 class SOSActivity : ComponentActivity() {
+    private val sosType by lazy {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
+            intent.getSerializableExtra("sosType", SOSType::class.java)
+        else
+            intent.getSerializableExtra("sosType") as SOSType
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContent { SOSNavigation() }
+        setContent { SOSNavigation(sosType!!) }
     }
 }
 
 @Composable
-private fun SOSNavigation() {
+private fun SOSNavigation(sosType: SOSType) {
     val navController = rememberNavController()
 
     NavHost(navController = navController, startDestination = SOSNavigation.SOS.route) {
-        composable(SOSNavigation.SOS.route) { SOSScreen(sosType = SOSType.HEART) }
+        composable(SOSNavigation.SOS.route) { SOSScreen(sosType = sosType) }
     }
 }
 

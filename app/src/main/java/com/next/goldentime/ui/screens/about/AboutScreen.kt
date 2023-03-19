@@ -13,6 +13,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.next.goldentime.ui.RescueActivity
 import com.next.goldentime.ui.components.common.TopBar
 import com.next.goldentime.ui.components.common.TopBarIcon
+import com.next.goldentime.usecase.sos.SOSType
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -31,10 +32,14 @@ fun AboutScreen(navigateBack: () -> Unit, model: AboutViewModel = viewModel()) {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            ElevatedButton(onClick = {
-                context.startActivity(Intent(context, RescueActivity::class.java))
-            }) {
+            ElevatedButton(onClick = { model.openRescueScreen(context) }) {
                 Text("Open Rescue Screen")
+            }
+            ElevatedButton(onClick = { model.openSOSScreen(context, SOSType.FALL) }) {
+                Text("Open SOS Screen : Fall")
+            }
+            ElevatedButton(onClick = { model.openSOSScreen(context, SOSType.HEART) }) {
+                Text("Open SOS Screen : Heart")
             }
         }
     }
