@@ -3,8 +3,8 @@ package com.next.goldentime.repository.user
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.doublePreferencesKey
 import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.next.goldentime.util.toIntList
@@ -17,8 +17,8 @@ class UserStoreRepository(private val userStore: DataStore<Preferences>) : UserR
     override fun watchUser() = userStore.data.map { user ->
         val name = user[UserStore.Name.key] ?: ""
         val birthDate = user[UserStore.BirthDate.key] ?: ""
-        val height = user[UserStore.Height.key] ?: 0.0
-        val weight = user[UserStore.Weight.key] ?: 0.0
+        val height = user[UserStore.Height.key] ?: 0
+        val weight = user[UserStore.Weight.key] ?: 0
         val bloodType = user[UserStore.BloodType.key] ?: ""
         val allergies = user[UserStore.Allergies.key] ?: ""
         val medications = user[UserStore.Medications.key] ?: ""
@@ -79,8 +79,8 @@ val Context.userStore: DataStore<Preferences> by preferencesDataStore("user")
 sealed class UserStore<T>(val key: Preferences.Key<T>) {
     object Name : UserStore<String>(stringPreferencesKey("name"))
     object BirthDate : UserStore<String>(stringPreferencesKey("birth_date"))
-    object Height : UserStore<Double>(doublePreferencesKey("height"))
-    object Weight : UserStore<Double>(doublePreferencesKey("weight"))
+    object Height : UserStore<Int>(intPreferencesKey("height"))
+    object Weight : UserStore<Int>(intPreferencesKey("weight"))
     object BloodType : UserStore<String>(stringPreferencesKey("blood_type"))
     object Allergies : UserStore<String>(stringPreferencesKey("allergies"))
     object Medications : UserStore<String>(stringPreferencesKey("medications"))

@@ -107,7 +107,7 @@ fun ProfileEditScreen(model: ProfileViewModel, navigateBack: () -> Unit) {
                     label = { Text("Height *") },
                     placeholder = { Text("Not set") },
                     value = height.toString(),
-                    onValueChange = { height = it.toDoubleOrNull() ?: 0.0 },
+                    onValueChange = { height = it.toIntOrNull() ?: 0 },
                     modifier = Modifier.fillMaxWidth(),
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
                 )
@@ -115,7 +115,7 @@ fun ProfileEditScreen(model: ProfileViewModel, navigateBack: () -> Unit) {
                     label = { Text("Weight *") },
                     placeholder = { Text("Not set") },
                     value = weight.toString(),
-                    onValueChange = { weight = it.toDoubleOrNull() ?: 0.0 },
+                    onValueChange = { weight = it.toIntOrNull() ?: 0 },
                     modifier = Modifier.fillMaxWidth(),
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
                 )

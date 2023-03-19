@@ -5,8 +5,8 @@ import kotlinx.coroutines.flow.Flow
 data class User(
     val name: String,
     val birthDate: String,
-    val height: Double,
-    val weight: Double,
+    val height: Int,
+    val weight: Int,
     val bloodType: String,
     val allergies: String,
     val medications: String,
