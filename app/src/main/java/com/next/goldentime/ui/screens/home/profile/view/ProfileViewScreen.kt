@@ -7,8 +7,8 @@ import com.next.goldentime.ui.components.common.FragmentTab
 import com.next.goldentime.ui.components.common.TopBar
 import com.next.goldentime.ui.components.common.TopBarIcon
 import com.next.goldentime.ui.components.home.WithTopBar
-import com.next.goldentime.ui.components.profile.DiseaseFragment
-import com.next.goldentime.ui.components.profile.MedicalIDFragment
+import com.next.goldentime.ui.components.home.profile.DiseaseFragment
+import com.next.goldentime.ui.components.home.profile.MedicalIDFragment
 import com.next.goldentime.ui.screens.home.profile.ProfileViewModel
 
 @Composable

@@ -1,4 +1,4 @@
-package com.next.goldentime.ui.components.profile
+package com.next.goldentime.ui.components.home.profile
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
@@ -14,7 +14,7 @@ import com.next.goldentime.R
 import com.next.goldentime.ui.components.common.Guide
 
 @Composable
-fun DiseaseAddGuide() {
+fun MedicalIDEditGuide() {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         Image(
             painter = painterResource(id = R.drawable.image_empty),
@@ -24,7 +24,7 @@ fun DiseaseAddGuide() {
         Spacer(Modifier.height(42.dp))
         Guide(
             title = "No Data",
-            description = "Explore “Articles” page to register your\nMedical Conditions."
+            description = "Tap edit button in the upper-right\ncorner to set up your Medical ID."
         )
     }
 }

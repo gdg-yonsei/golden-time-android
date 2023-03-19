@@ -1,4 +1,4 @@
-package com.next.goldentime.ui.components.profile
+package com.next.goldentime.ui.components.home.profile
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

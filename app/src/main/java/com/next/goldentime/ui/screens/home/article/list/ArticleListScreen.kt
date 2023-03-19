@@ -9,6 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.next.goldentime.ui.components.common.TopBar
 import com.next.goldentime.ui.components.home.WithTopBar
+import com.next.goldentime.ui.components.home.article.ArticleCard
 
 @Composable
 fun ArticleListScreen(showDiseaseList: () -> Unit) {
@@ -20,9 +21,14 @@ fun ArticleListScreen(showDiseaseList: () -> Unit) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text("What will you learn today?")
-            Spacer(Modifier.height(24.dp))
-            ElevatedButton(onClick = { showDiseaseList() }) {
-                Text("Show diseases")
+            Spacer(Modifier.height(40.dp))
+            Column(modifier = Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(56.dp)) {
+                ArticleCard(title = "How to use Golden Time", description = "The first guide for the first user") {
+
+                }
+                ArticleCard(title = "Cardiovascular disease", description = "Cardiovascular disease") {
+                    showDiseaseList()
+                }
             }
         }
     }
