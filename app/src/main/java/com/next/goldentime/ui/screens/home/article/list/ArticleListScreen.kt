@@ -22,11 +22,11 @@ fun ArticleListScreen(showDiseaseList: () -> Unit) {
         ) {
             Text("What will you learn today?")
             Spacer(Modifier.height(40.dp))
-            Column(modifier = Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(56.dp)) {
+            Column(modifier = Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(24.dp)) {
                 ArticleCard(title = "How to use Golden Time", description = "The first guide for the first user") {
 
                 }
-                ArticleCard(title = "Cardiovascular disease", description = "Cardiovascular disease") {
+                ArticleCard(title = "Disease", description = "Disease") {
                     showDiseaseList()
                 }
             }

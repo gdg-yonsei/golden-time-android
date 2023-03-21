@@ -2,11 +2,11 @@ package com.next.goldentime.ui.components.home.article
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Bookmark
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
@@ -22,7 +22,15 @@ fun ArticleCard(title: String, description: String, onClick: () -> Unit) {
         onClick = onClick
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
-            Text(title, fontSize = 24.sp, color = Color(0xFF201A18))
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text(
+                    title,
+                    modifier = Modifier.weight(1f),
+                    fontSize = 24.sp,
+                    color = Color(0xFF201A18)
+                )
+                Icon(imageVector = Icons.Filled.Bookmark, contentDescription = null)
+            }
             Spacer(Modifier.height(12.dp))
             Text(description, fontSize = 16.sp, color = Color(0xFF201A18))
         }

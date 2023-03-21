@@ -1,10 +1,6 @@
 package com.next.goldentime.ui.screens.home.article.diseaseDetail
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.ArrowBack
+import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -12,9 +8,8 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.next.goldentime.ui.components.common.TopBar
-import com.next.goldentime.ui.components.common.TopBarIcon
 import com.next.goldentime.ui.components.home.WithTopBar
 
 @Composable
@@ -26,10 +21,14 @@ fun DiseaseDetailScreen(
     val disease by model.disease.observeAsState()
 
     WithTopBar(topBar = {
-        TopBar(
-            disease?.title ?: "Loading",
-            left = TopBarIcon(Icons.Outlined.ArrowBack) { navigateBack() }
-        )
+        Box(
+            modifier = Modifier
+                .height(228.dp)
+                .padding(24.dp),
+            contentAlignment = Alignment.BottomStart
+        ) {
+            Text(disease?.title ?: "Loading", fontSize = 32.sp)
+        }
     }) {
         Column(
             modifier = Modifier

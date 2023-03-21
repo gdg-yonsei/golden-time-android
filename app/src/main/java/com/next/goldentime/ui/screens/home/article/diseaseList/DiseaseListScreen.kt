@@ -16,6 +16,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.next.goldentime.ui.components.common.TopBar
 import com.next.goldentime.ui.components.common.TopBarIcon
 import com.next.goldentime.ui.components.home.WithTopBar
+import com.next.goldentime.ui.components.home.article.ArticleCard
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -40,12 +41,8 @@ fun DiseaseListScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             diseases?.map { disease ->
-                Card(
-                    onClick = { showDetail(disease.id) },
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Text(disease.title)
-                    Text(disease.subtitle)
+                ArticleCard(title = disease.title, description = disease.subtitle) {
+                    showDetail(disease.id)
                 }
             }
         }
