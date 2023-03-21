@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import com.next.goldentime.repository.profile.UserStoreRepository
 import com.next.goldentime.repository.sos.SOSStaticRepository
-import com.next.goldentime.usecase.sos.SOSUseCase
+import com.next.goldentime.usecase.patient.SOSUseCase
 import kotlinx.coroutines.flow.map
 
 class SOSStateViewModel(

@@ -9,7 +9,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.next.goldentime.ui.screens.sos.SOSScreen
-import com.next.goldentime.usecase.sos.SOSType
+import com.next.goldentime.usecase.patient.SOSType
 
 class SOSActivity : ComponentActivity() {
     private val sosType by lazy {

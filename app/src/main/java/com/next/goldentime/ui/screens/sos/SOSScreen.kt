@@ -10,7 +10,7 @@ import androidx.navigation.compose.rememberNavController
 import com.next.goldentime.ui.screens.sos.complete.SOSCompleteScreen
 import com.next.goldentime.ui.screens.sos.detect.SOSDetectScreen
 import com.next.goldentime.ui.screens.sos.state.SOSStateScreen
-import com.next.goldentime.usecase.sos.SOSType
+import com.next.goldentime.usecase.patient.SOSType
 import com.next.goldentime.util.removePrevious
 
 @Composable
@@ -34,7 +34,11 @@ fun SOSScreen(sosType: SOSType, model: SOSViewModel = viewModel()) {
 
     NavHost(navController = navController, startDestination = SOSScreen.SOSDetect.route) {
         composable(SOSScreen.SOSDetect.route) {
-            SOSDetectScreen(sosType = sosType, confirmSOS = ::moveToSOSState, cancelSOS = ::finishSOS)
+            SOSDetectScreen(
+                sosType = sosType,
+                confirmSOS = ::moveToSOSState,
+                cancelSOS = ::finishSOS
+            )
         }
         composable(SOSScreen.SOSState.route) {
             val sosId = it.arguments?.getString("sosId")?.toInt() ?: 0

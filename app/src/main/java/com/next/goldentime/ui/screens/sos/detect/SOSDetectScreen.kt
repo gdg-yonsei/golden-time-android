@@ -21,7 +21,7 @@ import com.next.goldentime.ui.components.effect.PreventBack
 import com.next.goldentime.ui.components.sos.FallDetectGuide
 import com.next.goldentime.ui.components.sos.HeartDetectGuide
 import com.next.goldentime.ui.components.sos.SOSTimer
-import com.next.goldentime.usecase.sos.SOSType
+import com.next.goldentime.usecase.patient.SOSType
 import kotlinx.coroutines.launch
 
 @Composable

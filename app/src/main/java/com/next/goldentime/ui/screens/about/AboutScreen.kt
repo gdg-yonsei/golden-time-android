@@ -14,7 +14,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.next.goldentime.ui.components.about.Section
 import com.next.goldentime.ui.components.common.TopBar
 import com.next.goldentime.ui.components.common.TopBarIcon
-import com.next.goldentime.usecase.sos.SOSType
+import com.next.goldentime.usecase.patient.SOSType
 
 @Composable
 fun AboutScreen(navigateBack: () -> Unit, model: AboutViewModel = viewModel()) {

@@ -8,7 +8,7 @@ import androidx.lifecycle.asLiveData
 import com.next.goldentime.repository.disease.DiseaseStaticRepository
 import com.next.goldentime.repository.profile.User
 import com.next.goldentime.repository.profile.UserStoreRepository
-import com.next.goldentime.usecase.user.UserUseCase
+import com.next.goldentime.usecase.profile.UserUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 import java.util.*

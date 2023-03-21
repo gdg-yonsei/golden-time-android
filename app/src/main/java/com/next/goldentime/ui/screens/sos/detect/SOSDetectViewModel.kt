@@ -7,8 +7,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.next.goldentime.repository.profile.UserStoreRepository
 import com.next.goldentime.repository.sos.Location
 import com.next.goldentime.repository.sos.SOSStaticRepository
-import com.next.goldentime.usecase.sos.SOSType
-import com.next.goldentime.usecase.sos.SOSUseCase
+import com.next.goldentime.usecase.patient.SOSType
+import com.next.goldentime.usecase.patient.SOSUseCase
 
 class SOSDetectViewModel(
     userStore: DataStore<Preferences>,

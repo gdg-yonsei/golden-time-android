@@ -4,11 +4,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import com.next.goldentime.repository.disease.DiseaseStaticRepository
-import com.next.goldentime.usecase.disease.DiseaseUseCase
+import com.next.goldentime.usecase.article.ArticleUseCase
 
 class DiseaseDetailViewModel(
     private val diseaseId: Int,
-    private val diseaseUseCase: DiseaseUseCase = DiseaseUseCase(DiseaseStaticRepository())
+    private val diseaseUseCase: ArticleUseCase = ArticleUseCase(DiseaseStaticRepository())
 ) : ViewModel() {
     val disease = diseaseUseCase.getDisease(diseaseId).asLiveData()
 }
