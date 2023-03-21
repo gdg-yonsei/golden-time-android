@@ -1,8 +1,8 @@
 package com.next.goldentime.usecase.sos
 
+import com.next.goldentime.repository.profile.UserRepository
 import com.next.goldentime.repository.sos.Location
 import com.next.goldentime.repository.sos.SOSRepository
-import com.next.goldentime.repository.user.UserRepository
 import kotlinx.coroutines.flow.first
 
 class SOSUseCase(

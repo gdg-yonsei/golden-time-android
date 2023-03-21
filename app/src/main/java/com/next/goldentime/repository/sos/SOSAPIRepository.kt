@@ -3,7 +3,7 @@ package com.next.goldentime.repository.sos
 import android.util.Log
 import com.next.goldentime.framework.RetrofitClient
 import com.next.goldentime.framework.emitResponse
-import com.next.goldentime.repository.user.User
+import com.next.goldentime.repository.profile.Profile
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.flow
@@ -22,28 +22,28 @@ class SOSAPIRepository : SOSRepository {
             RetrofitClient.create(SOSAPIClient::class.java)
     }
 
-    override fun getSOS(sosId: Int) = flow {
-        val response = client.getSOS(sosId)
+    override fun getSOSInfo(id: Int) = flow {
+        val response = client.getSOSInfo(id)
         emitResponse(response)
     }.map {
         val patient = it.patient
         val (latitude, longitude) = it.location.split(",")
 
-        SOS(patient, Location(latitude.toDouble(), longitude.toDouble()))
+        SOSInfo(patient, Location(latitude.toDouble(), longitude.toDouble()))
     }.flowOn(Dispatchers.IO)
 
-    override fun watchSOSState(sosId: Int) = flow {
+    override fun watchSOSState(id: Int) = flow {
         while (true) {
-            val response = client.getSOSState(sosId)
+            val response = client.getSOSState(id)
             emitResponse(response)
 
             delay(3000)
         }
     }.flowOn(Dispatchers.IO)
 
-    override suspend fun requestSOS(user: User, location: Location) =
+    override suspend fun requestSOS(profile: Profile, location: Location) =
         withContext(Dispatchers.IO) {
-            val response = client.requestSOS(user, "${location.latitude},${location.longitude}")
+            val response = client.requestSOS(profile, "${location.latitude},${location.longitude}")
 
             if (response.isSuccessful) {
                 response.body()!!.sosId
@@ -52,27 +52,27 @@ class SOSAPIRepository : SOSRepository {
             }
         }
 
-    override suspend fun acceptSOS(sosId: Int) {
+    override suspend fun acceptSOS(id: Int) {
         withContext(Dispatchers.IO) {
-            client.acceptSOS(sosId)
+            client.acceptSOS(id)
         }
     }
 
-    override suspend fun postLocation(sosId: Int, location: Location) {
+    override suspend fun postLocation(id: Int, location: Location) {
         withContext(Dispatchers.IO) {
-            client.postLocation(sosId, "${location.latitude},${location.longitude}")
+            client.postLocation(id, "${location.latitude},${location.longitude}")
         }
     }
 
-    override suspend fun markAsArrived(sosId: Int) {
+    override suspend fun markAsArrived(id: Int) {
         withContext(Dispatchers.IO) {
-            client.markAsArrived(sosId)
+            client.markAsArrived(id)
         }
     }
 
-    override suspend fun completeSOS(sosId: Int) {
+    override suspend fun completeSOS(id: Int) {
         withContext(Dispatchers.IO) {
-            client.completeSOS(sosId)
+            client.completeSOS(id)
         }
     }
 }
@@ -82,9 +82,9 @@ class SOSAPIRepository : SOSRepository {
  */
 private interface SOSAPIClient {
     @GET("sos/{id}")
-    suspend fun getSOS(
+    suspend fun getSOSInfo(
         @Path("id") id: Int
-    ): Response<GetSOSResponse>
+    ): Response<GetSOSInfoResponse>
 
     @GET("sos/{id}/rescuers")
     suspend fun getSOSState(
@@ -93,7 +93,7 @@ private interface SOSAPIClient {
 
     @POST("sos")
     suspend fun requestSOS(
-        @Field("user") user: User,
+        @Field("user") profile: Profile,
         @Field("location") location: String
     ): Response<RequestSOSResponse>
 
@@ -119,5 +119,5 @@ private interface SOSAPIClient {
     ): Response<Void>
 }
 
-private data class GetSOSResponse(val patient: User, val location: String)
+private data class GetSOSInfoResponse(val patient: Profile, val location: String)
 private data class RequestSOSResponse(val sosId: Int)

@@ -1,8 +1,8 @@
 package com.next.goldentime.data.fixtures
 
-import com.next.goldentime.repository.user.User
+import com.next.goldentime.repository.profile.Profile
 
-val userA = User(
+val profileA = Profile(
     name = "A",
     birthDate = "2000",
     height = 180,
@@ -14,11 +14,11 @@ val userA = User(
     diseases = listOf(1)
 )
 
-val userB = User(
+val profileB = Profile(
     name = "B",
     birthDate = "2000",
-    height = 180,
-    weight = 75,
+    height = 160,
+    weight = 48,
     bloodType = "O",
     allergies = "",
     medications = "",

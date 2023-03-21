@@ -6,8 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import com.next.goldentime.repository.disease.DiseaseStaticRepository
-import com.next.goldentime.repository.user.User
-import com.next.goldentime.repository.user.UserStoreRepository
+import com.next.goldentime.repository.profile.User
+import com.next.goldentime.repository.profile.UserStoreRepository
 import com.next.goldentime.usecase.user.UserUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first

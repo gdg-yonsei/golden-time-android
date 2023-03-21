@@ -1,24 +1,20 @@
 package com.next.goldentime.repository.disease
 
+import com.next.goldentime.repository.case.SimpleCase
 import kotlinx.coroutines.flow.Flow
 
 data class Disease(
     val id: Int,
     val title: String,
     val subtitle: String,
-    val overview: String,
-    val manual: Manual,
+    val description: String,
+    val cases: List<SimpleCase>,
 )
-
-typealias Manual = List<Step>
-
-data class Step(val title: String, val description: String, val videoUrl: String? = null)
 
 /**
  * Repository
  */
 interface DiseaseRepository {
-    fun getDiseases(ids: List<Int>? = null): Flow<List<Disease>>
+    fun listDiseases(): Flow<List<Disease>>
     fun getDisease(id: Int): Flow<Disease>
-    fun getManual(diseaseId: Int): Flow<Manual>
 }

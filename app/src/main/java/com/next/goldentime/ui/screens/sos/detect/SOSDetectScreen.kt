@@ -12,8 +12,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.next.goldentime.App
+import com.next.goldentime.repository.profile.userStore
 import com.next.goldentime.repository.sos.Location
-import com.next.goldentime.repository.user.userStore
 import com.next.goldentime.ui.components.common.ChipButton
 import com.next.goldentime.ui.components.common.Timer
 import com.next.goldentime.ui.components.common.TopBar

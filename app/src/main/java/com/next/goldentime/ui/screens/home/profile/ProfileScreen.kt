@@ -6,7 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.next.goldentime.App
-import com.next.goldentime.repository.user.userStore
+import com.next.goldentime.repository.profile.userStore
 import com.next.goldentime.ui.screens.home.profile.edit.ProfileEditScreen
 import com.next.goldentime.ui.screens.home.profile.view.ProfileViewScreen
 

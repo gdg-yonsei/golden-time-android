@@ -1,8 +1,8 @@
 package com.next.goldentime.usecase.user
 
 import com.next.goldentime.repository.disease.DiseaseRepository
-import com.next.goldentime.repository.user.User
-import com.next.goldentime.repository.user.UserRepository
+import com.next.goldentime.repository.profile.User
+import com.next.goldentime.repository.profile.UserRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flatMapLatest
 

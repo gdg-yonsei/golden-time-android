@@ -12,7 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.next.goldentime.App
-import com.next.goldentime.repository.user.userStore
+import com.next.goldentime.repository.profile.userStore
 import com.next.goldentime.ui.components.common.TopBar
 import com.next.goldentime.ui.components.effect.PreventBack
 import com.next.goldentime.ui.components.sos.NoRescuerFragment
@@ -45,7 +45,10 @@ fun SOSStateScreen(
             }
 
             when (rescuerNum > 0 && closestRescuerDistance >= 0) {
-                true -> RescuerStateFragment(rescuerNum = rescuerNum, closestRescuerDistance = closestRescuerDistance)
+                true -> RescuerStateFragment(
+                    rescuerNum = rescuerNum,
+                    closestRescuerDistance = closestRescuerDistance
+                )
                 false -> NoRescuerFragment()
             }
 
