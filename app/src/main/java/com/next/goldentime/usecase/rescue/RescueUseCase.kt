@@ -5,8 +5,10 @@ import com.next.goldentime.repository.case.CaseRepository
 import com.next.goldentime.repository.disease.DiseaseRepository
 import com.next.goldentime.repository.sos.Location
 import com.next.goldentime.repository.sos.SOSRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 
 @OptIn(ExperimentalCoroutinesApi::class)
@@ -22,7 +24,7 @@ class RescueUseCase(
     fun getPatient() = _sosInfo.map { it.patient }
     fun getCases() = _sosInfo
         .flatMapLatest { diseaseRepository.getDisease(it.patient.diseases[0]) }
-        .flatMapLatest { caseRepository.getCase(it.id) }
+        .flatMapLatest { caseRepository.getCase(it.id) }.flowOn(Dispatchers.IO)
 
     fun getManual(case: Case) = case.manual
 
