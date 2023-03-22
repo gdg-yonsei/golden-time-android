@@ -11,8 +11,6 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.next.goldentime.App
-import com.next.goldentime.repository.profile.userStore
 import com.next.goldentime.ui.components.common.TopBar
 import com.next.goldentime.ui.components.effect.PreventBack
 import com.next.goldentime.ui.components.sos.NoRescuerFragment
@@ -23,12 +21,13 @@ import com.next.goldentime.ui.components.sos.SOSWaiter
 fun SOSStateScreen(
     sosId: Int,
     completeSOS: () -> Unit,
-    model: SOSStateViewModel = viewModel(
-        factory = SOSStateViewModelFactory(sosId, App.context.userStore)
-    )
+    model: SOSStateViewModel = viewModel(factory = SOSStateViewModelFactory(sosId))
 ) {
     PreventBack()
 
+    /**
+     * Content
+     */
     Scaffold(topBar = { TopBar("Waiting for help") }) {
         Box(
             modifier = Modifier

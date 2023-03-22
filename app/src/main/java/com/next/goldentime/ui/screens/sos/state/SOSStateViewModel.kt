@@ -1,38 +1,28 @@
 package com.next.goldentime.ui.screens.sos.state
 
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
-import com.next.goldentime.repository.profile.UserStoreRepository
-import com.next.goldentime.repository.sos.SOSStaticRepository
-import com.next.goldentime.usecase.patient.SOSUseCase
+import com.next.goldentime.usecase.patient.PatientUseCase
+import com.next.goldentime.util.generatePatientUseCase
 import kotlinx.coroutines.flow.map
 
 class SOSStateViewModel(
     sosId: Int,
-    userStore: DataStore<Preferences>,
-    private val sosUseCase: SOSUseCase = SOSUseCase(
-        SOSStaticRepository(),
-        UserStoreRepository(userStore)
-    )
+    private val patientUseCase: PatientUseCase = generatePatientUseCase()
 ) : ViewModel() {
-    private val _sosState = sosUseCase.watchSOSState(sosId)
+    private val _rescuer = patientUseCase.watchRescuer(sosId)
 
-    val rescuerNum = _sosState.map { it.rescuerNum }.asLiveData()
-    val closestRescuerDistance = _sosState.map { it.closestRescuerDistance }.asLiveData()
-    val done = _sosState.map { it.done }.asLiveData()
+    val rescuerNum = _rescuer.map { it.rescuerNum }.asLiveData()
+    val closestRescuerDistance = _rescuer.map { it.closestRescuerDistance }.asLiveData()
+    val done = _rescuer.map { it.done }.asLiveData()
 }
 
-class SOSStateViewModelFactory(
-    private val sosId: Int,
-    private val userStore: DataStore<Preferences>
-) : ViewModelProvider.Factory {
+class SOSStateViewModelFactory(private val sosId: Int) : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(SOSStateViewModel::class.java)) {
-            return SOSStateViewModel(sosId, userStore) as T
+            return SOSStateViewModel(sosId) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

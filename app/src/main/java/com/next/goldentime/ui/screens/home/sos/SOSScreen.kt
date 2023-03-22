@@ -17,7 +17,7 @@ import com.next.goldentime.ui.components.home.sos.SOSTrigger
 
 @Composable
 fun SOSScreen(
-    navigateToAbout: () -> Unit,
+    showAbout: () -> Unit,
     model: SOSViewModel = viewModel()
 ) {
     val context = LocalContext.current
@@ -33,7 +33,7 @@ fun SOSScreen(
         topBar = {
             TopBar(
                 "GOLDEN TIME",
-                right = TopBarIcon(Icons.Outlined.Settings) { navigateToAbout() }
+                right = TopBarIcon(Icons.Outlined.Settings) { showAbout() }
             )
         }
     ) {

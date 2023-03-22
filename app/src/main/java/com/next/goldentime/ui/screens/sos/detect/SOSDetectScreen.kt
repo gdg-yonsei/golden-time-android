@@ -11,8 +11,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.next.goldentime.App
-import com.next.goldentime.repository.profile.userStore
 import com.next.goldentime.repository.sos.Location
 import com.next.goldentime.ui.components.common.ChipButton
 import com.next.goldentime.ui.components.common.Timer
@@ -29,9 +27,7 @@ fun SOSDetectScreen(
     sosType: SOSType,
     confirmSOS: (sosId: Int) -> Unit,
     cancelSOS: () -> Unit,
-    model: SOSDetectViewModel = viewModel(
-        factory = SOSDetectViewModelFactory(App.context.userStore, sosType)
-    )
+    model: SOSDetectViewModel = viewModel(factory = SOSDetectViewModelFactory(sosType))
 ) {
     val composeScope = rememberCoroutineScope()
 
@@ -44,6 +40,9 @@ fun SOSDetectScreen(
 
     PreventBack()
 
+    /**
+     * Content
+     */
     Scaffold(topBar = { TopBar(model.title) }) { it ->
         Box(
             modifier = Modifier

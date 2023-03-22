@@ -20,6 +20,9 @@ import com.next.goldentime.usecase.patient.SOSType
 fun AboutScreen(navigateBack: () -> Unit, model: AboutViewModel = viewModel()) {
     val context = LocalContext.current
 
+    /**
+     * Content
+     */
     Scaffold(
         topBar = {
             TopBar("Settings", left = TopBarIcon(Icons.Outlined.ArrowBack) { navigateBack() })

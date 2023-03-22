@@ -27,6 +27,9 @@ import com.next.goldentime.ui.screens.home.sos.SOSScreen
 fun HomeScreen(navigateToAbout: () -> Unit, model: HomeViewModel = viewModel()) {
     val navController = rememberNavController()
 
+    /**
+     * Content
+     */
     Scaffold(
         bottomBar = { BottomNavigationBar(navController = navController) }
     ) {
@@ -36,7 +39,7 @@ fun HomeScreen(navigateToAbout: () -> Unit, model: HomeViewModel = viewModel()) 
             modifier = Modifier.padding(it)
         ) {
             composable(HomeScreen.Profile.route) { ProfileScreen() }
-            composable(HomeScreen.SOS.route) { SOSScreen(navigateToAbout = navigateToAbout) }
+            composable(HomeScreen.SOS.route) { SOSScreen(showAbout = navigateToAbout) }
             composable(HomeScreen.Article.route) { ArticleScreen() }
         }
     }

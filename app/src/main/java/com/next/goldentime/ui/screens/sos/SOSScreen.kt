@@ -32,6 +32,9 @@ fun SOSScreen(sosType: SOSType, model: SOSViewModel = viewModel()) {
         (context as Activity).finish()
     }
 
+    /**
+     * Content
+     */
     NavHost(navController = navController, startDestination = SOSScreen.SOSDetect.route) {
         composable(SOSScreen.SOSDetect.route) {
             SOSDetectScreen(
