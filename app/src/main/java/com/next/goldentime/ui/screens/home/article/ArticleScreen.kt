@@ -5,9 +5,11 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.next.goldentime.ui.screens.home.article.articleList.ArticleListScreen
+import com.next.goldentime.ui.screens.home.article.caseDetail.CaseDetailScreen
+import com.next.goldentime.ui.screens.home.article.caseList.CaseListScreen
 import com.next.goldentime.ui.screens.home.article.diseaseDetail.DiseaseDetailScreen
 import com.next.goldentime.ui.screens.home.article.diseaseList.DiseaseListScreen
-import com.next.goldentime.ui.screens.home.article.list.ArticleListScreen
 
 @Composable
 fun ArticleScreen(model: ArticleViewModel = viewModel()) {
@@ -26,13 +28,32 @@ fun ArticleScreen(model: ArticleViewModel = viewModel()) {
         )
     }
 
+    fun navigateToCaseList() {
+        navController.navigate(ArticleScreen.CaseList.route)
+    }
+
+    fun navigateToCaseDetail(caseId: Int) {
+        navController.navigate(
+            ArticleScreen.CaseDetail.route.replace(
+                "{caseId}",
+                "$caseId"
+            )
+        )
+    }
+
     fun navigateBack() {
         navController.navigateUp()
     }
 
+    /**
+     * Content
+     */
     NavHost(navController = navController, startDestination = ArticleScreen.ArticleList.route) {
         composable(ArticleScreen.ArticleList.route) {
-            ArticleListScreen(showDiseaseList = ::navigateToDiseaseList)
+            ArticleListScreen(
+                showDiseaseList = ::navigateToDiseaseList,
+                showCaseList = ::navigateToCaseList
+            )
         }
         composable(ArticleScreen.DiseaseList.route) {
             DiseaseListScreen(
@@ -48,6 +69,20 @@ fun ArticleScreen(model: ArticleViewModel = viewModel()) {
                 navigateBack = ::navigateBack
             )
         }
+        composable(ArticleScreen.CaseList.route) {
+            CaseListScreen(
+                navigateBack = ::navigateBack,
+                showDetail = ::navigateToCaseDetail,
+            )
+        }
+        composable(ArticleScreen.CaseDetail.route) {
+            val caseId = it.arguments?.getString("caseId")?.toInt() ?: 0
+
+            CaseDetailScreen(
+                caseId = caseId,
+                navigateBack = ::navigateBack
+            )
+        }
     }
 }
 
@@ -55,4 +90,6 @@ private sealed class ArticleScreen(val route: String) {
     object ArticleList : ArticleScreen("article")
     object DiseaseList : ArticleScreen("article/disease")
     object DiseaseDetail : ArticleScreen("article/disease/{diseaseId}")
+    object CaseList : ArticleScreen("article/case")
+    object CaseDetail : ArticleScreen("article/case/{caseId}")
 }

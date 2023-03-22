@@ -1,4 +1,4 @@
-package com.next.goldentime.ui.components.home.profile
+package com.next.goldentime.ui.components.common
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
@@ -11,19 +11,19 @@ import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.next.goldentime.repository.profile.User
+import com.next.goldentime.usecase.profile.MedicalID
 
 @Composable
-fun MedicalIDReader(user: User) {
+fun MedicalIDReader(medicalID: MedicalID) {
     val medicalIDFields = listOf(
-        Field("Name", "Not set", user.name),
-        Field("Birth date", "Not set", user.birthDate),
-        Field("Height", "Not set", user.height.toString()),
-        Field("Weight", "Not set", user.weight.toString()),
-        Field("Blood type", "Not set", user.bloodType),
-        Field("Allergies", "Not set", user.allergies),
-        Field("Medications", "Not set", user.medications),
-        Field("Medical Notes", "Not set", user.medicalNotes),
+        Field("Name", "Not set", medicalID.name),
+        Field("Birth date", "Not set", medicalID.birthDate),
+        Field("Height", "Not set", medicalID.height.toString()),
+        Field("Weight", "Not set", medicalID.weight.toString()),
+        Field("Blood type", "Not set", medicalID.bloodType),
+        Field("Allergies", "Not set", medicalID.allergies),
+        Field("Medications", "Not set", medicalID.medications),
+        Field("Medical Notes", "Not set", medicalID.medicalNotes),
     )
 
     LazyColumn(

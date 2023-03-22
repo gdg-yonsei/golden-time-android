@@ -10,55 +10,36 @@ import androidx.compose.material.icons.outlined.Done
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import com.next.goldentime.repository.profile.User
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.next.goldentime.ui.components.common.Suspender
 import com.next.goldentime.ui.components.common.TopBar
 import com.next.goldentime.ui.components.common.TopBarIcon
 import com.next.goldentime.ui.components.home.WithTopBar
-import com.next.goldentime.ui.screens.home.profile.ProfileViewModel
 import kotlinx.coroutines.launch
 
 @Composable
-fun ProfileEditScreen(model: ProfileViewModel, navigateBack: () -> Unit) {
+fun ProfileEditScreen(navigateBack: () -> Unit, model: ProfileEditViewModel = viewModel()) {
     val composeScope = rememberCoroutineScope()
 
-    var savedProfile by remember { mutableStateOf<User?>(null) }
-    var newProfile by remember { mutableStateOf<User?>(null) }
+    val medicalID by model.medicalID.observeAsState()
 
-    LaunchedEffect(Unit) {
-        val user = model.getUser()
-        savedProfile = user
-    }
-
-    WithTopBar(topBar = {
-        TopBar(
-            "Profile Edit",
-            left = TopBarIcon(Icons.Outlined.ArrowBack) { navigateBack() },
-            right = TopBarIcon(Icons.Outlined.Done) {
-                composeScope.launch {
-                    newProfile?.let { model.saveMedicalID(it) }
-                    navigateBack()
-                }
-            },
-        )
-    }) {
-        Suspender(data = savedProfile) {
-            val scrollState = rememberScrollState()
-
-            var name by remember { mutableStateOf(it.name) }
-            var birthDate by remember { mutableStateOf(it.birthDate) }
-            var height by remember { mutableStateOf(it.height) }
-            var weight by remember { mutableStateOf(it.weight) }
-            var bloodType by remember { mutableStateOf(it.bloodType) }
-            var allergies by remember { mutableStateOf(it.allergies) }
-            var medications by remember { mutableStateOf(it.medications) }
-            var medicalNotes by remember { mutableStateOf(it.medicalNotes) }
-
-            LaunchedEffect(
+    fun setMedicalID(
+        name: String,
+        birthDate: String,
+        height: Int,
+        weight: Int,
+        bloodType: String,
+        allergies: String,
+        medications: String,
+        medicalNotes: String
+    ) {
+        composeScope.launch {
+            model.setMedicalID(
                 name,
                 birthDate,
                 height,
@@ -67,19 +48,44 @@ fun ProfileEditScreen(model: ProfileViewModel, navigateBack: () -> Unit) {
                 allergies,
                 medications,
                 medicalNotes
-            ) {
-                newProfile = User(
-                    name,
-                    birthDate,
-                    height,
-                    weight,
-                    bloodType,
-                    allergies,
-                    medications,
-                    medicalNotes,
-                    it.diseases
-                )
-            }
+            )
+
+            navigateBack()
+        }
+    }
+
+    /**
+     * Content
+     */
+    Suspender(medicalID) {
+        var name by remember { mutableStateOf(it.name) }
+        var birthDate by remember { mutableStateOf(it.birthDate) }
+        var height by remember { mutableStateOf(it.height) }
+        var weight by remember { mutableStateOf(it.weight) }
+        var bloodType by remember { mutableStateOf(it.bloodType) }
+        var allergies by remember { mutableStateOf(it.allergies) }
+        var medications by remember { mutableStateOf(it.medications) }
+        var medicalNotes by remember { mutableStateOf(it.medicalNotes) }
+
+        WithTopBar(topBar = {
+            TopBar(
+                "Medical ID",
+                left = TopBarIcon(Icons.Outlined.ArrowBack) { navigateBack() },
+                right = TopBarIcon(Icons.Outlined.Done) {
+                    setMedicalID(
+                        name,
+                        birthDate,
+                        height,
+                        weight,
+                        bloodType,
+                        allergies,
+                        medications,
+                        medicalNotes
+                    )
+                },
+            )
+        }) {
+            val scrollState = rememberScrollState()
 
             Column(
                 modifier = Modifier

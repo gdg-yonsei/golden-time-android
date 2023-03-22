@@ -5,15 +5,11 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.next.goldentime.App
-import com.next.goldentime.repository.profile.userStore
 import com.next.goldentime.ui.screens.home.profile.edit.ProfileEditScreen
-import com.next.goldentime.ui.screens.home.profile.view.ProfileViewScreen
+import com.next.goldentime.ui.screens.home.profile.read.ProfileReadScreen
 
 @Composable
-fun ProfileScreen(
-    model: ProfileViewModel = viewModel(factory = ProfileViewModelFactory(App.context.userStore))
-) {
+fun ProfileScreen(model: ProfileViewModel = viewModel()) {
     val navController = rememberNavController()
 
     fun navigateToProfileEdit() {
@@ -24,23 +20,20 @@ fun ProfileScreen(
         navController.navigateUp()
     }
 
-    NavHost(navController = navController, startDestination = ProfileScreen.ProfileView.route) {
-        composable(ProfileScreen.ProfileView.route) {
-            ProfileViewScreen(
-                model = model,
-                edit = ::navigateToProfileEdit
-            )
+    /**
+     * Content
+     */
+    NavHost(navController = navController, startDestination = ProfileScreen.ProfileRead.route) {
+        composable(ProfileScreen.ProfileRead.route) {
+            ProfileReadScreen(edit = ::navigateToProfileEdit)
         }
         composable(ProfileScreen.ProfileEdit.route) {
-            ProfileEditScreen(
-                model = model,
-                navigateBack = ::navigateBack
-            )
+            ProfileEditScreen(navigateBack = ::navigateBack)
         }
     }
 }
 
 private sealed class ProfileScreen(val route: String) {
-    object ProfileView : ProfileScreen("profile/view")
+    object ProfileRead : ProfileScreen("profile/read")
     object ProfileEdit : ProfileScreen("profile/edit")
 }

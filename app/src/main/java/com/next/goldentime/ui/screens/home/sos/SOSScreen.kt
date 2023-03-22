@@ -3,7 +3,7 @@ package com.next.goldentime.ui.screens.home.sos
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Settings
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -26,6 +26,9 @@ fun SOSScreen(
         model.triggerSOS(context)
     }
 
+    /**
+     * Content
+     */
     WithTopBar(
         topBar = {
             TopBar(

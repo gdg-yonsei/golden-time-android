@@ -1,4 +1,4 @@
-package com.next.goldentime.ui.screens.home.article.diseaseDetail
+package com.next.goldentime.ui.screens.home.article.caseDetail
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Text
@@ -13,12 +13,12 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.next.goldentime.ui.components.home.WithTopBar
 
 @Composable
-fun DiseaseDetailScreen(
-    diseaseId: Int,
+fun CaseDetailScreen(
+    caseId: Int,
     navigateBack: () -> Unit,
-    model: DiseaseDetailViewModel = viewModel(factory = DiseaseDetailViewModelFactory(diseaseId))
+    model: CaseDetailViewModel = viewModel(factory = CaseDetailViewModelFactory(caseId))
 ) {
-    val disease by model.disease.observeAsState()
+    val case by model.case.observeAsState()
 
     /**
      * Content
@@ -30,7 +30,7 @@ fun DiseaseDetailScreen(
                 .padding(24.dp),
             contentAlignment = Alignment.BottomStart
         ) {
-            Text(disease?.title ?: "Loading", fontSize = 32.sp)
+            Text(case?.title ?: "Loading", fontSize = 32.sp)
         }
     }) {
         Column(
@@ -39,10 +39,12 @@ fun DiseaseDetailScreen(
                 .padding(24.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            disease?.let {
+            case?.let {
                 Text(it.subtitle)
-                Text(it.description)
-                Text("${it.cases.size}")
+                Text(it.overview)
+                Text("${it.symptoms.size}")
+                Text(it.causes)
+                Text("${it.manual.size}")
             }
         }
     }

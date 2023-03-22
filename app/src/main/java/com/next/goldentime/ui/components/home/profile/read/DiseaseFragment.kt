@@ -1,4 +1,4 @@
-package com.next.goldentime.ui.components.home.profile
+package com.next.goldentime.ui.components.home.profile.read
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,15 +12,16 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.LiveData
+import com.next.goldentime.repository.disease.Disease
 import com.next.goldentime.ui.components.common.Suspender
 import com.next.goldentime.ui.components.common.Validator
-import com.next.goldentime.ui.screens.home.profile.ProfileViewModel
 
 @Composable
-fun DiseaseFragment(model: ProfileViewModel) {
-    val diseases by model.diseases.observeAsState()
+fun DiseaseFragment(liveDiseases: LiveData<List<Disease>>) {
+    val diseases by liveDiseases.observeAsState()
 
-    Suspender(data = diseases) {
+    Suspender(diseases) {
         val hasDisease = it.isNotEmpty()
 
         Validator(valid = hasDisease, invalidContent = { DiseaseAddGuide() }) {

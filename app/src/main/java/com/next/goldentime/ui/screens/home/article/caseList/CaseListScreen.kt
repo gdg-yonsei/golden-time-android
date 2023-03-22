@@ -1,6 +1,9 @@
-package com.next.goldentime.ui.screens.home.article.diseaseList
+package com.next.goldentime.ui.screens.home.article.caseList
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.runtime.Composable
@@ -16,19 +19,19 @@ import com.next.goldentime.ui.components.home.WithTopBar
 import com.next.goldentime.ui.components.home.article.ArticleCard
 
 @Composable
-fun DiseaseListScreen(
+fun CaseListScreen(
     navigateBack: () -> Unit,
-    showDetail: (diseaseId: Int) -> Unit,
-    model: DiseaseListViewModel = viewModel()
+    showDetail: (caseId: Int) -> Unit,
+    model: CaseListViewModel = viewModel()
 ) {
-    val diseases by model.diseases.observeAsState()
+    val cases by model.cases.observeAsState()
 
     /**
      * Content
      */
     WithTopBar(topBar = {
         TopBar(
-            "Disease",
+            "Emergency Case",
             left = TopBarIcon(Icons.Outlined.ArrowBack) { navigateBack() }
         )
     }) {
@@ -39,9 +42,9 @@ fun DiseaseListScreen(
             verticalArrangement = Arrangement.spacedBy(15.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            diseases?.map { disease ->
-                ArticleCard(title = disease.title, description = disease.subtitle) {
-                    showDetail(disease.id)
+            cases?.map { case ->
+                ArticleCard(title = case.title, description = case.subtitle) {
+                    showDetail(case.id)
                 }
             }
         }
