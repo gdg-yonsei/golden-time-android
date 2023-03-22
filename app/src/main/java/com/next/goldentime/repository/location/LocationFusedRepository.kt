@@ -16,8 +16,8 @@ class LocationFusedRepository(context: Context) : LocationRepository {
     private val fusedLocationClient: FusedLocationProviderClient =
         LocationServices.getFusedLocationProviderClient(context)
 
-    private var _latitude = 0.0
-    private var _longitude = 0.0
+    private var _latitude: Double? = null
+    private var _longitude: Double? = null
 
     @SuppressLint("MissingPermission")
     private fun getCurrentLocation() {
@@ -37,10 +37,10 @@ class LocationFusedRepository(context: Context) : LocationRepository {
     override fun getLocation() = flow {
         getCurrentLocation()
 
-        while (_latitude == 0.0 && _longitude == 0.0) {
+        while (_latitude == null && _longitude == null) {
             continue
         }
 
-        emit(Location(_latitude, _longitude))
+        emit(Location(_latitude!!, _longitude!!))
     }.flowOn(Dispatchers.IO)
 }
