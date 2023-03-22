@@ -10,13 +10,18 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.next.goldentime.ui.components.common.TopBar
+import com.next.goldentime.ui.screens.rescue.RescueViewModel
 
 @Composable
-fun RescueAcceptScreen(accept: () -> Unit) {
+fun RescueAcceptScreen(showManual: () -> Unit, model: RescueViewModel) {
     LaunchedEffect(Unit) {
-        accept()
+        model.acceptSOS()
+        showManual()
     }
 
+    /**
+     * Content
+     */
     Scaffold(topBar = { TopBar("New SOS") }) {
         Box(
             modifier = Modifier

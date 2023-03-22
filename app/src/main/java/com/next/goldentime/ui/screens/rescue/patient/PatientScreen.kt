@@ -11,14 +11,17 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.next.goldentime.ui.components.common.MedicalIDReader
 import com.next.goldentime.ui.components.common.Suspender
 import com.next.goldentime.ui.components.common.TopBar
 import com.next.goldentime.ui.components.common.TopBarIcon
-import com.next.goldentime.ui.components.home.profile.MedicalIDReader
 import com.next.goldentime.ui.screens.rescue.RescueViewModel
 
 @Composable
-fun PatientScreen(model: RescueViewModel, navigateBack: () -> Unit) {
+fun PatientScreen(navigateBack: () -> Unit, model: RescueViewModel) {
+    /**
+     * Content
+     */
     Scaffold(topBar = {
         TopBar(
             "Medical ID",
@@ -31,9 +34,9 @@ fun PatientScreen(model: RescueViewModel, navigateBack: () -> Unit) {
                 .padding(it),
             contentAlignment = Alignment.Center
         ) {
-            val user by model.patient.observeAsState()
+            val medicalID by model.medicalID.observeAsState()
 
-            Suspender(user) { MedicalIDReader(it) }
+            Suspender(medicalID) { MedicalIDReader(it) }
         }
     }
 }

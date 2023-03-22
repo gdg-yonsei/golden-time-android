@@ -20,14 +20,14 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ManualScreen(
-    model: RescueViewModel,
     showPatientID: () -> Unit,
-    complete: () -> Unit
+    complete: () -> Unit,
+    model: RescueViewModel,
 ) {
     val composeScope = rememberCoroutineScope()
 
-    val manual by model.manual.observeAsState()
     val location by model.location.observeAsState()
+    val cases by model.cases.observeAsState()
 
     fun markAsArrived() {
         composeScope.launch {
@@ -35,12 +35,15 @@ fun ManualScreen(
         }
     }
 
+    /**
+     * Content
+     */
     BottomSheetScaffold(
         topBar = { TopBar("Instructions") },
         sheetContent = {
-            Suspender(manual) {
+            Suspender(cases) {
                 ManualSheet(
-                    manual = it,
+                    manual = it[0].manual,
                     showPatientID = showPatientID,
                     markAsArrived = ::markAsArrived
                 )

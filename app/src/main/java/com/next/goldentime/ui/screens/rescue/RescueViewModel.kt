@@ -3,39 +3,27 @@ package com.next.goldentime.ui.screens.rescue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
-import com.next.goldentime.repository.disease.DiseaseStaticRepository
-import com.next.goldentime.repository.sos.Location
-import com.next.goldentime.repository.sos.SOSStaticRepository
 import com.next.goldentime.usecase.rescue.RescueUseCase
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.flow.map
+import com.next.goldentime.util.generateRescueUseCase
 
-@OptIn(ExperimentalCoroutinesApi::class)
 class RescueViewModel(
     sosId: Int,
-    private val rescueUseCase: RescueUseCase = RescueUseCase(
-        SOSStaticRepository(),
-        DiseaseStaticRepository(),
-        sosId
-    )
+    private val rescueUseCase: RescueUseCase = generateRescueUseCase(sosId)
 ) : ViewModel() {
-    private val _sos = rescueUseCase.getSOS()
-    private val _manual = _sos.flatMapLatest { sos ->
-        rescueUseCase.getManual(sos.patient.diseases[0])
-    }
+    private val _location = rescueUseCase.getLocation()
+    private val _medicalID = rescueUseCase.getMedicalID()
+    private val _cases = rescueUseCase.getCases()
+    
+    val location = _location.asLiveData()
+    val medicalID = _medicalID.asLiveData()
+    val cases = _cases.asLiveData()
 
-    val location = _sos.map { it.location }.asLiveData()
-    val patient = _sos.map { it.patient }.asLiveData()
-    val manual = _manual.asLiveData()
+    val getManual = rescueUseCase::getManual
 
-    suspend fun acceptSOS() = rescueUseCase.acceptSOS()
-
-    suspend fun postLocation(location: Location) = rescueUseCase.postLocation(location)
-
-    suspend fun markAsArrived() = rescueUseCase.markAsArrived()
-
-    suspend fun completeSOS() = rescueUseCase.completeSOS()
+    val acceptSOS = rescueUseCase::acceptSOS
+    val postLocation = rescueUseCase::postLocation
+    val markAsArrived = rescueUseCase::markAsArrived
+    val completeSOS = rescueUseCase::completeSOS
 }
 
 class RescueViewModelFactory(

@@ -5,11 +5,10 @@ import com.next.goldentime.repository.case.CaseRepository
 import com.next.goldentime.repository.disease.DiseaseRepository
 import com.next.goldentime.repository.sos.Location
 import com.next.goldentime.repository.sos.SOSRepository
+import com.next.goldentime.usecase.profile.MedicalID
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.*
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class RescueUseCase(
@@ -21,10 +20,27 @@ class RescueUseCase(
     private val _sosInfo = sosRepository.getSOSInfo(sosId)
 
     fun getLocation() = _sosInfo.map { it.location }
-    fun getPatient() = _sosInfo.map { it.patient }
+    fun getMedicalID() = _sosInfo.map { it.patient }.map {
+        MedicalID(
+            it.name,
+            it.birthDate,
+            it.height,
+            it.weight,
+            it.bloodType,
+            it.allergies,
+            it.medications,
+            it.medicalNotes
+        )
+    }
+
     fun getCases() = _sosInfo
         .flatMapLatest { diseaseRepository.getDisease(it.patient.diseases[0]) }
-        .flatMapLatest { caseRepository.getCase(it.id) }.flowOn(Dispatchers.IO)
+        .flatMapLatest { disease ->
+            flow {
+                val cases = disease.cases.map { caseRepository.getCase(it.id).first() }
+                emit(cases)
+            }
+        }.flowOn(Dispatchers.IO)
 
     fun getManual(case: Case) = case.manual
 
