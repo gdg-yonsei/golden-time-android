@@ -1,4 +1,4 @@
-package com.next.goldentime.ui.components.sos
+package com.next.goldentime.ui.components.sos.state
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.BorderStroke

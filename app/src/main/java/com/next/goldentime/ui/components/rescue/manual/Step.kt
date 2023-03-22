@@ -1,4 +1,4 @@
-package com.next.goldentime.ui.components.rescue
+package com.next.goldentime.ui.components.rescue.manual
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*

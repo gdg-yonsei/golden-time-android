@@ -13,9 +13,9 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.next.goldentime.ui.components.common.TopBar
 import com.next.goldentime.ui.components.effect.PreventBack
-import com.next.goldentime.ui.components.sos.NoRescuerFragment
-import com.next.goldentime.ui.components.sos.RescuerStateFragment
-import com.next.goldentime.ui.components.sos.SOSWaiter
+import com.next.goldentime.ui.components.sos.state.NoRescuerFragment
+import com.next.goldentime.ui.components.sos.state.RescuerStateFragment
+import com.next.goldentime.ui.components.sos.state.SOSWaiter
 
 @Composable
 fun SOSStateScreen(

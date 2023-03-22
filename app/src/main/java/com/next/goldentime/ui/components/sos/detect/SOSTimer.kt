@@ -1,4 +1,4 @@
-package com.next.goldentime.ui.components.sos
+package com.next.goldentime.ui.components.sos.detect
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Column

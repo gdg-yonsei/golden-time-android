@@ -1,4 +1,4 @@
-package com.next.goldentime.ui.components.sos
+package com.next.goldentime.ui.components.sos.state
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons

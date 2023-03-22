@@ -1,4 +1,4 @@
-package com.next.goldentime.ui.components.rescue
+package com.next.goldentime.ui.components.rescue.manual
 
 import android.util.Log
 import androidx.compose.foundation.layout.*
@@ -14,8 +14,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.next.goldentime.repository.disease.Manual
+import com.next.goldentime.repository.case.Step
 import com.next.goldentime.ui.components.common.ChipButton
+
+typealias Manual = List<Step>
 
 @Composable
 fun ManualSheet(manual: Manual, showPatientID: () -> Unit, markAsArrived: () -> Unit) {

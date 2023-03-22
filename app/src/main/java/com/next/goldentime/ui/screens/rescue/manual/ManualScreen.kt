@@ -13,7 +13,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.next.goldentime.ui.components.common.Suspender
 import com.next.goldentime.ui.components.common.TopBar
-import com.next.goldentime.ui.components.rescue.ManualSheet
+import com.next.goldentime.ui.components.rescue.manual.ManualSheet
 import com.next.goldentime.ui.screens.rescue.RescueViewModel
 import kotlinx.coroutines.launch
 
