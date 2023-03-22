@@ -3,7 +3,7 @@ package com.next.goldentime.usecase.rescue
 import com.next.goldentime.repository.case.Case
 import com.next.goldentime.repository.case.CaseRepository
 import com.next.goldentime.repository.disease.DiseaseRepository
-import com.next.goldentime.repository.sos.Location
+import com.next.goldentime.repository.location.Location
 import com.next.goldentime.repository.sos.SOSRepository
 import com.next.goldentime.usecase.profile.MedicalID
 import kotlinx.coroutines.Dispatchers

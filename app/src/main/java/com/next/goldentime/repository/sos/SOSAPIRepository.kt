@@ -3,6 +3,7 @@ package com.next.goldentime.repository.sos
 import android.util.Log
 import com.next.goldentime.framework.RetrofitClient
 import com.next.goldentime.framework.emitResponse
+import com.next.goldentime.repository.location.Location
 import com.next.goldentime.repository.profile.Profile
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay

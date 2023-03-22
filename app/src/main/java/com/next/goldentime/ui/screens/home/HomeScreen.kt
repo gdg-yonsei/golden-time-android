@@ -28,7 +28,6 @@ import com.next.goldentime.ui.screens.home.article.ArticleScreen
 import com.next.goldentime.ui.screens.home.profile.ProfileScreen
 import com.next.goldentime.ui.screens.home.sos.SOSScreen
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(navigateToAbout: () -> Unit, model: HomeViewModel = viewModel()) {
     val context = LocalContext.current

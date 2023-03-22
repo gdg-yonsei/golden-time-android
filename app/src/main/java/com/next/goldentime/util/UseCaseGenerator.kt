@@ -3,6 +3,7 @@ package com.next.goldentime.util
 import com.next.goldentime.App
 import com.next.goldentime.repository.case.CaseStaticRepository
 import com.next.goldentime.repository.disease.DiseaseStaticRepository
+import com.next.goldentime.repository.location.LocationFusedRepository
 import com.next.goldentime.repository.profile.ProfileStoreRepository
 import com.next.goldentime.repository.profile.profileStore
 import com.next.goldentime.repository.sos.SOSStaticRepository
@@ -14,7 +15,8 @@ import com.next.goldentime.usecase.rescue.RescueUseCase
 fun generatePatientUseCase(): PatientUseCase {
     return PatientUseCase(
         sosRepository = SOSStaticRepository(),
-        profileRepository = ProfileStoreRepository(App.context.profileStore)
+        profileRepository = ProfileStoreRepository(App.context.profileStore),
+        locationRepository = LocationFusedRepository(App.context)
     )
 }
 

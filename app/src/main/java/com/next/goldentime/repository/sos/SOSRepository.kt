@@ -1,13 +1,12 @@
 package com.next.goldentime.repository.sos
 
+import com.next.goldentime.repository.location.Location
 import com.next.goldentime.repository.profile.Profile
 import kotlinx.coroutines.flow.Flow
 
 data class SOSInfo(val patient: Profile, val location: Location)
 
 data class SOSState(val rescuerNum: Int, val closestRescuerDistance: Double, val done: Boolean)
-
-data class Location(val latitude: Double, val longitude: Double)
 
 /**
  * Repository

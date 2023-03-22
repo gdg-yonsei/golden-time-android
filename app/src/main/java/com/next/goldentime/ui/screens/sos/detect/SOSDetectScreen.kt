@@ -11,7 +11,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.next.goldentime.repository.sos.Location
 import com.next.goldentime.ui.components.common.ChipButton
 import com.next.goldentime.ui.components.common.Timer
 import com.next.goldentime.ui.components.common.TopBar
@@ -33,7 +32,7 @@ fun SOSDetectScreen(
 
     fun requestSOS() {
         composeScope.launch {
-            val sosId = model.requestSOS(Location(0.0, 0.0))
+            val sosId = model.requestSOS()
             confirmSOS(sosId)
         }
     }

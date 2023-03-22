@@ -1,6 +1,6 @@
 package com.next.goldentime.data.fixtures
 
-import com.next.goldentime.repository.sos.Location
+import com.next.goldentime.repository.location.Location
 import com.next.goldentime.repository.sos.SOSInfo
 import com.next.goldentime.repository.sos.SOSState
 
