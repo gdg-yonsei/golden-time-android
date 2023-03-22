@@ -1,5 +1,8 @@
 package com.next.goldentime.ui.screens.home
 
+import android.app.Activity
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
@@ -7,11 +10,13 @@ import androidx.compose.material.icons.filled.Article
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
@@ -23,9 +28,23 @@ import com.next.goldentime.ui.screens.home.article.ArticleScreen
 import com.next.goldentime.ui.screens.home.profile.ProfileScreen
 import com.next.goldentime.ui.screens.home.sos.SOSScreen
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(navigateToAbout: () -> Unit, model: HomeViewModel = viewModel()) {
+    val context = LocalContext.current
     val navController = rememberNavController()
+
+    val permissionLauncher = rememberLauncherForActivityResult(
+        ActivityResultContracts.RequestMultiplePermissions()
+    ) { permissions ->
+        val allGranted = permissions.values.all { it }
+
+        if (!allGranted) (context as Activity).finish()
+    }
+
+    LaunchedEffect(Unit) {
+        model.checkPermissions(context, permissionLauncher)
+    }
 
     /**
      * Content
