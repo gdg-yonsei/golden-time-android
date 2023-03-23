@@ -6,7 +6,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.HeartBroken
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
@@ -16,6 +17,7 @@ import androidx.lifecycle.LiveData
 import com.next.goldentime.repository.disease.Disease
 import com.next.goldentime.ui.components.common.Suspender
 import com.next.goldentime.ui.components.common.Validator
+import com.next.goldentime.ui.components.home.article.ArticleCard
 
 @Composable
 fun DiseaseFragment(liveDiseases: LiveData<List<Disease>>) {
@@ -32,9 +34,15 @@ fun DiseaseFragment(liveDiseases: LiveData<List<Disease>>) {
                     .fillMaxSize()
                     .verticalScroll(scrollState)
                     .padding(24.dp),
-                verticalArrangement = Arrangement.spacedBy(24.dp),
+                verticalArrangement = Arrangement.spacedBy(20.dp),
             ) {
-                Text("Disease List $it")
+                it.map { disease ->
+                    ArticleCard(
+                        title = disease.title,
+                        description = disease.subtitle,
+                        icon = Icons.Outlined.HeartBroken
+                    ) {}
+                }
             }
         }
     }
