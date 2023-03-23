@@ -11,6 +11,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.google.android.gms.maps.model.CameraPosition
+import com.google.android.gms.maps.model.LatLng
+import com.google.maps.android.compose.GoogleMap
+import com.google.maps.android.compose.Marker
+import com.google.maps.android.compose.MarkerState
+import com.google.maps.android.compose.rememberCameraPositionState
 import com.next.goldentime.ui.components.common.Suspender
 import com.next.goldentime.ui.components.common.TopBar
 import com.next.goldentime.ui.components.rescue.manual.ManualSheet
@@ -52,15 +58,26 @@ fun ManualScreen(
         sheetPeekHeight = 100.dp
     ) {
         Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(it)
-                .background(Color.LightGray),
+            modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Suspender(location) {
-                Text("Map")
+            Suspender(location) { location ->
+                val patientLocation = LatLng(location.latitude, location.longitude)
+                val cameraPositionState = rememberCameraPositionState {
+                    position = CameraPosition.fromLatLngZoom(patientLocation, 20f)
+                }
+
+                GoogleMap(
+                    modifier = Modifier.fillMaxSize(),
+                    cameraPositionState = cameraPositionState
+                ) {
+                    Marker(
+                        state = MarkerState(position = patientLocation),
+                        title = "Patient here",
+                        snippet = "Patient here"
+                    )
+                }
             }
         }
     }
