@@ -53,6 +53,7 @@ fun DiseaseDetailScreen(
                     Text(it.title, fontSize = 32.sp, color = Color(0xFF201A18))
                 }
 
+                // Contents
                 FragmentTab(tabs = tabs) { index ->
                     when (index) {
                         0 -> MarkdownFragment(it.description)
