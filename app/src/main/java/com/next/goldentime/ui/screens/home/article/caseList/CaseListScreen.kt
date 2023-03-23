@@ -16,7 +16,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.next.goldentime.ui.components.common.TopBar
 import com.next.goldentime.ui.components.common.TopBarIcon
 import com.next.goldentime.ui.components.home.WithTopBar
-import com.next.goldentime.ui.components.home.article.ArticleCard
 
 @Composable
 fun CaseListScreen(
@@ -43,9 +42,7 @@ fun CaseListScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             cases?.map { case ->
-                ArticleCard(title = case.title, description = case.subtitle) {
-                    showDetail(case.id)
-                }
+
             }
         }
     }

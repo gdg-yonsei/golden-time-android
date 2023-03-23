@@ -1,6 +1,9 @@
 package com.next.goldentime.ui.screens.home.article.diseaseList
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.runtime.Composable
@@ -13,7 +16,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.next.goldentime.ui.components.common.TopBar
 import com.next.goldentime.ui.components.common.TopBarIcon
 import com.next.goldentime.ui.components.home.WithTopBar
-import com.next.goldentime.ui.components.home.article.ArticleCard
 
 @Composable
 fun DiseaseListScreen(
@@ -40,9 +42,7 @@ fun DiseaseListScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             diseases?.map { disease ->
-                ArticleCard(title = disease.title, description = disease.subtitle) {
-                    showDetail(disease.id)
-                }
+
             }
         }
     }
