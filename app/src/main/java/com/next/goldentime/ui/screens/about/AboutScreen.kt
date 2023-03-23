@@ -43,7 +43,7 @@ fun AboutScreen(navigateBack: () -> Unit, model: AboutViewModel = viewModel()) {
                     Text("App version : 0.0.1")
                 }
                 Section(title = "Debug") {
-                    OutlinedButton(onClick = { model.openRescueScreen(context) }) {
+                    OutlinedButton(onClick = { model.openRescueScreen(context, 1) }) {
                         Text("Open Rescue Screen")
                     }
                     OutlinedButton(onClick = { model.openSOSScreen(context, SOSType.FALL) }) {

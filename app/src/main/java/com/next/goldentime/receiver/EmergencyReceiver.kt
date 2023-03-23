@@ -9,13 +9,13 @@ import com.google.android.gms.wearable.WearableListenerService
 
 class EmergencyReceiver : WearableListenerService() {
     override fun onMessageReceived(messageEvent: MessageEvent) {
-        Handler(Looper.getMainLooper()).post(Runnable {
+        Handler(Looper.getMainLooper()).post {
             Log.d("GOLDEN TIME FCM", "New message received : ${messageEvent.data}")
             Toast.makeText(
                 this,
                 "New message received : ${messageEvent.data}",
                 Toast.LENGTH_LONG
             ).show()
-        })
+        }
     }
 }

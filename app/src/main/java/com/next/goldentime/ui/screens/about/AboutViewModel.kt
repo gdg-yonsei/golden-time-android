@@ -9,8 +9,11 @@ import com.next.goldentime.usecase.patient.SOSType
 
 class AboutViewModel : ViewModel() {
     // TEMP
-    fun openRescueScreen(context: Context) {
-        context.startActivity(Intent(context, RescueActivity::class.java))
+    fun openRescueScreen(context: Context, sosId: Int) {
+        val intent = Intent(context, RescueActivity::class.java)
+        intent.putExtra("sosId", sosId)
+
+        context.startActivity(intent)
     }
 
     fun openSOSScreen(context: Context, sosType: SOSType) {
