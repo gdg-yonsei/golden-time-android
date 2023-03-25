@@ -8,6 +8,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.next.goldentime.ui.screens.rescue.RescueScreen
+import com.next.goldentime.ui.theme.GoldenTimeTheme
 
 class RescueActivity : ComponentActivity() {
     private val sosId by lazy { intent.getIntExtra("sosId", 0) }
@@ -15,7 +16,9 @@ class RescueActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContent { RescueNavigation(sosId) }
+        setContent {
+            GoldenTimeTheme { RescueNavigation(sosId) }
+        }
     }
 }
 

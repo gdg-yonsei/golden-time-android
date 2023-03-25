@@ -9,6 +9,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.next.goldentime.ui.screens.sos.SOSScreen
+import com.next.goldentime.ui.theme.GoldenTimeTheme
 import com.next.goldentime.usecase.patient.SOSType
 
 class SOSActivity : ComponentActivity() {
@@ -22,7 +23,9 @@ class SOSActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContent { SOSNavigation(sosType!!) }
+        setContent {
+            GoldenTimeTheme { SOSNavigation(sosType!!) }
+        }
     }
 }
 
