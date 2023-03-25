@@ -14,7 +14,7 @@ import com.next.goldentime.usecase.rescue.RescueUseCase
 
 fun generatePatientUseCase(): PatientUseCase {
     return PatientUseCase(
-        sosRepository = SOSStaticRepository(),
+        sosRepository = SOSStaticRepository(), // SOSAPIRepository()
         profileRepository = ProfileStoreRepository(App.context.profileStore),
         locationRepository = LocationFusedRepository(App.context)
     )
@@ -22,7 +22,7 @@ fun generatePatientUseCase(): PatientUseCase {
 
 fun generateRescueUseCase(sosId: Int): RescueUseCase {
     return RescueUseCase(
-        sosRepository = SOSStaticRepository(),
+        sosRepository = SOSStaticRepository(), // SOSAPIRepository()
         diseaseRepository = DiseaseAPIRepository(),
         caseRepository = CaseAPIRepository(),
         locationRepository = LocationFusedRepository(App.context),

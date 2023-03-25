@@ -21,6 +21,8 @@ import com.next.goldentime.ui.components.common.layout.Fill
 import com.next.goldentime.ui.components.common.layout.Suspender
 import com.next.goldentime.ui.components.home.WithTopBar
 import com.next.goldentime.ui.components.home.article.MarkdownFragment
+import com.next.goldentime.ui.components.home.article.caseDetail.ManualFragment
+import com.next.goldentime.ui.components.home.article.caseDetail.SymptomListFragment
 
 @Composable
 fun CaseDetailScreen(
@@ -57,9 +59,9 @@ fun CaseDetailScreen(
                 FragmentTab(tabs = tabs, scrollable = true) { index ->
                     when (index) {
                         0 -> MarkdownFragment(it.overview)
-                        1 -> MarkdownFragment(it.symptoms.toString())
+                        1 -> SymptomListFragment(it.symptoms)
                         2 -> MarkdownFragment(it.causes)
-                        3 -> MarkdownFragment(it.manual.toString())
+                        3 -> ManualFragment(it.manual)
                     }
                 }
             }
