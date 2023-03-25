@@ -1,4 +1,4 @@
-package com.next.goldentime.ui.components.common
+package com.next.goldentime.ui.components.common.effect
 
 import androidx.compose.runtime.*
 import kotlinx.coroutines.delay

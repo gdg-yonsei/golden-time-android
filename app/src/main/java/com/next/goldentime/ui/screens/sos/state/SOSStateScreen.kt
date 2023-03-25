@@ -12,7 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.next.goldentime.ui.components.common.TopBar
-import com.next.goldentime.ui.components.effect.PreventBack
+import com.next.goldentime.ui.components.common.effect.PreventBack
 import com.next.goldentime.ui.components.sos.state.NoRescuerFragment
 import com.next.goldentime.ui.components.sos.state.RescuerStateFragment
 import com.next.goldentime.ui.components.sos.state.SOSWaiter

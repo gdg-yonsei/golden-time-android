@@ -9,6 +9,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.next.goldentime.ui.components.common.Progress
+import com.next.goldentime.ui.components.common.layout.Gap
+import com.next.goldentime.ui.theme.Neutral80
 
 @Composable
 fun SOSWaiter(completeSOS: () -> Unit) {
@@ -19,18 +22,18 @@ fun SOSWaiter(completeSOS: () -> Unit) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceBetween
     ) {
-        CircularProgressIndicator()
-        Column(
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
+        Box(modifier = Modifier.size(150.dp), contentAlignment = Alignment.Center) {
+            Progress()
+        }
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
             FilledIconButton(
                 modifier = Modifier.size(64.dp),
-                colors = IconButtonDefaults.filledIconButtonColors(containerColor = Color(0xFFD0C4C0)),
+                colors = IconButtonDefaults.filledIconButtonColors(containerColor = Neutral80),
                 onClick = { completeSOS() }
             ) {
                 Icon(imageVector = Icons.Outlined.Close, contentDescription = null)
             }
+            Gap(8)
             Text("I don't need a help")
         }
     }
