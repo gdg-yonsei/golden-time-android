@@ -25,6 +25,7 @@ fun generateRescueUseCase(sosId: Int): RescueUseCase {
         sosRepository = SOSStaticRepository(),
         diseaseRepository = DiseaseStaticRepository(),
         caseRepository = CaseStaticRepository(),
+        locationRepository = LocationFusedRepository(App.context),
         sosId = sosId
     )
 }

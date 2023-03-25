@@ -4,6 +4,7 @@ import com.next.goldentime.repository.case.Case
 import com.next.goldentime.repository.case.CaseRepository
 import com.next.goldentime.repository.disease.DiseaseRepository
 import com.next.goldentime.repository.location.Location
+import com.next.goldentime.repository.location.LocationRepository
 import com.next.goldentime.repository.sos.SOSRepository
 import com.next.goldentime.usecase.profile.MedicalID
 import kotlinx.coroutines.Dispatchers
@@ -15,6 +16,7 @@ class RescueUseCase(
     private val sosRepository: SOSRepository,
     private val diseaseRepository: DiseaseRepository,
     private val caseRepository: CaseRepository,
+    private val locationRepository: LocationRepository,
     private val sosId: Int,
 ) {
     private val _sosInfo = sosRepository.getSOSInfo(sosId)
@@ -45,7 +47,13 @@ class RescueUseCase(
     fun getManual(case: Case) = case.manual
 
     suspend fun acceptSOS() = sosRepository.acceptSOS(sosId)
-    suspend fun postLocation(location: Location) = sosRepository.postLocation(sosId, location)
+    suspend fun postLocation(): Location {
+        val location = locationRepository.getLocation().first()
+        sosRepository.postLocation(sosId, location)
+
+        return location
+    }
+
     suspend fun markAsArrived() = sosRepository.markAsArrived(sosId)
     suspend fun completeSOS() = sosRepository.completeSOS(sosId)
 }
