@@ -1,13 +1,10 @@
-package com.next.goldentime.ui.components.common
+package com.next.goldentime.ui.components.common.button
 
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Emergency
-import androidx.compose.material3.AssistChip
-import androidx.compose.material3.AssistChipDefaults
-import androidx.compose.material3.Icon
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -16,7 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun ChipButton(label: String, icon: ImageVector, noBorder: Boolean = false, onClick: () -> Unit) {
+fun ChipButton(label: String, icon: ImageVector, onClick: () -> Unit) {
     AssistChip(
         label = { Text(label) },
         leadingIcon = {
@@ -27,13 +24,11 @@ fun ChipButton(label: String, icon: ImageVector, noBorder: Boolean = false, onCl
             )
         },
         colors = AssistChipDefaults.assistChipColors(
-            containerColor = Color(0xFFFFDAD9),
-            leadingIconContentColor = Color(0xFF201A18)
+            containerColor = MaterialTheme.colorScheme.tertiaryContainer,
+            leadingIconContentColor = Color.Black
         ),
         shape = RoundedCornerShape(50),
-        border =
-        if (noBorder) null
-        else AssistChipDefaults.assistChipBorder(borderColor = Color(0xFF201A18)),
+        border = null,
         onClick = onClick
     )
 }
@@ -42,10 +37,4 @@ fun ChipButton(label: String, icon: ImageVector, noBorder: Boolean = false, onCl
 @Composable
 private fun ChipButtonPreview1() {
     ChipButton(label = "Label", icon = Icons.Filled.Emergency) {}
-}
-
-@Preview
-@Composable
-private fun ChipButtonPreview2() {
-    ChipButton(label = "Label", icon = Icons.Filled.Emergency, noBorder = true) {}
 }

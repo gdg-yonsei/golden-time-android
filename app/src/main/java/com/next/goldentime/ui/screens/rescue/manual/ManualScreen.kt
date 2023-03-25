@@ -13,8 +13,10 @@ import com.google.maps.android.compose.GoogleMap
 import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.MarkerState
 import com.google.maps.android.compose.rememberCameraPositionState
-import com.next.goldentime.ui.components.common.Suspender
+import com.next.goldentime.ui.components.common.Progress
 import com.next.goldentime.ui.components.common.TopBar
+import com.next.goldentime.ui.components.common.layout.Fill
+import com.next.goldentime.ui.components.common.layout.Suspender
 import com.next.goldentime.ui.components.rescue.manual.ManualSheet
 import com.next.goldentime.ui.screens.rescue.RescueViewModel
 import kotlinx.coroutines.launch
@@ -54,7 +56,7 @@ fun ManualScreen(
     BottomSheetScaffold(
         topBar = { TopBar("Instructions") },
         sheetContent = {
-            Suspender(cases) {
+            Suspender(cases, { Fill { Progress() } }) {
                 ManualSheet(
                     manual = it[0].manual,
                     showPatientID = showPatientID,
@@ -69,8 +71,8 @@ fun ManualScreen(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Suspender(location) { location ->
-                Suspender(location2) { location2 ->
+            Suspender(location, { Fill { Progress() } }) { location ->
+                Suspender(location2, { Fill { Progress() } }) { location2 ->
                     val patientLocation = LatLng(location.latitude, location.longitude)
                     val myLocation = LatLng(location2.latitude, location2.longitude)
 

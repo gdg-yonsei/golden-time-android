@@ -5,15 +5,19 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ElevatedButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.next.goldentime.ui.components.common.layout.Gap
+import com.next.goldentime.ui.theme.Neutral50
+import com.next.goldentime.ui.theme.Neutral80
+import com.next.goldentime.ui.theme.Tertiary60
 
 @Composable
 fun Step(
@@ -34,16 +38,16 @@ fun Step(
                 modifier = Modifier
                     .size(32.dp)
                     .background(
-                        color = Color(if (disabled) 0xFFD0C4C0 else 0xFFDB7174),
+                        color = if (disabled) Neutral80 else Tertiary60,
                         shape = RoundedCornerShape(50)
                     ),
                 contentAlignment = Alignment.Center
             ) {
-                Text("$index", fontSize = 16.sp, color = Color.White, textAlign = TextAlign.Center)
+                Text("$index", style = MaterialTheme.typography.labelLarge, color = Color.White)
             }
-            Spacer(Modifier.height(8.dp))
+            Gap(8)
             Divider(
-                color = Color(0xFFD0C4C0),
+                color = Neutral80,
                 modifier = Modifier
                     .defaultMinSize(1.dp, 61.dp)
                     .width(1.dp)
@@ -54,20 +58,18 @@ fun Step(
         Column {
             Text(
                 title,
-                fontSize = 16.sp,
-                fontWeight = FontWeight(600),
-                color = Color(if (disabled) 0xFFD0C4C0 else 0xFF333333)
+                style = MaterialTheme.typography.bodyLarge,
+                color = if (disabled) Neutral80 else Color(0xFF333333)
             )
             if (!disabled) {
-                Spacer(Modifier.height(2.dp))
+                Gap(2)
                 Text(
                     description,
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight(400),
-                    color = Color(0xFF7F7571)
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = Neutral50
                 )
                 onNext?.let { onNext ->
-                    Spacer(Modifier.height(16.dp))
+                    Gap(12)
                     ElevatedButton(onClick = { onNext() }) { Text("Next") }
                 }
             }

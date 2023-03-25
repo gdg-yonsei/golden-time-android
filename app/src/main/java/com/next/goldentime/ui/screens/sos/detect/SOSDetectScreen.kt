@@ -45,7 +45,7 @@ fun SOSDetectScreen(
     /**
      * Content
      */
-    Scaffold(topBar = { TopBar(model.title) }) { it ->
+    Scaffold(topBar = { TopBar(model.title) }) {
         Box(
             modifier = Modifier
                 .fillMaxSize()

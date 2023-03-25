@@ -12,9 +12,11 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.next.goldentime.ui.components.common.MedicalIDReader
-import com.next.goldentime.ui.components.common.Suspender
+import com.next.goldentime.ui.components.common.Progress
 import com.next.goldentime.ui.components.common.TopBar
 import com.next.goldentime.ui.components.common.TopBarIcon
+import com.next.goldentime.ui.components.common.layout.Fill
+import com.next.goldentime.ui.components.common.layout.Suspender
 import com.next.goldentime.ui.screens.rescue.RescueViewModel
 
 @Composable
@@ -36,7 +38,9 @@ fun PatientScreen(navigateBack: () -> Unit, model: RescueViewModel) {
         ) {
             val medicalID by model.medicalID.observeAsState()
 
-            Suspender(medicalID) { MedicalIDReader(it) }
+            Suspender(medicalID, { Fill { Progress() } }) {
+                MedicalIDReader(it)
+            }
         }
     }
 }
