@@ -13,17 +13,18 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.LiveData
-import com.next.goldentime.repository.disease.Disease
-import com.next.goldentime.ui.components.common.Suspender
+import com.next.goldentime.ui.components.common.Progress
 import com.next.goldentime.ui.components.common.Validator
+import com.next.goldentime.ui.components.common.layout.Fill
+import com.next.goldentime.ui.components.common.layout.Suspender
 import com.next.goldentime.ui.components.home.article.ArticleCard
+import com.next.goldentime.ui.screens.home.profile.read.ProfileReadViewModel
 
 @Composable
-fun DiseaseFragment(liveDiseases: LiveData<List<Disease>>) {
-    val diseases by liveDiseases.observeAsState()
+fun DiseaseFragment(model: ProfileReadViewModel) {
+    val diseases by model.diseases.observeAsState()
 
-    Suspender(diseases) {
+    Suspender(diseases, { Fill { Progress() } }) {
         val hasDisease = it.isNotEmpty()
 
         Validator(valid = hasDisease, invalidContent = { DiseaseAddGuide() }) {

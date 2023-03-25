@@ -13,10 +13,6 @@ import com.next.goldentime.ui.components.home.profile.read.MedicalIDFragment
 
 @Composable
 fun ProfileReadScreen(edit: () -> Unit, model: ProfileReadViewModel = viewModel()) {
-    val medicalID = model.medicalID
-    val diseases = model.diseases
-    val checkMedicalIDValid = model.checkMedicalIDValid
-
     /**
      * Content
      */
@@ -30,11 +26,8 @@ fun ProfileReadScreen(edit: () -> Unit, model: ProfileReadViewModel = viewModel(
 
         FragmentTab(tabs = tabs) {
             when (it) {
-                0 -> MedicalIDFragment(
-                    liveMedicalID = medicalID,
-                    checkMedicalIDValid = checkMedicalIDValid
-                )
-                1 -> DiseaseFragment(liveDiseases = diseases)
+                0 -> MedicalIDFragment(model)
+                1 -> DiseaseFragment(model)
             }
         }
     }

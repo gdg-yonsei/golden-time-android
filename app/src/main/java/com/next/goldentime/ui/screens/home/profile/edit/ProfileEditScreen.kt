@@ -16,9 +16,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.next.goldentime.ui.components.common.Suspender
+import com.next.goldentime.ui.components.common.Progress
 import com.next.goldentime.ui.components.common.TopBar
 import com.next.goldentime.ui.components.common.TopBarIcon
+import com.next.goldentime.ui.components.common.layout.Fill
+import com.next.goldentime.ui.components.common.layout.Suspender
 import com.next.goldentime.ui.components.home.WithTopBar
 import kotlinx.coroutines.launch
 
@@ -57,7 +59,7 @@ fun ProfileEditScreen(navigateBack: () -> Unit, model: ProfileEditViewModel = vi
     /**
      * Content
      */
-    Suspender(medicalID) {
+    Suspender(medicalID, { Fill { Progress() } }) {
         var name by remember { mutableStateOf(it.name) }
         var birthDate by remember { mutableStateOf(it.birthDate) }
         var height by remember { mutableStateOf(it.height) }
