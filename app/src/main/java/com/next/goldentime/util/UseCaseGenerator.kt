@@ -1,8 +1,8 @@
 package com.next.goldentime.util
 
 import com.next.goldentime.App
-import com.next.goldentime.repository.case.CaseStaticRepository
-import com.next.goldentime.repository.disease.DiseaseStaticRepository
+import com.next.goldentime.repository.case.CaseAPIRepository
+import com.next.goldentime.repository.disease.DiseaseAPIRepository
 import com.next.goldentime.repository.location.LocationFusedRepository
 import com.next.goldentime.repository.profile.ProfileStoreRepository
 import com.next.goldentime.repository.profile.profileStore
@@ -23,8 +23,8 @@ fun generatePatientUseCase(): PatientUseCase {
 fun generateRescueUseCase(sosId: Int): RescueUseCase {
     return RescueUseCase(
         sosRepository = SOSStaticRepository(),
-        diseaseRepository = DiseaseStaticRepository(),
-        caseRepository = CaseStaticRepository(),
+        diseaseRepository = DiseaseAPIRepository(),
+        caseRepository = CaseAPIRepository(),
         locationRepository = LocationFusedRepository(App.context),
         sosId = sosId
     )
@@ -33,13 +33,13 @@ fun generateRescueUseCase(sosId: Int): RescueUseCase {
 fun generateProfileUseCase(): ProfileUseCase {
     return ProfileUseCase(
         profileRepository = ProfileStoreRepository(App.context.profileStore),
-        diseaseRepository = DiseaseStaticRepository()
+        diseaseRepository = DiseaseAPIRepository()
     )
 }
 
 fun generateArticleUseCase(): ArticleUseCase {
     return ArticleUseCase(
-        diseaseRepository = DiseaseStaticRepository(),
-        caseRepository = CaseStaticRepository()
+        diseaseRepository = DiseaseAPIRepository(),
+        caseRepository = CaseAPIRepository()
     )
 }
