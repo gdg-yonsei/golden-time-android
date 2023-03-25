@@ -19,6 +19,7 @@ import com.next.goldentime.ui.components.common.TopBar
 import com.next.goldentime.ui.components.common.TopBarIcon
 import com.next.goldentime.ui.components.common.layout.Fill
 import com.next.goldentime.ui.components.common.layout.Suspender
+import com.next.goldentime.ui.components.common.text.Highlight
 import com.next.goldentime.ui.components.home.WithTopBar
 import com.next.goldentime.ui.components.home.article.MarkdownFragment
 import com.next.goldentime.ui.components.home.article.diseaseDetail.CaseListFragment
@@ -40,10 +41,7 @@ fun DiseaseDetailScreen(
         TopBar("", left = TopBarIcon(Icons.Outlined.ArrowBack) { navigateBack() })
     }) {
         Suspender(disease, { Fill { Progress() }}) {
-            Column(
-                modifier = Modifier.fillMaxSize(),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
+            Column(modifier = Modifier.fillMaxSize()) {
                 // Header
                 Box(
                     modifier = Modifier
@@ -52,11 +50,11 @@ fun DiseaseDetailScreen(
                         .padding(24.dp),
                     contentAlignment = Alignment.BottomStart
                 ) {
-                    Text(it.title, fontSize = 32.sp, color = Color(0xFF201A18))
+                    Highlight(it.title)
                 }
 
                 // Contents
-                FragmentTab(tabs = tabs) { index ->
+                FragmentTab(tabs = tabs, scrollable = true) { index ->
                     when (index) {
                         0 -> MarkdownFragment(it.description)
                         1 -> CaseListFragment(it.cases)

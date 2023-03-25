@@ -1,14 +1,11 @@
 package com.next.goldentime.ui.components.common
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.ScrollableTabRow
-import androidx.compose.material3.Tab
-import androidx.compose.material3.TabRow
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import com.next.goldentime.ui.components.common.layout.Fill
 
 @Composable
 fun FragmentTab(
@@ -32,14 +29,18 @@ fun FragmentTab(
         }
 
         if (scrollable) {
-            ScrollableTabRow(selectedTabIndex = currentTabIndex) { tabRow() }
+            ScrollableTabRow(selectedTabIndex = currentTabIndex, divider = {}) {
+                tabRow()
+            }
+            Divider(color = MaterialTheme.colorScheme.surfaceVariant)
         } else {
-            TabRow(selectedTabIndex = currentTabIndex) { tabRow() }
+            TabRow(selectedTabIndex = currentTabIndex, divider = {}) {
+                tabRow()
+            }
+            Divider(color = MaterialTheme.colorScheme.surfaceVariant)
         }
 
         // Content
-        Box(modifier = Modifier.weight(1f)) {
-            content(currentTabIndex)
-        }
+        Fill { content(currentTabIndex) }
     }
 }

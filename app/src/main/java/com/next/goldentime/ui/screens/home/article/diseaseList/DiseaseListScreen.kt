@@ -23,7 +23,7 @@ import com.next.goldentime.ui.components.common.layout.Fill
 import com.next.goldentime.ui.components.common.layout.Suspender
 import com.next.goldentime.ui.components.home.WithTopBar
 import com.next.goldentime.ui.components.home.article.ArticleCard
-import com.next.goldentime.ui.components.home.article.Bookmark
+import com.next.goldentime.ui.components.home.article.diseaseList.Bookmark
 
 @Composable
 fun DiseaseListScreen(

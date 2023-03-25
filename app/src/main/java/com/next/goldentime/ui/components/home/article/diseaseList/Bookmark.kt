@@ -1,4 +1,4 @@
-package com.next.goldentime.ui.components.home.article
+package com.next.goldentime.ui.components.home.article.diseaseList
 
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
