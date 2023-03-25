@@ -14,9 +14,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.next.goldentime.ui.components.common.FragmentTab
-import com.next.goldentime.ui.components.common.Suspender
+import com.next.goldentime.ui.components.common.Progress
 import com.next.goldentime.ui.components.common.TopBar
 import com.next.goldentime.ui.components.common.TopBarIcon
+import com.next.goldentime.ui.components.common.layout.Fill
+import com.next.goldentime.ui.components.common.layout.Suspender
 import com.next.goldentime.ui.components.home.WithTopBar
 import com.next.goldentime.ui.components.home.article.MarkdownFragment
 
@@ -35,7 +37,7 @@ fun CaseDetailScreen(
     WithTopBar(topBar = {
         TopBar("", left = TopBarIcon(Icons.Outlined.ArrowBack) { navigateBack() })
     }) {
-        Suspender(case) {
+        Suspender(case, { Fill { Progress() } }) {
             Column(
                 modifier = Modifier.fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally

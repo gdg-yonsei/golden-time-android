@@ -1,6 +1,9 @@
 package com.next.goldentime.ui.components.home.article
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -8,13 +11,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import com.next.goldentime.ui.components.common.layout.Gap
+import com.next.goldentime.ui.theme.NeutralVariant80
 
 @Composable
 fun ArticleSection(title: String, vararg items: ArticleItemData) {
     Card(
         modifier = Modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(containerColor = Color(0x119B4511)),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.primary.copy(.05f)
+        ),
         shape = RoundedCornerShape(24.dp)
     ) {
         Column(modifier = Modifier.padding(0.dp, 36.dp, 0.dp, 12.dp)) {
@@ -22,11 +28,11 @@ fun ArticleSection(title: String, vararg items: ArticleItemData) {
             Text(
                 title,
                 modifier = Modifier.padding(28.dp, 0.dp),
-                fontSize = 22.sp,
-                color = Color(0xFF9B4511)
+                style = MaterialTheme.typography.titleLarge,
+                color = MaterialTheme.colorScheme.primary
             )
 
-            Spacer(Modifier.height(2.dp))
+            Gap(2)
 
             // Items
             items.mapIndexed { index, item ->
@@ -49,7 +55,7 @@ fun ArticleSection(title: String, vararg items: ArticleItemData) {
                         modifier = Modifier
                             .height(.5.dp)
                             .padding(28.dp, 0.dp),
-                        color = Color(0xFFD7C2B9)
+                        color = NeutralVariant80
                     )
             }
         }

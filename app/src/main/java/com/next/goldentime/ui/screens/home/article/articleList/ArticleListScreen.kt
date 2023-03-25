@@ -8,6 +8,8 @@ import androidx.compose.material.icons.filled.Emergency
 import androidx.compose.material.icons.filled.IntegrationInstructions
 import androidx.compose.material.icons.filled.MedicalInformation
 import androidx.compose.material.icons.filled.MedicalServices
+import androidx.compose.material.icons.outlined.MedicalInformation
+import androidx.compose.material.icons.outlined.MedicalServices
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -16,6 +18,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.next.goldentime.ui.components.common.TopBar
+import com.next.goldentime.ui.components.common.layout.Gap
+import com.next.goldentime.ui.components.common.text.Highlight
 import com.next.goldentime.ui.components.home.WithTopBar
 import com.next.goldentime.ui.components.home.article.ArticleItemData
 import com.next.goldentime.ui.components.home.article.ArticleSection
@@ -38,9 +42,9 @@ fun ArticleListScreen(
                 .verticalScroll(scrollState)
                 .padding(24.dp),
         ) {
-            Text("Be ready to save life", fontSize = 28.sp, color = Color(0xFF9B4511))
+            Highlight("Learn, it does wonders")
 
-            Spacer(Modifier.height(28.dp))
+            Gap(20)
 
             Column(
                 modifier = Modifier.fillMaxWidth(),
@@ -57,13 +61,13 @@ fun ArticleListScreen(
                     ArticleItemData(
                         title = "Diseases",
                         description = "Diseases",
-                        icon = Icons.Filled.MedicalInformation,
+                        icon = Icons.Outlined.MedicalInformation,
                         onClick = { showDiseaseList() }
                     ),
                     ArticleItemData(
                         title = "Basic First-Aid Manual",
                         description = "Basic First-Aid Manual",
-                        icon = Icons.Filled.MedicalServices,
+                        icon = Icons.Outlined.MedicalServices,
                         onClick = { }
                     ),
                 )
