@@ -57,9 +57,9 @@ fun CaseDetailScreen(
                 FragmentTab(tabs = tabs, scrollable = true) { index ->
                     when (index) {
                         0 -> MarkdownFragment(it.overview)
-                        1 -> Text(it.symptoms.toString())
+                        1 -> MarkdownFragment(it.symptoms.toString())
                         2 -> MarkdownFragment(it.causes)
-                        3 -> Text(it.manual.toString())
+                        3 -> MarkdownFragment(it.manual.toString())
                     }
                 }
             }
