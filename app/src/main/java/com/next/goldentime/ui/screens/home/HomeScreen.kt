@@ -89,7 +89,11 @@ private fun BottomNavigationBar(navController: NavController) {
                 selected = screen.route == currentRoute,
                 onClick = { moveTo(screen.route) },
                 icon = { Icon(imageVector = screen.icon, contentDescription = screen.label) },
-                label = { Text(screen.label) }
+                label = { Text(screen.label) },
+                colors = NavigationBarItemDefaults.colors(
+                    indicatorColor = MaterialTheme.colorScheme.primaryContainer,
+                    selectedIconColor = Color.Black
+                )
             )
         }
     }

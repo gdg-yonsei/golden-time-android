@@ -5,6 +5,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 private val DarkColorPalette = darkColorScheme(
     primary = Primary80,
@@ -68,11 +70,11 @@ private val LightColorPalette = lightColorScheme(
 
 @Composable
 fun GoldenTimeTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
-    val colorScheme = if (darkTheme) {
-        DarkColorPalette
-    } else {
-        LightColorPalette
-    }
+    val systemUiController = rememberSystemUiController()
+
+    systemUiController.setSystemBarsColor(color = Neutral99, darkIcons = !darkTheme)
+
+    val colorScheme = if (darkTheme) DarkColorPalette else LightColorPalette
 
     MaterialTheme(
         colorScheme = colorScheme,

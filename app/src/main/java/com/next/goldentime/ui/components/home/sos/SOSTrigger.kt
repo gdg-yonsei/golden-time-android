@@ -17,6 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.next.goldentime.R
+import com.next.goldentime.ui.theme.Neutral99
 import kotlinx.coroutines.delay
 
 const val BUTTON_HEIGHT_WHEN_INACTIVE = 200
@@ -77,7 +78,7 @@ fun SOSTrigger(triggerSOS: () -> Unit) {
                 .fillMaxWidth()
                 .fillMaxHeight(animatedWhiteFraction)
                 .align(Alignment.TopCenter)
-                .background(Color.White)
+                .background(Neutral99)
         )
         Image(
             painter = painterResource(id = R.drawable.icon_sos),
