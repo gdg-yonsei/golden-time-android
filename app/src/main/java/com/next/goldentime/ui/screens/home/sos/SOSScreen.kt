@@ -12,6 +12,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.next.goldentime.ui.components.common.Guide
 import com.next.goldentime.ui.components.common.TopBar
 import com.next.goldentime.ui.components.common.TopBarIcon
+import com.next.goldentime.ui.components.common.layout.Gap
+import com.next.goldentime.ui.components.common.text.Highlight
 import com.next.goldentime.ui.components.home.WithTopBar
 import com.next.goldentime.ui.components.home.sos.SOSTrigger
 
@@ -32,7 +34,7 @@ fun SOSScreen(
     WithTopBar(
         topBar = {
             TopBar(
-                "GOLDEN TIME",
+                "Golden Time",
                 right = TopBarIcon(Icons.Outlined.Settings) { showAbout() }
             )
         }
@@ -42,12 +44,11 @@ fun SOSScreen(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            Highlight("SOS")
+            Gap(20)
             SOSTrigger(triggerSOS = ::triggerSOS)
-            Spacer(Modifier.height(40.dp))
-            Guide(
-                title = "SOS",
-                description = "Press and hold the above button for 3\nseconds to make an emergency SOS."
-            )
+            Gap(40)
+            Guide("Press and hold the above button for 3\nseconds to make an emergency SOS.")
         }
     }
 }
