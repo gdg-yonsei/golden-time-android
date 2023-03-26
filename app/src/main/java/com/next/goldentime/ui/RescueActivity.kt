@@ -1,6 +1,8 @@
 package com.next.goldentime.ui
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
@@ -19,6 +21,11 @@ class RescueActivity : ComponentActivity() {
         setContent {
             GoldenTimeTheme { RescueNavigation(sosId) }
         }
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        setIntent(intent)
     }
 }
 

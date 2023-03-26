@@ -34,7 +34,13 @@ class SOSReceiver : FirebaseMessagingService() {
 
         val intent = Intent(this, RescueActivity::class.java)
         intent.putExtra("sosId", sosId.toInt())
-        val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
+        val pendingIntent =
+            PendingIntent.getActivity(
+                this,
+                0,
+                intent,
+                PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+            )
 
         createNotificationChannel(this, "sos", "SOS Request")
         val notification = NotificationCompat.Builder(this, "sos")

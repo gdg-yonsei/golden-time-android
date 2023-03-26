@@ -61,7 +61,8 @@ class SOSAPIRepository : SOSRepository {
     override suspend fun postLocation(id: Int, location: Location) {
         withContext(Dispatchers.IO) {
             client.postLocation(
-                PostLocationRequest(id, "${location.latitude},${location.longitude}")
+                id,
+                PostLocationRequest("${location.latitude},${location.longitude}")
             )
         }
     }
@@ -105,6 +106,7 @@ private interface SOSAPIClient {
 
     @POST("sos/{id}/rescuer/location")
     suspend fun postLocation(
+        @Path("id") id: Int,
         @Body request: PostLocationRequest
     ): Response<Void>
 
@@ -124,4 +126,4 @@ private data class GetSOSInfoResponse(val patient: Profile, val location: String
 private data class RequestSOSRequest(val user: Profile, val location: String)
 private data class RequestSOSResponse(val sosId: Int)
 
-private data class PostLocationRequest(val id: Int, val location: String)
+private data class PostLocationRequest(val location: String)
