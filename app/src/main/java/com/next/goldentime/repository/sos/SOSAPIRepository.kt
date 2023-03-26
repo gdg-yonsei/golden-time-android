@@ -12,10 +12,7 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import retrofit2.Response
-import retrofit2.http.Field
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 class SOSAPIRepository : SOSRepository {
     companion object {
@@ -44,12 +41,14 @@ class SOSAPIRepository : SOSRepository {
 
     override suspend fun requestSOS(profile: Profile, location: Location) =
         withContext(Dispatchers.IO) {
-            val response = client.requestSOS(profile, "${location.latitude},${location.longitude}")
+            val response = client.requestSOS(
+                RequestSOSRequest(profile, "${location.latitude},${location.longitude}")
+            )
 
             if (response.isSuccessful) {
                 response.body()!!.sosId
             } else {
-                Log.e("API Call", response.errorBody().toString())
+                Log.e("API Call", response.errorBody()!!.string())
             }
         }
 
@@ -61,7 +60,9 @@ class SOSAPIRepository : SOSRepository {
 
     override suspend fun postLocation(id: Int, location: Location) {
         withContext(Dispatchers.IO) {
-            client.postLocation(id, "${location.latitude},${location.longitude}")
+            client.postLocation(
+                PostLocationRequest(id, "${location.latitude},${location.longitude}")
+            )
         }
     }
 
@@ -94,8 +95,7 @@ private interface SOSAPIClient {
 
     @POST("sos")
     suspend fun requestSOS(
-        @Field("user") profile: Profile,
-        @Field("location") location: String
+        @Body request: RequestSOSRequest
     ): Response<RequestSOSResponse>
 
     @POST("sos/{id}/rescuer/accept")
@@ -105,8 +105,7 @@ private interface SOSAPIClient {
 
     @POST("sos/{id}/rescuer/location")
     suspend fun postLocation(
-        @Path("id") id: Int,
-        @Field("location") location: String
+        @Body request: PostLocationRequest
     ): Response<Void>
 
     @POST("sos/{id}/rescuer/arrived")
@@ -121,4 +120,8 @@ private interface SOSAPIClient {
 }
 
 private data class GetSOSInfoResponse(val patient: Profile, val location: String)
+
+private data class RequestSOSRequest(val user: Profile, val location: String)
 private data class RequestSOSResponse(val sosId: Int)
+
+private data class PostLocationRequest(val id: Int, val location: String)

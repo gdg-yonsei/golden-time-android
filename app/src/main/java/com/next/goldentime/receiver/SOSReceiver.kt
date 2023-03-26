@@ -36,7 +36,7 @@ class SOSReceiver : FirebaseMessagingService() {
         intent.putExtra("sosId", sosId.toInt())
         val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
 
-        createNotificationChannel(this, "sos", "SOS 요청")
+        createNotificationChannel(this, "sos", "SOS Request")
         val notification = NotificationCompat.Builder(this, "sos")
             .setSmallIcon(R.drawable.icon_sos)
             .setContentTitle("New SOS")
