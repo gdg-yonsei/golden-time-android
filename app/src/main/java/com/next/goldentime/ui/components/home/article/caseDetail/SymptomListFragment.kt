@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -22,6 +23,12 @@ fun SymptomListFragment(symptoms: List<String>) {
             .padding(24.dp),
         verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
-        symptoms.map { Text("- $it") }
+        symptoms.map {
+            Text(
+                "- $it",
+                style = MaterialTheme.typography.bodyLarge,
+                color = MaterialTheme.colorScheme.onBackground
+            )
+        }
     }
 }
