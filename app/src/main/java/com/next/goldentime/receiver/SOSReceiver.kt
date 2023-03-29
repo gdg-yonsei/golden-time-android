@@ -30,6 +30,7 @@ class SOSReceiver : FirebaseMessagingService() {
 
         /**
          * Check location
+         * TODO : Calculate the distance between the patient and the rescuer. If it is not a proper distance, do not show the notification.
          */
 
         val intent = Intent(this, RescueActivity::class.java)
@@ -44,9 +45,9 @@ class SOSReceiver : FirebaseMessagingService() {
 
         createNotificationChannel(this, "sos", "SOS Request")
         val notification = NotificationCompat.Builder(this, "sos")
-            .setSmallIcon(R.drawable.icon_sos)
-            .setContentTitle("New SOS")
-            .setContentText("Emergency")
+            .setSmallIcon(R.mipmap.ic_launcher)
+            .setContentTitle("Someone needs your help!")
+            .setContentText("Look around and check the manual for the patient.")
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setContentIntent(pendingIntent)
             .setAutoCancel(true)
