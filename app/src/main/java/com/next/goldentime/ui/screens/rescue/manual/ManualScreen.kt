@@ -4,20 +4,14 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.google.android.gms.maps.model.CameraPosition
-import com.google.android.gms.maps.model.LatLng
-import com.google.maps.android.compose.GoogleMap
-import com.google.maps.android.compose.Marker
-import com.google.maps.android.compose.MarkerState
-import com.google.maps.android.compose.rememberCameraPositionState
 import com.next.goldentime.ui.components.common.Progress
 import com.next.goldentime.ui.components.common.TopBar
 import com.next.goldentime.ui.components.common.layout.Fill
 import com.next.goldentime.ui.components.common.layout.Suspender
 import com.next.goldentime.ui.components.rescue.manual.ManualSheet
+import com.next.goldentime.ui.components.rescue.manual.RescueMap
 import com.next.goldentime.ui.screens.rescue.RescueViewModel
 import kotlinx.coroutines.launch
 
@@ -33,20 +27,9 @@ fun ManualScreen(
     val location by model.location.observeAsState()
     val cases by model.cases.observeAsState()
 
-    var location2 by remember {
-        mutableStateOf<com.next.goldentime.repository.location.Location?>(null)
-    }
-
     fun markAsArrived() {
         composeScope.launch {
             model.markAsArrived()
-        }
-    }
-
-    LaunchedEffect(Unit) {
-        composeScope.launch {
-            val myLocation = model.postLocation()
-            location2 = myLocation
         }
     }
 
@@ -58,44 +41,20 @@ fun ManualScreen(
         sheetContent = {
             Suspender(cases, { Fill { Progress() } }) {
                 ManualSheet(
-                    manual = it[0].manual,
+                    manual = model.getManual(it[0]),
                     showPatientID = showPatientID,
                     markAsArrived = ::markAsArrived
                 )
             }
         },
-        sheetPeekHeight = 200.dp
+        sheetPeekHeight = 200.dp,
     ) {
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
-            Suspender(location, { Fill { Progress() } }) { location ->
-                Suspender(location2, { Fill { Progress() } }) { location2 ->
-                    val patientLocation = LatLng(location.latitude, location.longitude)
-                    val myLocation = LatLng(location2.latitude, location2.longitude)
-
-                    val cameraPositionState = rememberCameraPositionState {
-                        position = CameraPosition.fromLatLngZoom(patientLocation, 20f)
-                    }
-
-                    GoogleMap(
-                        modifier = Modifier.fillMaxSize(),
-                        cameraPositionState = cameraPositionState
-                    ) {
-                        Marker(
-                            state = MarkerState(position = patientLocation),
-                            title = "Patient here",
-                            snippet = "Patient here"
-                        )
-                        Marker(
-                            state = MarkerState(position = myLocation),
-                            title = "I'm here",
-                            snippet = "I'm here"
-                        )
-                    }
-                }
+        Box(modifier = Modifier.padding(it)) {
+            Suspender(location, { Fill { Progress() } }) { patientLocation ->
+                RescueMap(
+                    patientLocation = patientLocation,
+                    postLocation = model.postLocation
+                )
             }
         }
     }

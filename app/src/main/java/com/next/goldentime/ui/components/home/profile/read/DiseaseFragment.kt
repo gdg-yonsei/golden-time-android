@@ -41,7 +41,8 @@ fun DiseaseFragment(model: ProfileReadViewModel) {
                     ArticleCard(
                         title = disease.title,
                         description = disease.subtitle,
-                        icon = Icons.Outlined.HeartBroken
+                        icon = Icons.Outlined.HeartBroken,
+                        behavior = {}
                     ) {}
                 }
             }
