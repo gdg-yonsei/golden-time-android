@@ -66,7 +66,8 @@ fun ArticleScreen(model: ArticleViewModel = viewModel()) {
 
             DiseaseDetailScreen(
                 diseaseId = diseaseId,
-                navigateBack = ::navigateBack
+                navigateBack = ::navigateBack,
+                showCaseDetail = ::navigateToCaseDetail,
             )
         }
         composable(ArticleScreen.CaseList.route) {

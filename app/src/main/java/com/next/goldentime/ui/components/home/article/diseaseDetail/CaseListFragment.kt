@@ -16,7 +16,7 @@ import com.next.goldentime.repository.case.SimpleCase
 import com.next.goldentime.ui.components.home.article.ArticleCard
 
 @Composable
-fun CaseListFragment(cases: List<SimpleCase>) {
+fun CaseListFragment(cases: List<SimpleCase>, showCaseDetail: (caseId: Int) -> Unit) {
     val scrollState = rememberScrollState()
 
     Column(
@@ -32,7 +32,9 @@ fun CaseListFragment(cases: List<SimpleCase>) {
                 title = case.title,
                 description = case.subtitle,
                 icon = Icons.Outlined.HeartBroken
-            ) { }
+            ) {
+                showCaseDetail(case.id)
+            }
         }
     }
 }

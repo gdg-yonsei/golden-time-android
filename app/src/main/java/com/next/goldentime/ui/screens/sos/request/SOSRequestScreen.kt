@@ -30,7 +30,7 @@ fun SOSRequestScreen(
         else {
             Toast.makeText(
                 context,
-                "Failed to request SOS.",
+                "Failed to request SOS : It seems you don't turn on location on your phone.",
                 Toast.LENGTH_LONG
             ).show()
 

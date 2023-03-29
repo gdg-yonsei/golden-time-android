@@ -28,6 +28,7 @@ import com.next.goldentime.ui.components.home.article.diseaseDetail.CaseListFrag
 fun DiseaseDetailScreen(
     diseaseId: Int,
     navigateBack: () -> Unit,
+    showCaseDetail: (caseId: Int) -> Unit,
     model: DiseaseDetailViewModel = viewModel(factory = DiseaseDetailViewModelFactory(diseaseId))
 ) {
     val disease by model.disease.observeAsState()
@@ -57,7 +58,7 @@ fun DiseaseDetailScreen(
                 FragmentTab(tabs = tabs, scrollable = true) { index ->
                     when (index) {
                         0 -> MarkdownFragment(it.description)
-                        1 -> CaseListFragment(it.cases)
+                        1 -> CaseListFragment(it.cases, showCaseDetail = showCaseDetail)
                     }
                 }
             }

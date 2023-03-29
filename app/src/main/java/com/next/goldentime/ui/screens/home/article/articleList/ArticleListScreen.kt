@@ -54,19 +54,19 @@ fun ArticleListScreen(
                     title = "Health Topics",
                     ArticleItemData(
                         title = "Emergency Cases",
-                        description = "Emergency Cases",
+                        description = "Learn the warning signs, and when to call 911.",
                         icon = Icons.Filled.Emergency,
                         onClick = { showCaseList() }
                     ),
                     ArticleItemData(
                         title = "Diseases",
-                        description = "Diseases",
+                        description = "Learn heart conditions to improve and maintain your health.",
                         icon = Icons.Outlined.MedicalInformation,
                         onClick = { showDiseaseList() }
                     ),
                     ArticleItemData(
                         title = "Basic First-Aid Manual",
-                        description = "Basic First-Aid Manual",
+                        description = "CPR saves lives. Be the beat for someone you love.",
                         icon = Icons.Outlined.MedicalServices,
                         onClick = { }
                     ),
@@ -75,7 +75,7 @@ fun ArticleListScreen(
                     title = "Get Started",
                     ArticleItemData(
                         title = "Onboarding",
-                        description = "Onboarding",
+                        description = "Welcome to Golden Time.",
                         icon = Icons.Filled.IntegrationInstructions,
                         onClick = { }
                     ),
