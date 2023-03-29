@@ -2,14 +2,9 @@ package com.next.goldentime.ui.screens.sos.detect
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.next.goldentime.usecase.patient.PatientUseCase
 import com.next.goldentime.usecase.patient.SOSType
-import com.next.goldentime.util.generatePatientUseCase
 
-class SOSDetectViewModel(
-    sosType: SOSType,
-    private val patientUseCase: PatientUseCase = generatePatientUseCase()
-) : ViewModel() {
+class SOSDetectViewModel(sosType: SOSType) : ViewModel() {
     val title = when (sosType) {
         SOSType.FALL -> "Fall Detected"
         SOSType.HEART -> "Irregular Heart Rate Detected"
@@ -19,8 +14,6 @@ class SOSDetectViewModel(
         SOSType.FALL, SOSType.HEART -> 30
         else -> 0
     }
-
-    val requestSOS = patientUseCase::requestSOS
 }
 
 class SOSDetectViewModelFactory(private val sosType: SOSType) : ViewModelProvider.Factory {
