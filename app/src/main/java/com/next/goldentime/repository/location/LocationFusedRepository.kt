@@ -11,36 +11,29 @@ import com.google.android.gms.tasks.OnTokenCanceledListener
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.tasks.await
 
 class LocationFusedRepository(context: Context) : LocationRepository {
     private val fusedLocationClient: FusedLocationProviderClient =
         LocationServices.getFusedLocationProviderClient(context)
 
-    private var _latitude: Double? = null
-    private var _longitude: Double? = null
-
     @SuppressLint("MissingPermission")
-    private fun getCurrentLocation() {
-        fusedLocationClient.getCurrentLocation(
+    private suspend fun getCurrentLocation(): Location? {
+        val location = fusedLocationClient.getCurrentLocation(
             Priority.PRIORITY_HIGH_ACCURACY,
             object : CancellationToken() {
                 override fun onCanceledRequested(p0: OnTokenCanceledListener) =
                     CancellationTokenSource().token
 
                 override fun isCancellationRequested() = false
-            }).addOnSuccessListener { location ->
-            _latitude = location?.latitude ?: 0.0
-            _longitude = location?.longitude ?: 0.0
-        }
+            }).await()
+
+        return if (location != null) Location(location.latitude, location.longitude) else null
     }
 
     override fun getLocation() = flow {
-        getCurrentLocation()
+        val location = getCurrentLocation()
 
-        while (_latitude == null && _longitude == null) {
-            continue
-        }
-
-        emit(Location(_latitude!!, _longitude!!))
+        emit(location)
     }.flowOn(Dispatchers.IO)
 }

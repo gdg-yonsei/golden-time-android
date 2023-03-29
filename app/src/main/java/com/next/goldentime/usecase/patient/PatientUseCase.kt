@@ -10,9 +10,9 @@ class PatientUseCase(
     private val profileRepository: ProfileRepository,
     private val locationRepository: LocationRepository,
 ) {
-    suspend fun requestSOS(): Int {
+    suspend fun requestSOS(): Int? {
         val profile = profileRepository.watchProfile().first()
-        val location = locationRepository.getLocation().first()
+        val location = locationRepository.getLocation().first() ?: return null
 
         return sosRepository.requestSOS(profile, location)
     }

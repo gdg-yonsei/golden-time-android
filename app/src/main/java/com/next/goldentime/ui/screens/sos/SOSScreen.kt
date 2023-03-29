@@ -49,7 +49,7 @@ fun SOSScreen(sosType: SOSType, model: SOSViewModel = viewModel()) {
             )
         }
         composable(SOSScreen.SOSRequest.route) {
-            SOSRequestScreen(showState = ::moveToSOSState)
+            SOSRequestScreen(showState = ::moveToSOSState, cancelSOS = ::finishSOS)
         }
         composable(SOSScreen.SOSState.route) {
             val sosId = it.arguments?.getString("sosId")?.toInt() ?: 0

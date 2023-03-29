@@ -47,8 +47,8 @@ class RescueUseCase(
     fun getManual(case: Case) = case.manual
 
     suspend fun acceptSOS() = sosRepository.acceptSOS(sosId)
-    suspend fun postLocation(): Location {
-        val location = locationRepository.getLocation().first()
+    suspend fun postLocation(): Location? {
+        val location = locationRepository.getLocation().first() ?: return null
         sosRepository.postLocation(sosId, location)
 
         return location
