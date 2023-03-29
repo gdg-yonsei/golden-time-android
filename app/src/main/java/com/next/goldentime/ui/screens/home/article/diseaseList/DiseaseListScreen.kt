@@ -1,11 +1,10 @@
 package com.next.goldentime.ui.screens.home.article.diseaseList
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.material.icons.outlined.HeartBroken
@@ -45,17 +44,14 @@ fun DiseaseListScreen(
     }) {
         Suspender(diseases, { Fill { Progress() } }) { diseases ->
             Suspender(myDiseases, { Fill { Progress() } }) { myDiseases ->
-                val scrollState = rememberScrollState()
-
-                Column(
+                LazyColumn(
                     modifier = Modifier
                         .fillMaxSize()
-                        .verticalScroll(scrollState)
                         .padding(24.dp),
                     verticalArrangement = Arrangement.spacedBy(20.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    diseases.map { disease ->
+                    items(diseases) { disease ->
                         ArticleCard(
                             title = disease.title,
                             description = disease.subtitle,

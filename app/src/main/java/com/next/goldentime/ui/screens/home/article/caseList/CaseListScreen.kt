@@ -1,11 +1,10 @@
 package com.next.goldentime.ui.screens.home.article.caseList
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.material.icons.outlined.HeartBroken
@@ -41,18 +40,15 @@ fun CaseListScreen(
             left = TopBarIcon(Icons.Outlined.ArrowBack) { navigateBack() }
         )
     }) {
-        Suspender(cases, { Fill { Progress() }}) {
-            val scrollState = rememberScrollState()
-            
-            Column(
+        Suspender(cases, { Fill { Progress() } }) { cases ->
+            LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()
-                    .verticalScroll(scrollState)
                     .padding(24.dp),
                 verticalArrangement = Arrangement.spacedBy(20.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                it.map { case ->
+                items(cases) { case ->
                     ArticleCard(
                         title = case.title,
                         description = case.subtitle,
