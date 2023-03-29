@@ -1,6 +1,8 @@
 package com.next.goldentime.ui.screens.rescue
 
+import android.app.Activity
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -17,6 +19,7 @@ fun RescueScreen(
     model: RescueViewModel = viewModel(factory = RescueViewModelFactory(sosId))
 ) {
     val navController = rememberNavController()
+    val context = LocalContext.current
 
     fun navigateToManual() {
         navController.navigate(RescueScreen.Manual.route) { removePrevious(navController) }
@@ -32,6 +35,10 @@ fun RescueScreen(
 
     fun navigateBack() {
         navController.navigateUp()
+    }
+
+    fun finish() {
+        (context as Activity).finish()
     }
 
     /**
@@ -59,6 +66,7 @@ fun RescueScreen(
         }
         composable(RescueScreen.RescueComplete.route) {
             RescueCompleteScreen(
+                finish = ::finish,
                 model = model,
             )
         }

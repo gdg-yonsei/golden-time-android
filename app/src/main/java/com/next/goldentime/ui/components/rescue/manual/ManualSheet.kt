@@ -22,7 +22,17 @@ import com.next.goldentime.ui.components.common.layout.Gap
 typealias Manual = List<Step>
 
 @Composable
-fun ManualSheet(manual: Manual, showPatientID: () -> Unit, markAsArrived: () -> Unit) {
+fun ManualSheet(
+    manual: Manual,
+    showPatientID: () -> Unit,
+    markAsArrived: () -> Unit,
+    complete: () -> Unit
+) {
+    var foundPatient by remember { mutableStateOf(false) }
+
+    /**
+     * Content
+     */
     Column(modifier = Modifier.padding(24.dp)) {
         Text(
             "Instructions",
@@ -43,12 +53,10 @@ fun ManualSheet(manual: Manual, showPatientID: () -> Unit, markAsArrived: () -> 
 
         LazyColumn(verticalArrangement = Arrangement.spacedBy(16.dp)) {
             item {
-                var foundPatient by remember { mutableStateOf(false) }
-
                 Step(
                     index = 1,
                     title = "Find the patient",
-                    description = "Find the patient",
+                    description = "Before approaching the casualty, always make sure the area is safe.",
                     disabled = foundPatient,
                     onNext = {
                         markAsArrived()
@@ -57,7 +65,21 @@ fun ManualSheet(manual: Manual, showPatientID: () -> Unit, markAsArrived: () -> 
                 )
             }
             itemsIndexed(manual) { index, step ->
-                Step(index = index + 2, title = step.title, description = step.description)
+                Step(
+                    index = index + 2,
+                    title = step.title,
+                    description = step.description,
+                    videoUrl = step.videoUrl
+                )
+            }
+            item {
+                Step(
+                    index = manual.size + 2,
+                    title = "Wrap up",
+                    description = "You really worked so hard. After following all the instructions, wrap up the situation.",
+                    disabled = !foundPatient,
+                    onNext = { complete() }
+                )
             }
         }
     }

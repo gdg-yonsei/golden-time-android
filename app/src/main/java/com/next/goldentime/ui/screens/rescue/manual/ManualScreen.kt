@@ -33,6 +33,13 @@ fun ManualScreen(
         }
     }
 
+    fun completeSOS() {
+        composeScope.launch {
+            model.completeSOS()
+            complete()
+        }
+    }
+
     /**
      * Content
      */
@@ -43,7 +50,8 @@ fun ManualScreen(
                 ManualSheet(
                     manual = model.getManual(it[0]),
                     showPatientID = showPatientID,
-                    markAsArrived = ::markAsArrived
+                    markAsArrived = ::markAsArrived,
+                    complete = ::completeSOS
                 )
             }
         },
