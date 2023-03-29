@@ -11,9 +11,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import com.next.goldentime.ui.components.common.YoutubePlayer
 import com.next.goldentime.ui.components.common.layout.Gap
 import com.next.goldentime.ui.theme.Neutral50
 import com.next.goldentime.ui.theme.Neutral80
@@ -24,16 +23,18 @@ fun Step(
     index: Int,
     title: String,
     description: String,
+    videoUrl: String? = null,
     disabled: Boolean = false,
     onNext: (() -> Unit)? = null
 ) {
     Row(
-        modifier = Modifier
-            .height(IntrinsicSize.Min)
-            .fillMaxWidth(),
-        horizontalArrangement = Arrangement.spacedBy(16.dp)
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.spacedBy(16.dp),
     ) {
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Column(
+            modifier = Modifier.heightIn(100.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
             Box(
                 modifier = Modifier
                     .size(32.dp)
@@ -49,7 +50,6 @@ fun Step(
             Divider(
                 color = Neutral80,
                 modifier = Modifier
-                    .defaultMinSize(1.dp, 61.dp)
                     .width(1.dp)
                     .weight(1f)
             )
@@ -68,6 +68,10 @@ fun Step(
                     style = MaterialTheme.typography.bodyLarge,
                     color = Neutral50
                 )
+                videoUrl?.let { videoUrl ->
+                    Gap(12)
+                    YoutubePlayer(videoUrl)
+                }
                 onNext?.let { onNext ->
                     Gap(12)
                     ElevatedButton(onClick = { onNext() }) { Text("Next") }

@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.next.goldentime.repository.case.Step
+import com.next.goldentime.ui.components.common.YoutubePlayer
 import com.next.goldentime.ui.components.rescue.manual.Step
 
 typealias Manual = List<Step>
@@ -29,7 +30,8 @@ fun ManualFragment(manual: Manual) {
             Step(
                 index = index + 1,
                 title = step.title,
-                description = step.description
+                description = step.description,
+                videoUrl = step.videoUrl,
             )
         }
     }
