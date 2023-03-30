@@ -95,14 +95,9 @@ https://user-images.githubusercontent.com/11978494/228890652-6afb2edf-26c6-406a-
 
 2. Open in Android Studio.
 
-3. Inject private keys.
+3. Sync gradle dependencies.
 
-    - local.properties
-    - google-services.json
-
-4. Sync gradle dependencies.
-
-5. Build and enjoy!
+4. Build and enjoy!
 
 ## Download
 
