@@ -10,8 +10,11 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTube
 @Composable
 fun YoutubePlayer(url: String) {
     val videoId =
-        if (url.startsWith("http")) url.split("/").last()
-        else url
+        when {
+            url.startsWith("http") && url.contains("v=") -> url.split("=").last()
+            url.startsWith("http") && !url.contains("v=") -> url.split("/").last()
+            else -> url
+        }
 
     Surface {
         AndroidView(factory = { context ->
