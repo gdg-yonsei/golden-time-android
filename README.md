@@ -104,6 +104,10 @@ https://user-images.githubusercontent.com/11978494/228890652-6afb2edf-26c6-406a-
 
 5. Build and enjoy!
 
+## Download
+
+You can download the debug app from `/release` folder.
+
 ## Required
 
 ### Prerequisites
