@@ -59,21 +59,58 @@ With the above business logics, we have 5 big screens (UI layer).
 
 ### Main Page
 
-| | |
-|:-:|:-:|
-| | |
+| Profile Page | Home Page | Article Page |
+|:-:|:-:|:-:|
+| ![Profile](https://user-images.githubusercontent.com/11978494/228888455-bc89111f-173e-4347-a2aa-ffc2ff8ef6fb.jpeg) | ![SOS Trigger](https://user-images.githubusercontent.com/11978494/228888669-29e38ed8-398d-47f2-a591-2cbdd6eea914.jpeg) | ![Article](https://user-images.githubusercontent.com/11978494/228888241-2e5561e1-59c4-4905-bc87-1d0fe0e270c8.jpeg) |
+
+### SOS Detection
+
+| Fall detection | Irregular heart rate detection | Waiting timer |
+|:-:|:-:|:-:|
+| ![Fall detected](https://user-images.githubusercontent.com/11978494/228889216-7bbe21a1-1a78-40c4-9f96-acb0e26773d7.jpeg) | ![Heart rate detected](https://user-images.githubusercontent.com/11978494/228889285-98e51cb4-b931-4708-8325-a8bf29568a09.jpeg) | ![Fall detected timer](https://user-images.githubusercontent.com/11978494/228889327-0d38eeba-66f6-46af-b56c-e280cd9aa754.jpeg) |
+
+### SOS/Rescue
+
+| SOS Triggered | SOS Waiting | Rescue |
+|:-:|:-:|:-:|
+| ![SOS](https://user-images.githubusercontent.com/11978494/228889564-c33748a7-f776-40fd-8b1d-70fdb60efa1f.jpeg) | ![SOS Watch](https://user-images.githubusercontent.com/11978494/228891912-ad201e9e-2216-412d-9f22-771d08f6be98.jpeg) | ![Rescue](https://user-images.githubusercontent.com/11978494/228890502-074d62c9-d040-4c29-9275-7ea569bba46d.jpeg) |
+
+## Videos
+
+### SOS Triggered by manually
+
+https://user-images.githubusercontent.com/11978494/228889995-b29650d8-b2c7-49be-8b63-29ad9aa2b52e.mp4
+
+### After accepting SOS
+
+https://user-images.githubusercontent.com/11978494/228890652-6afb2edf-26c6-406a-9350-fba153e1b6a0.mp4
 
 ## Getting started
 
 1. Clone the project.
-  ```
-  
-  ```
 
-2. l
+    ```
+    git clone https://github.com/gdsc-ys/golden-time-android.git
+    ```
 
-## Permission
+2. Open in Android Studio.
 
+3. Inject private keys.
+
+    - local.properties
+    - google-services.json
+
+4. Sync gradle dependencies.
+
+5. Build and enjoy!
+
+## Required
+
+### Prerequisites
+- Minimum SDK version : 24
+- Target SDK version : 33
+
+### Permission
 - Internet
 - Location
 - Notification
