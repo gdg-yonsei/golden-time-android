@@ -1,12 +1,12 @@
 <h1 align="center">Golden Time 📱</h1>
-<h3 align="center">Share a manual, share a life</h3>
+<h3 align="center">"I need you right next to me, not an expert in ten minute distance"</h3>
 <p align="center">
   <img src="https://user-images.githubusercontent.com/11978494/228843932-c59e03fb-d4e7-458d-a548-58e80583a7ea.png" alt="icon" width="250" height="250">
 </p>
 
 ## Overview
 
-*Golden Time* is a service helping rescuers to save the patient with the proper manual. By sharing the patient's manual to nearby people when an emergency occurs, it shortens rescuer's hesitating time and prevents some critical dangers such as a WRONG ACTION. And this is the main application of Golden Time running in Android. 
+*Golden Time* is a service helping rescuers to save the patient with the proper manual. By sharing the patient's manual to nearby people when an emergency occurs, it shortens rescuer's hesitating time and prevents some critical dangers such as WRONG ACTIONs. And this is the main application of Golden Time running in Android. You can check out other components of our service such as [Golden Time - Backend](https://github.com/gdsc-ys/golden-time-backend) and [Golden Time - WearOS](https://github.com/gdsc-ys/golden-time-wearos)
 
 The overall process is as follows.
 1. Register a disease with related manuals.
@@ -17,7 +17,17 @@ The overall process is as follows.
 In addition to the main flow, users can read and study various diseases with an article tab.
 With our wearable application [WearOS for Golden Time](https://github.com/gdsc-ys/golden-time-wearos), the patient can monitor his or her heart rates and trigger an emergency SOS automatically if it detects an irregular heart rate or a falling activity.
 
-## Architecture
+## Our goals
+
+| Good Health and Well-being | Quality Education | Reduced Inequality |
+|:-:|:-:|:-:|
+| <img width="50%" src="https://user-images.githubusercontent.com/11978494/229120095-200494e8-a916-4387-bee3-70477d2b4824.png"> | <img width="50%" src="https://user-images.githubusercontent.com/11978494/229120393-90b52bc9-94e1-4c8b-b709-25d8c4dfe423.png"> | <img width="50%" src="https://user-images.githubusercontent.com/11978494/229120495-43c49966-c735-4ebd-97f5-0d92ce349f5f.png"> |
+
+## High-level architecture
+
+![Solution Challenge - High level architecture](https://user-images.githubusercontent.com/11978494/229120978-77f4b040-933d-42a6-880c-fd1e2fd4f0bb.png)
+
+## App Architecture
 
 It follows a MVVM pattern and a layered architecture.
 First, it consists of 5 repositories (Data layer) and 5 usecases (Domain layer).
@@ -52,8 +62,6 @@ With the above business logics, we have 5 big screens (UI layer).
 - Firebase (Messaging service)
 - Google maps
 - Youtube iframe API
-- with [WearOS](https://github.com/gdsc-ys/golden-time-wearos)...
-- with [Server](https://github.com/gdsc-ys/golden-time-backend)...
 
 ## Screenshots
 
