@@ -1,4 +1,4 @@
-<h1 align="center">Golden Time 📱</h1>
+<h1 align="center">Golden Time - Android 📱</h1>
 <h3 align="center">"I need you right next to me, not an expert in ten minute distance"</h3>
 <p align="center">
   <img src="https://user-images.githubusercontent.com/11978494/228843932-c59e03fb-d4e7-458d-a548-58e80583a7ea.png" alt="icon" width="250" height="250">
