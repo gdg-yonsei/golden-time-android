@@ -1,10 +1,14 @@
 package com.next.goldentime.ui.screens.sos.detect
 
+import android.os.Vibrator
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.next.goldentime.ui.components.common.TopBar
@@ -24,6 +28,15 @@ fun SOSDetectScreen(
     cancelSOS: () -> Unit,
     model: SOSDetectViewModel = viewModel(factory = SOSDetectViewModelFactory(sosType))
 ) {
+    val context = LocalContext.current
+
+    LaunchedEffect(Unit) {
+        model.startNotify(context)
+    }
+    DisposableEffect(Unit) {
+        onDispose { model.stopNotify() }
+    }
+
     PreventBack()
 
     /**
